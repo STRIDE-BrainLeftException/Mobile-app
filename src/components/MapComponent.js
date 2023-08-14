@@ -8,7 +8,7 @@ import Animated, {
   runOnJS,
 } from "react-native-reanimated";
 import { PanGestureHandler } from "react-native-gesture-handler";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -26,12 +26,6 @@ const MapComponent = (props) => {
   const translateY = useSharedValue(0);
 
   const type = props.type;
-
-  const routes = useRoute();
-
-  const item = props.route.params?.item || { id: Math.random() };
-
-  console.log({ type, item });
 
   const navigation = useNavigation();
 
@@ -64,26 +58,25 @@ const MapComponent = (props) => {
       return (
         <TouchableOpacity
           onPress={() => {
+            console.log("check", {type})
             if (type == "galaxies") {
               console.log({ type });
               navigation.navigate("SolarSystems", { item: p });
             }
           }}
+          style={[
+            styles.square,
+            {
+              height: p.size,
+              width: p.size,
+              margin: Math.round(Math.random() * 10 + 10),
+              backgroundColor: "#00ff00",
+              position: "absolute",
+              top: convertToDistanceFromEdge(p).x,
+              left: convertToDistanceFromEdge(p).y,
+            },
+          ]}
         >
-            <View
-              style={[
-                styles.square,
-                {
-                  height: p.size,
-                  width: p.size,
-                  margin: Math.round(Math.random() * 10 + 10),
-                  backgroundColor: "#00ff00",
-                  position: "absolute",
-                  top: convertToDistanceFromEdge(p).x,
-                  left: convertToDistanceFromEdge(p).y,
-                },
-              ]}
-            ></View>
         </TouchableOpacity>
       );
     },

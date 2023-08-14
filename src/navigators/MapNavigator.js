@@ -6,7 +6,10 @@ const Stack = createStackNavigator();
 
 function MapNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Galaxies">
+    <Stack.Navigator
+      initialRouteName="Galaxies"
+      screenOptions={{ presentation: "transparentModal" }}
+    >
       <Stack.Screen name="Galaxies" component={GalaxyScreen} />
       <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
     </Stack.Navigator>
