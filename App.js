@@ -6,17 +6,19 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
+import OnBoardingNavigator from "./src/navigators/OnBoardingNavigator";
 
 const Stack = createStackNavigator();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="Map">
+    <Stack.Navigator initialRouteName="onBoarding">
       <Stack.Screen
         name="Map"
         component={MapNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="onBoarding" component={OnBoardingNavigator} />
     </Stack.Navigator>
   );
 }
