@@ -9,6 +9,7 @@ import MapNavigator from "./src/navigators/MapNavigator";
 import { NativeBaseProvider } from "native-base";
 import HomeScreen from "./src/screens/HomeScreen";
 import { theme } from "./src/utils/theme";
+import HomeTabs from "./src/navigators/HomeTabs";
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,8 @@ export default function App() {
   return (
     <NativeBaseProvider theme={theme} >
       <NavigationContainer>
-        <RootStack />
+        {/* <RootStack /> */}
+        <HomeTabs />
       </NavigationContainer>
       <StatusBar style="auto" />
     </NativeBaseProvider>
