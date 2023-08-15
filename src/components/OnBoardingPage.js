@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import { Button, View, Text } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { Button, View, Text } from 'react-native';
 
 const OnBoardingPage = ({ page }) => {
   const navigation = useNavigation();

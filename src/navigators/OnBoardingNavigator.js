@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
-} from "@react-navigation/stack";
-import GalaxyScreen from "../screens/GalaxyScreen";
-import SolarSystemScreen from "../screens/SolarSystemScreen";
-import OnBoardingPage from "../components/OnBoardingPage";
-import { useRoute } from "@react-navigation/native";
-import { NavigationState } from "@react-navigation/native";
-import { Text, View } from "react-native";
-import { Button } from "react-native";
+} from '@react-navigation/stack';
+import GalaxyScreen from '../screens/GalaxyScreen';
+import SolarSystemScreen from '../screens/SolarSystemScreen';
+import FlightOptionPage from '../screens/FlightOptionPage';
+import OnBoardingPage from '../components/OnBoardingPage';
+import { useRoute } from '@react-navigation/native';
+import { NavigationState } from '@react-navigation/native';
+import { Text, View } from 'react-native';
+import { Button } from 'react-native';
 
 const Stack = createStackNavigator();
 
 const screens = [
-  { page: 1, image: "", heading: "fndjipaf fdjif", description: "fdmjiafpd" },
-  { page: 2, image: "", heading: "fndjipaf fdjif", description: "fdmjiafpd" },
-  { page: 3, image: "", heading: "fndjipaf fdjif", description: "fdmjiafpd" },
-  { page: 4, image: "", heading: "fndjipaf fdjif", description: "fdmjiafpd" },
-  { page: 5, image: "", heading: "fndjipaf fdjif", description: "fdmjiafpd" },
+  { page: 1, image: '', heading: 'fndjipaf fdjif', description: 'fdmjiafpd' },
+  { page: 2, image: '', heading: 'fndjipaf fdjif', description: 'fdmjiafpd' },
+  { page: 3, image: '', heading: 'fndjipaf fdjif', description: 'fdmjiafpd' },
+  { page: 4, image: '', heading: 'fndjipaf fdjif', description: 'fdmjiafpd' },
+  { page: 5, image: '', heading: 'fndjipaf fdjif', description: 'fdmjiafpd' },
 ];
 
 function OnBoardingNavigator({ navigation }) {
@@ -47,7 +48,7 @@ function OnBoardingNavigator({ navigation }) {
             navigation.navigate(String(prev));
             setPage(prev);
           }}
-          title="prev"
+          title='prev'
         />
         <Button
           onPress={() => {
@@ -55,7 +56,7 @@ function OnBoardingNavigator({ navigation }) {
             navigation.navigate(String(next));
             setPage(next);
           }}
-          title="next"
+          title='next'
         />
       </View>
     </>
