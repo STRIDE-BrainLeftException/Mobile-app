@@ -28,12 +28,12 @@ function OnBoardingNavigator({ navigation }) {
   return (
     <>
       <Stack.Navigator
-        initialRouteName={String(1)}
+        initialRouteName={'page'}
         screenOptions={{
           headerShown: false,
           ...TransitionPresets.SlideFromRightIOS,
         }}
-      >
+      ><Stack.Screen name={'page'} component={FlightOptionPage}/>
         {screens.map((s, index) => (
           <Stack.Screen name={String(s.page)}>
             {(props) => <OnBoardingPage key={index} {...props} page={s.page} />}

@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import MapNavigator from './src/navigators/MapNavigator';
 import OnBoardingNavigator from './src/navigators/OnBoardingNavigator';
+import { NativeBaseProvider } from "native-base";
 
 const Stack = createStackNavigator();
 
@@ -25,12 +26,12 @@ function RootStack() {
 
 export default function App() {
   return (
-    <>
+    <NativeBaseProvider>
       <NavigationContainer>
         <RootStack />
       </NavigationContainer>
-      <StatusBar style='auto' />
-    </>
+      <StatusBar style="auto" />
+    </NativeBaseProvider>
   );
 }
 
