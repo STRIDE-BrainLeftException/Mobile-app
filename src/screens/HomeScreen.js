@@ -1,9 +1,13 @@
 import { StyleSheet } from "react-native";
-import { View, Image, Text } from "native-base";
+import { View, Image, Text, HStack, VStack } from "native-base";
 import BackGroundImage from "../assets/images/bookingProcessBackground.png";
 import { StatusBar } from "expo-status-bar";
 import CarouselCards from "../components/Carousel/Carousel";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Logo from "../components/basic/Logo";
+import { WIDTH } from "../utils/constants";
+import { AnimatePresence } from "moti";
+import AnimatedView from "../components/basic/AnimatedView";
 
 const HomeScreen = () => {
   return (
@@ -13,11 +17,25 @@ const HomeScreen = () => {
         style={[StyleSheet.absoluteFill, styles.image]}
         source={BackGroundImage}
       />
-      <SafeAreaView >
-        <View style={styles.page}>
-          <Text style={styles.title}>Let's explore together</Text>
-        </View>
-        <CarouselCards />
+      <SafeAreaView>
+        <AnimatePresence>
+          <VStack space={5}>
+            <HStack>
+              <Logo size={WIDTH / 2.5} isBlue={true} />
+            </HStack>
+            <AnimatedView>
+              <View style={styles.page}>
+                <Text style={styles.title}>Let's explore together</Text>
+              </View>
+            </AnimatedView>
+            <CarouselCards />
+            <AnimatedView>
+              <View style={styles.page}>
+                <Text style={styles.title}>travel beyond the known worlds</Text>
+              </View>
+            </AnimatedView>
+          </VStack>
+        </AnimatePresence>
       </SafeAreaView>
     </View>
   );
@@ -33,11 +51,11 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   page: {
-    padding: 30,
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 30,
-    lineHeight: 40
+    lineHeight: 40,
   },
 });
 
