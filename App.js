@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
+import HomeTabs from "./src/navigators/HomeTabs";
 
 const Stack = createStackNavigator();
 
@@ -25,7 +26,8 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <RootStack />
+        {/* <RootStack /> */}
+        <HomeTabs />
       </NavigationContainer>
       <StatusBar style="auto" />
     </>
