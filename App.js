@@ -7,12 +7,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
 import { NativeBaseProvider } from "native-base";
+import HomeScreen from "./src/screens/HomeScreen";
+import { theme } from "./src/utils/theme";
 
 const Stack = createStackNavigator();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="Map">
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Map"
         component={MapNavigator}
@@ -24,7 +31,7 @@ function RootStack() {
 
 export default function App() {
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={theme} >
       <NavigationContainer>
         <RootStack />
       </NavigationContainer>
