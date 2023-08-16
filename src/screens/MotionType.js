@@ -6,7 +6,6 @@ import { Text, StatusBar, Image, FlatList } from "react-native";
 const cardDataArray = [
   {
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/hyperStride-img.png"),
-    // image_path: require("src\\assets\\images\\Booking Process\\Jump Type Screen\\cosmoV-img.png"),
     title: "HyperStride",
     superScript: "TM",
     description: "Fastest Possible way to travel intergalactic",
@@ -114,10 +113,6 @@ const BlurViewCardConents = ({
 const MotionTypeScreen = () => {
   return (
     <ImageBackground
-      // FIXME:
-      // source={require("../assets/images/BookingBG.png")}
-      // When I change the image it is not applying the background image
-      // to the whole application
       source={require("../assets/images/Booking_BG.png")}
       style={styles.backgroundImage}
     >
@@ -174,7 +169,6 @@ const styles = StyleSheet.create({
     right: 10,
     fontSize: 25,
     color: "#4E96EA",
-    // fontWeight: "bold",
   },
 });
 
