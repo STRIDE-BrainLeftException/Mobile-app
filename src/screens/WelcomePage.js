@@ -7,7 +7,8 @@ import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
 // const PlaceholderImage = require('./../../assets/splash.png');
 import PlaceholderImage from '../assets/images/bookingProcessBackground.png';
 import { ONBOARDING_BOTTOM_COLOR } from '../utils/constants';
-
+import Logo from '../components/basic/Logo';
+const hostess = require('./../assets/images/onboarding/OnboardingScreen1.png');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -29,17 +30,28 @@ const styles = StyleSheet.create({
     color: '#fff',
     zIndex: 3,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
+
+  welcome: {
+    backgroundColor: 'transparent',
+    flex: 1,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 3,
+  },
+
   text: {
     backgroundColor: 'transparent',
-    fontSize: 17,
+    fontSize: 25,
     color: '#fff',
     zIndex: 3,
   },
   textBox: {
+    flex: 1,
     paddingHorizontal: 30,
-    paddingVertical: 30,
-    top: 550,
+    paddingVertical: 90,
     justifyContent: 'flex-end',
     alignContent: 'center',
     zIndex: 3,
@@ -48,28 +60,27 @@ const styles = StyleSheet.create({
   image: { width: '100%', height: '100%' },
 });
 
-const FlightOptionPage = ({ item, ...props }) => {
+const WelcomePage = () => {
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={item.image}
-        style={styles.image}
-        resizeMode='cover'
-      >
-        {/* <LinearGradientr
-          // Background Linear Gradient
-          colors={["rgba(0,0,0,0)", ONBOARDING_BOTTOM_COLOR]}
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
-          style={styles.background}
-        /> */}
+      <ImageBackground source={hostess} style={styles.image} resizeMode='cover'>
+        <View style={styles.welcome}>
+          <Text style={styles.text}>Welcome </Text>
+          <Text style={styles.text}>UnhiījŁ Nì</Text>
+        </View>
+
         <View style={styles.textBox}>
-          <Text style={styles.textHead}>{item.heading}</Text>
-          <Text style={styles.text}>{item.description}</Text>
+          <View style={{ alignItems: 'center' }}>
+            <Logo size={200} isBlue={true} />
+          </View>
+
+          <Text style={styles.textHead}>
+            #1 Inter-Galactic Space Travel Agency
+          </Text>
         </View>
       </ImageBackground>
     </View>
   );
 };
 
-export default FlightOptionPage;
+export default WelcomePage;
