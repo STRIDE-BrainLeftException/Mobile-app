@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="onBoarding">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
         component={HomeTabs}
