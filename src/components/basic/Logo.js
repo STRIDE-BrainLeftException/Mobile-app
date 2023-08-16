@@ -5,7 +5,7 @@ import LogoImageBlue from "../../assets/images/Stride_Logo_blue.png";
 
 const Logo = ({ size = 60, isBlue = false }) => {
   return (
-    <View padding={5}>
+    <View paddingX={5} pt={5}>
       {isBlue ? (
         <Image
           source={LogoImageBlue}

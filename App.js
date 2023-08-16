@@ -8,12 +8,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
 import OnBoardingNavigator from "./src/navigators/OnBoardingNavigator";
 import { NativeBaseProvider } from "native-base";
+import HomeScreen from "./src/screens/HomeScreen";
+import { theme } from "./src/utils/theme";
+import HomeTabs from "./src/navigators/HomeTabs";
 
 const Stack = createStackNavigator();
 
 function RootStack() {
   return (
     <Stack.Navigator initialRouteName="onBoarding">
+      <Stack.Screen
+        name="Home"
+        component={HomeTabs}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Map"
         component={MapNavigator}
@@ -30,11 +38,11 @@ function RootStack() {
 
 export default function App() {
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={theme}>
       <NavigationContainer>
         <RootStack />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </NativeBaseProvider>
   );
 }
