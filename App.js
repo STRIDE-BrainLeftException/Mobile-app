@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
+import OnBoardingNavigator from "./src/navigators/OnBoardingNavigator";
 import { NativeBaseProvider } from "native-base";
 import HomeScreen from "./src/screens/HomeScreen";
 import { theme } from "./src/utils/theme";
@@ -15,7 +16,7 @@ const Stack = createStackNavigator();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="onBoarding">
       <Stack.Screen
         name="Home"
         component={HomeScreen}
@@ -26,13 +27,18 @@ function RootStack() {
         component={MapNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="onBoarding"
+        component={OnBoardingNavigator}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
 
 export default function App() {
   return (
-    <NativeBaseProvider theme={theme} >
+    <NativeBaseProvider theme={theme}>
       <NavigationContainer>
         {/* <RootStack /> */}
         <HomeTabs />
