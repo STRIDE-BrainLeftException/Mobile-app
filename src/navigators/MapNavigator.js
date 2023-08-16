@@ -1,4 +1,4 @@
-import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
 
@@ -20,10 +20,7 @@ function MapNavigator() {
   return (
     <Stack.Navigator
       initialRouteName="Galaxies"
-      screenOptions={{
-        // presentation: "modal",
-        ...TransitionPresets.SlideFromRightIOS
-      }}
+      screenOptions={{ presentation: "transparentModal" }}
     >
       <Stack.Screen name="Galaxies" component={GalaxyScreen} />
       <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
