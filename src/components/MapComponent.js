@@ -1,14 +1,14 @@
-import React from "react";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import React from 'react';
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import Animated, {
   useAnimatedGestureHandler,
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   runOnJS,
-} from "react-native-reanimated";
-import { PanGestureHandler } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native-reanimated';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -58,10 +58,10 @@ const MapComponent = (props) => {
       return (
         <TouchableOpacity
           onPress={() => {
-            console.log("check", {type})
-            if (type == "galaxies") {
+            console.log('check', { type });
+            if (type == 'galaxies') {
               console.log({ type });
-              navigation.navigate("SolarSystems", { item: p });
+              navigation.navigate('SolarSystems', { item: p });
             }
           }}
           style={[
@@ -70,14 +70,12 @@ const MapComponent = (props) => {
               height: p.size,
               width: p.size,
               margin: Math.round(Math.random() * 10 + 10),
-              backgroundColor: "#00ff00",
-              position: "absolute",
+              backgroundColor: '#00ff00',
+              position: 'absolute',
               top: convertToDistanceFromEdge(p).x,
               left: convertToDistanceFromEdge(p).y,
             },
-          ]}
-        >
-        </TouchableOpacity>
+          ]}></TouchableOpacity>
       );
     },
   }));
@@ -147,23 +145,21 @@ const MapComponent = (props) => {
           {
             top: 0,
             height: 200,
-            width: "100%",
-            position: "absolute",
+            width: '100%',
+            position: 'absolute',
           },
-        ]}
-      ></View>
+        ]}></View>
       <PanGestureHandler onGestureEvent={panGestureEvent}>
-          <Animated.View
-            style={[
-              styles.square,
-              { height: MAP_HEIGHT, width: MAP_WIDTH },
-              rStyle,
-            ]}
-          >
-            {points.map((point, index) => (
-              <point.view key={index} />
-            ))}
-          </Animated.View>
+        <Animated.View
+          style={[
+            styles.square,
+            { height: MAP_HEIGHT, width: MAP_WIDTH },
+            rStyle,
+          ]}>
+          {points.map((point, index) => (
+            <point.view key={index} />
+          ))}
+        </Animated.View>
       </PanGestureHandler>
     </View>
   );
@@ -172,15 +168,15 @@ const MapComponent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   dropzone: {
-    backgroundColor: "rgba(0, 0, 256, 0.5)",
+    backgroundColor: 'rgba(0, 0, 123, 0.5)',
   },
   square: {
     borderRadius: 15,
-    backgroundColor: "red",
+    backgroundColor: 'red',
   },
 });
 
