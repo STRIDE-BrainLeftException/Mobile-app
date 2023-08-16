@@ -19,7 +19,7 @@ function RootStack() {
     <Stack.Navigator initialRouteName="onBoarding">
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeTabs}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -40,10 +40,9 @@ export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
-        {/* <RootStack /> */}
-        <HomeTabs />
+        <RootStack />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </NativeBaseProvider>
   );
 }
