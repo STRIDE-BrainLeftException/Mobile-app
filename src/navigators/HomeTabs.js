@@ -13,6 +13,7 @@ import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
 
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
+import { ComponentsScreen } from "../screens/TestingScreens/Components";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
@@ -22,7 +23,7 @@ const renderScene = SceneMap({
   home: HomeScreen,
   second: SecondRoute,
   second2: SecondRoute,
-  map2: SecondRoute,
+  map2: ComponentsScreen,
   map: MapNavigator,
 });
 
@@ -75,8 +76,11 @@ export default function HomeTabs() {
         }}
       >
         <BlurView
-        intensity={10}
-          style={{ height: BOTTOM_TAB_BAR_HEIGHT, backgroundColor: "rgba(0,0,0,0.7)",}}
+          intensity={10}
+          style={{
+            height: BOTTOM_TAB_BAR_HEIGHT,
+            backgroundColor: "rgba(0,0,0,0.7)",
+          }}
           tint="dark"
         ></BlurView>
       </View>
