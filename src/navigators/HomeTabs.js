@@ -8,6 +8,9 @@ import { BlurView } from "expo-blur";
 
 import HomeIcon from "../assets/icons/app-bar/home_icon_default.png";
 import HomeIconActive from "../assets/icons/app-bar/home_icon_active.png";
+import RideIcon from "../assets/icons/app-bar/ride_icon_default.png";
+import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
+
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
 
@@ -18,6 +21,8 @@ const SecondRoute = () => (
 const renderScene = SceneMap({
   home: HomeScreen,
   second: SecondRoute,
+  second2: SecondRoute,
+  map2: SecondRoute,
   map: MapNavigator,
 });
 
@@ -27,15 +32,19 @@ export default function HomeTabs() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "home", title: "Home" },
+    { key: "map2", title: "Map" },
     { key: "map", title: "Map" },
+    { key: "second2", title: "Second" },
     { key: "second", title: "Second" },
   ]);
 
   const renderIcon = ({ route, focused, color }) => {
     const routes = {
       home: { active: HomeIconActive, default: HomeIcon },
-      map: { active: HomeIconActive, default: HomeIcon },
+      map: { active: RideIconActive, default: RideIcon },
+      map2: { active: RideIconActive, default: RideIcon },
       second: { active: HomeIconActive, default: HomeIcon },
+      second2: { active: HomeIconActive, default: HomeIcon },
     };
     console.log({ route });
     return (
@@ -66,7 +75,8 @@ export default function HomeTabs() {
         }}
       >
         <BlurView
-          style={{ height: BOTTOM_TAB_BAR_HEIGHT }}
+        intensity={10}
+          style={{ height: BOTTOM_TAB_BAR_HEIGHT, backgroundColor: "rgba(0,0,0,0.7)",}}
           tint="dark"
         ></BlurView>
       </View>
