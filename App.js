@@ -11,6 +11,7 @@ import { NativeBaseProvider } from "native-base";
 import HomeScreen from "./src/screens/HomeScreen";
 import { theme } from "./src/utils/theme";
 import HomeTabs from "./src/navigators/HomeTabs";
+import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
 
 const Stack = createStackNavigator();
 
