@@ -3,9 +3,9 @@ import { BlurView } from "expo-blur";
 import { Text, View } from "native-base";
 import { StyleSheet } from "react-native";
 
-const BlurViewCard = ({children}) => {
+const BlurViewCard = ({children, containerStyle}) => {
   return (
-    <View style={styles.view}>
+    <View style={[styles.view, containerStyle ]}>
       <BlurView style={[styles.blurView]}>{children}</BlurView>
     </View>
   );
