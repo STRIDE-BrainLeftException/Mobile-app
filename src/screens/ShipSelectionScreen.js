@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ImageBackground, StatusBar } from "react-native";
+import ShipViewComponent from "../components/ShipViewComponent";
 
 const ShipSelectionScreen = () => {
   return (
@@ -8,6 +9,7 @@ const ShipSelectionScreen = () => {
       style={styles.backgroundImage}
     >
       <StatusBar />
+      <ShipViewComponent />
     </ImageBackground>
   );
 };
