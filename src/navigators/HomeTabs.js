@@ -14,6 +14,7 @@ import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
 import MotionTypeScreen from "../screens/MotionType";
+import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
@@ -26,6 +27,13 @@ const SecondRoute = () => (
 //   map2: SecondRoute,
 //   map: MapNavigator,
 // });
+const renderScene = SceneMap({
+  home: HomeScreen,
+  second: PlanetSelectedScreen,
+  second2: SecondRoute,
+  map2: SecondRoute,
+  map: MapNavigator,
+});
 
 export default function HomeTabs() {
   const layout = useWindowDimensions();
@@ -47,7 +55,7 @@ export default function HomeTabs() {
       case "home":
         return <HomeScreen jumpTo={jumpTo} />;
       case "second":
-        return <SecondRoute jumpTo={jumpTo} />;
+        return <PlanetSelectedScreen jumpTo={jumpTo} />;
       case "second2":
         return <MotionTypeScreen jumpTo={jumpTo} />;
       case "map2":
