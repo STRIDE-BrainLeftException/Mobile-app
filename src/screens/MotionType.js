@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { View as MView } from "moti";
+
 import COLORS from "../utils/colors";
 
 const cardDataArray = [
@@ -103,7 +105,7 @@ const Separator = ({ seperatorStyle }) => (
 const CustomImage = ({ source }) => {
   return (
     <View style={styles.imageContainer}>
-      <Image source={source} style={styles.image} />
+      <Image alt={' '} source={source} style={styles.image} />
     </View>
   );
 };
@@ -187,35 +189,53 @@ const BlurViewCardConents = ({
   handleButtonPress,
 }) => {
   return (
-    <BlurViewCard
-      containerStyle={[
-        styles.cardContainer,
-        isExpanded && styles.clikedCardContainer,
-      ]}
+    <MView
+      delay={Math.round(Math.random() * 200)}
+      from={{
+        opacity: 0,
+        scale: 0.5,
+      }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+      }}
+      exit={{ opacity: 0, scale: 0.5 }}
     >
-      <TouchableOpacity
-        onPress={() => {
-          toggleCardExpansion(index);
-        }}
+      <BlurViewCard
+        containerStyle={[
+          styles.cardContainer,
+          isExpanded && styles.clickedCardContainer,
+        ]}
       >
-        <View style={styles.container}>
-          <CustomImage source={image_path} />
+        <TouchableOpacity
+          onPress={() => {
+            toggleCardExpansion(index);
+          }}
+        >
+          <View style={styles.container}>
+            <CustomImage source={image_path} />
 
-          <TitleText title={title} superScript={superScript} />
-          <DescriptionText description={description} />
+            <TitleText title={title} superScript={superScript} />
+            <DescriptionText description={description} />
 
-          <Text style={styles.bottomText}>Starting from</Text>
-          <Text style={styles.priceText}>{price}Ñ</Text>
-        </View>
-      </TouchableOpacity>
-      {isExpanded && <HiddenText hidden_description={hidden_description} />}
-      {isExpanded && <SelectAndContinueBtn onPress={handleButtonPress} />}
-      {isExpanded && <Separator seperatorStyle={styles.customSeperatorStyle} />}
-    </BlurViewCard>
+            <Text style={styles.bottomText}>Starting from</Text>
+            <Text style={styles.priceText}>{price}Ñ</Text>
+          </View>
+
+          {isExpanded && (
+            <>
+              <HiddenText hidden_description={hidden_description} />
+              <SelectAndContinueBtn onPress={handleButtonPress} />
+              <Separator seperatorStyle={styles.customSeperatorStyle} />
+            </>
+          )}
+        </TouchableOpacity>
+      </BlurViewCard>
+    </MView>
   );
 };
 
-const MotionTypeScreen = () => {
+const MotionTypeScreen = ({ jumpTo }) => {
   const [expandedCardIndex, setExpandedCardIndex] = useState(-1);
 
   const toggleCardExpansion = (index) => {
@@ -263,7 +283,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: "90%",
   },
-  clikedCardContainer: {
+  clickedCardContainer: {
     height: 400,
   },
   separator: {

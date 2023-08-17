@@ -7,13 +7,13 @@ const Logo = ({ size = 60, isBlue = false }) => {
   return (
     <View paddingX={5} pt={5}>
       {isBlue ? (
-        <Image
+        <Image alt={' '}
           source={LogoImageBlue}
           resizeMode="contain"
           style={{ height: size / 3, width: size }}
         />
       ) : (
-        <Image
+        <Image alt={' '}
           source={LogoImage}
           resizeMode="contain"
           style={{ height: size / 3, width: size }}

@@ -10,7 +10,7 @@ export default function BlueViewTestScreen() {
   const text = "Hello, my container is blurring contents underneath!";
   return (
     <View style={styles.container}>
-      <Image style={[StyleSheet.absoluteFill, styles.image]} source={{ uri }} />
+      <Image alt={' '} style={[StyleSheet.absoluteFill, styles.image]} source={{ uri }} />
       <View style={{paddingTop: 300}}>
       <BlurViewCard />
       </View>

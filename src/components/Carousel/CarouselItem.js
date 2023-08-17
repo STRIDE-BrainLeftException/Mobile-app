@@ -11,7 +11,7 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
 const CarouselCardItem = ({ item, index }) => {
   return (
     <View style={styles.container} key={index}>
-      <Image
+      <Image alt={' '}
         source={{ uri: item.imgUrl }}
         style={[StyleSheet.absoluteFill, styles.image]}
       />
