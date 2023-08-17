@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import React from 'react';
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import Animated, {
   useAnimatedGestureHandler,
   useSharedValue,
@@ -163,23 +163,22 @@ const MapComponent = (props) => {
           {
             top: 0,
             height: 200,
-            width: "100%",
-            position: "absolute",
+            width: '100%',
+            position: 'absolute',
           },
         ]}
       ></View> */}
       <PanGestureHandler onGestureEvent={panGestureEvent}>
-          <Animated.View
-            style={[
-              styles.square,
-              { height: MAP_HEIGHT, width: MAP_WIDTH },
-              rStyle,
-            ]}
-          >
-            {points.map((point, index) => (
-              <point.view key={index} />
-            ))}
-          </Animated.View>
+        <Animated.View
+          style={[
+            styles.square,
+            { height: MAP_HEIGHT, width: MAP_WIDTH },
+            rStyle,
+          ]}>
+          {points.map((point, index) => (
+            <point.view key={index} />
+          ))}
+        </Animated.View>
       </PanGestureHandler>
     </View>
   );
@@ -188,11 +187,11 @@ const MapComponent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   dropzone: {
-    backgroundColor: "rgba(0, 0, 256, 0.5)",
+    backgroundColor: 'rgba(0, 0, 123, 0.5)',
   },
   square: {
     borderRadius: 15,

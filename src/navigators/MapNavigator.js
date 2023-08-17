@@ -6,6 +6,8 @@ import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
 import PlanetScreen from "../screens/PlanetScreen";
 import { Animated } from "react-native";
+import Calender from '../screens/Calender';
+import SelectPackage from '../screens/SelectPackage';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +71,8 @@ function MapNavigator() {
         cardStyleInterpolator: forSlide,
       }}
     >
+      <Stack.Screen name="SelectPackage" component={SelectPackage} />
+      <Stack.Screen name="Calender" component={Calender} />
       <Stack.Screen name="Galaxies" component={GalaxyScreen} />
       <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
       <Stack.Screen name="Planets" component={PlanetScreen} />
