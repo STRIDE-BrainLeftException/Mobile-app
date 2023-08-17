@@ -11,6 +11,7 @@ import { NativeBaseProvider } from "native-base";
 import HomeScreen from "./src/screens/HomeScreen";
 import { theme } from "./src/utils/theme";
 import HomeTabs from "./src/navigators/HomeTabs";
+import BookingNavigator from "./src/navigators/BookingNavigator";
 
 const Stack = createStackNavigator();
 
@@ -23,8 +24,8 @@ function RootStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Map"
-        component={MapNavigator}
+        name="Booking"
+        component={BookingNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

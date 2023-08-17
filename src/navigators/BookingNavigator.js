@@ -6,6 +6,9 @@ import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
 import PlanetScreen from "../screens/PlanetScreen";
 import { Animated } from "react-native";
+import MapNavigator from "./MapNavigator";
+import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
+import MotionTypeScreen from "../screens/MotionType";
 
 const Stack = createStackNavigator();
 
@@ -59,21 +62,23 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   };
 };
 
-function MapNavigator() {
+function BookingNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Galaxies"
-      screenOptions={{
-        // presentation: "modal",
-        // ...TransitionPresets.SlideFromRightIOS,
-        cardStyleInterpolator: forSlide,
-      }}
+      initialRouteName="Map"
+      screenOptions={
+        {
+          //   cardStyleInterpolator: forSlide,
+          headerShown: false
+        }
+      }
     >
-      <Stack.Screen name="Galaxies" component={GalaxyScreen} />
-      <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
-      <Stack.Screen name="Planets" component={PlanetScreen} />
+      <Stack.Screen name="Map" component={MapNavigator} />
+      <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
+      <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
+      {/* <Stack.Screen name="DateSelect" component={} /> */}
     </Stack.Navigator>
   );
 }
 
-export default MapNavigator;
+export default BookingNavigator;

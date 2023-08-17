@@ -87,6 +87,9 @@ const MapComponent = (props) => {
               if (type == "systems") {
                 navigation.navigate("Planets");
               }
+              if (type == "planets") {
+                navigation.navigate("StationSelect");
+              }
             }}
             style={[styles.square, { height: p.size, width: p.size }]}
           ></TouchableOpacity>
