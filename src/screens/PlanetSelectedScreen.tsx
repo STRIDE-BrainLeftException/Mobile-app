@@ -1,8 +1,9 @@
 import React, { useRef, useMemo, useCallback, useState } from "react";
 import { ImageBackground } from "react-native";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList } from "react-native";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { BlurView } from "expo-blur";
+
 import {
   BLUEVIEW_BORDER_COLOR,
   BLURVIEW_BORDER_WIDTH,
@@ -12,7 +13,6 @@ import {
 } from "../utils/constants";
 import PlanetStationsView from "../components/PlanetStationsView";
 import { position } from "native-base/lib/typescript/theme/styled-system";
-import BlurViewCard from "../components/basic/BlurViewCard";
 
 const planetArrayData = [
   {
@@ -26,21 +26,27 @@ const planetArrayData = [
 const whereToGoArrayData = [
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img.png"),
+    desitination_name: "Lißa Dune Racing",
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-1.png"),
+    desitination_name: "Hapez Plant Museum",
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-2.png"),
+    destination_name: "Horizon City Tower",
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-3.png"),
+    destination_name: "Signal Tower of yore",
   },
   {
-    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where to go/img-4.png"),
+    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-4.png"),
+    destination_name: "Kriptony Dreamer",
   },
   {
-    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where to go/img-5.png"),
+    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-5.png"),
+    destination_name: "Aplha Moon Watching",
   },
 ];
 
@@ -95,23 +101,67 @@ const TitleContainer = ({ stationName, subStationName, content }) => {
       >
         Where to Go
       </Text>
+      <View style={{ height: 20 }} />
     </View>
   );
 };
 
 const CustomImage = ({ source }) => {
+  return <Image source={source} style={styles.image} />;
+};
+
+const PopularDestinationSection = ({ image_path, destination_name }) => {
   return (
-    <View style={styles.imageContainer}>
-      <Image source={source} style={styles.image} />
+    <View style={styles.container_where_to_image}>
+      <BlurView style={styles.blurView}>
+        <CustomImage source={image_path} />
+        <View style={{ height: 5 }}></View>
+        <Text
+          style={{
+            color: "rgba(255, 255, 255, 1)",
+            fontSize: 11.71,
+            textAlign: "center",
+          }}
+        >
+          {destination_name}
+        </Text>
+      </BlurView>
     </View>
   );
 };
 
-const PopularDestinationSection = ({  }) => {
+const Planet_Details_Section = ({}) => {
+  const renderItem = ({ item }) => (
+    <PopularDestinationSection
+      image_path={item.image_path}
+      destination_name={item.desitination_name}
+    />
+  );
+
+  const Separator = ({ }) => (
+    <View style={{width:10}} />
+  );
+  
+
   return (
-    <BlurViewCard containerStyle={styles.cardContainer}>
-      <CustomImage source={whereToGoArrayData[0].image_path} />
-    </BlurViewCard>
+    <BottomSheetScrollView>
+      <TitleContainer
+        stationName={planetArrayData[0].stationName}
+        subStationName={planetArrayData[0].subStationName}
+        content={planetArrayData[0].content}
+      />
+      <View style={{ flexDirection: "row" }}>
+        <FlatList
+          data={whereToGoArrayData}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.destination_name}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.flatListContent}
+          ItemSeparatorComponent={Separator}
+        />
+      </View>
+    </BottomSheetScrollView>
   );
 };
 
@@ -168,34 +218,45 @@ const PlanetSelectedScreen = () => {
           </View>
         )}
       >
-        <BottomSheetScrollView>
-          {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9.1].map((i) => {
+        {/* <BottomSheetScrollView> */}
+        {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9.1].map((i) => {
             return (
               <View key={i} style={{ height: 200, width: "90%" }}>
                 <Text>{i}</Text>
               </View>
             );
           })} */}
-          {/* <BlurView style={{ flex: 1, width: "100%" }}> */}
-          {/* <Text>Awesome 🎉</Text> */}
-          <TitleContainer
-            stationName={planetArrayData[0].stationName}
-            subStationName={planetArrayData[0].subStationName}
-            content={planetArrayData[0].content}
-          />
-          <PopularDestinationSection />
-        </BottomSheetScrollView>
+        {/* <BlurView style={{ flex: 1, width: "100%" }}> */}
+        {/* <Text>Awesome 🎉</Text> */}
+        {/* </BottomSheetScrollView> */}
         {/* </BlurView> */}
+
+        <Planet_Details_Section />
       </BottomSheet>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  blurView: {
+    width: "100%",
+    alignItems: "center",
+    paddingTop: 20,
+    height: "100%",
+    borderRadius: 20,
+  },
   container: {
     flex: 1,
     padding: 24,
     backgroundColor: "grey",
+  },
+  container_where_to_image: {
+    overflow: "hidden",
+    borderRadius: 20,
+    width: 175,
+    height: 195,
+    backgroundColor: "transparent",
+    borderColor: "rgba(255,255,255,0.5)",
   },
   contentContainer: {
     borderWidth: BLURVIEW_BORDER_WIDTH,
@@ -207,16 +268,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "transparent",
   },
-  imageContainer: {
-    width: "100%",
+  image: {
+    borderRadius: 10,
   },
-  image:{
-
+  cardContainer: {
+    width: "40%",
+    position: "relative",
+    // alignSelf: "left",
+    // padding:10,
+    // marginRight:10,
+    // alignSelf: "left",
+    // height: 200,
   },
-  cardContainer:{
-    width: "90%",
-    height: 200,
-  }
+  flatListContent: {
+    paddingHorizontal: 10, // Adjust horizontal padding to control spacing
+  },
 });
 
 export default PlanetSelectedScreen;
