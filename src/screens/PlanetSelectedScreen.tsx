@@ -1,6 +1,7 @@
 import React, { useRef, useMemo, useCallback, useState } from "react";
 import { ImageBackground } from "react-native";
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { BlurView } from "expo-blur";
 
