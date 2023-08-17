@@ -7,8 +7,8 @@ const PackageSelector = () => {
     <View style={styles.pakageSelectorStyle}>
       {/* <Text>Testing the pakage selector card</Text> */}
       <PackageBlurViewCard
-        img={
-          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        image={
+          '../../assets/images/Booking_Process/Package_Selection_Screen/krypium-img.png'
         }
         pkg={'Krypium'}
         description={
@@ -16,8 +16,8 @@ const PackageSelector = () => {
         }
       />
       <PackageBlurViewCard
-        img={
-          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        image={
+          '../../assets/images/Booking_Process/Package_Selection_Screen/krypium-img.png'
         }
         pkg={'Omium'}
         description={
@@ -25,8 +25,8 @@ const PackageSelector = () => {
         }
       />
       <PackageBlurViewCard
-        img={
-          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        image={
+          '../../assets/images/Booking_Process/Package_Selection_Screen/krypium-img.png'
         }
         pkg={'Terynium'}
         description={
@@ -34,11 +34,11 @@ const PackageSelector = () => {
         }
       />
       <PackageBlurViewCard
-        img={
-          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        image={
+          '../../assets/images/Booking_Process/Package_Selection_Screen/krypium-img.png'
         }
         pkg={'Serynium'}
-        description={'Varied food, basic health care, worry-free exploration.'}
+        description={'Varied food, basic health care, worry-free explorations.'}
       />
     </View>
   );

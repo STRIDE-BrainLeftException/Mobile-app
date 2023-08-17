@@ -4,6 +4,7 @@ import { Text, View, Image } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 const PackageBlurViewCard = ({ image, pkg, description }) => {
+  const img = image;
   return (
     <View style={styles.view}>
       <BlurView style={[styles.blurView]}>
@@ -21,15 +22,14 @@ const PackageBlurViewCard = ({ image, pkg, description }) => {
             marginRight: 10,
           }}>
           <Image
-            source={{
-              require:
-                '../../assets/images/Booking Process/Package Selection Screen/planet.png',
-            }}
+            // source={{
+            //   uri: 'https://img.freepik.com/premium-photo/illustration-neon-tropical-theme-with-palm-tree-exotic-floral-ai_564714-1270.jpg',
+            // }}
+            source={require('../../assets/images/Booking_Process/Package_Selection_Screen/omium-img.png')}
             alt="Alternate Text"
             style={{
               width: 100,
               height: 100,
-              backgroundColor: 'white',
               borderRadius: 10,
             }} // Set desired width and height
           />
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   view: {
     borderRadius: 20,
+    marginBottom: 10,
     overflow: 'hidden',
     backgroundColor: 'transparent',
     borderColor: 'rgba(255,255,255,0.5)',
