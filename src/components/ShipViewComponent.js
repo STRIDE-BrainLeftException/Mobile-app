@@ -12,10 +12,16 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import { BlurView } from "expo-blur";
 
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
-  console.log(shipData.image);
-
   const shipTypeStyle =
     shipData.type === "HyperStride" ? styles.shipType[0] : styles.shipType[1];
+
+  _renderItem = ({ item, index }) => {
+    return (
+      <BlurView intensity={40} style={styles.slide}>
+        <Image style={styles.slideImg} source={item} />
+      </BlurView>
+    );
+  };
 
   return (
     <View style={styles.root}>
@@ -33,7 +39,7 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
         </View>
       </View>
       <View style={styles.blurViewContainer}>
-        <BlurView style={styles.blurView} tint="dark" intensity={30}>
+        <BlurView style={styles.blurView} tint="dark" intensity={50}>
           <Text style={styles.shipEngine}>{shipData.engine}</Text>
           <Text style={styles.shipDescription}>{shipData.description}</Text>
           <View style={styles.shipStatsContainer}>
@@ -50,7 +56,17 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
               <Text style={styles.shipStatFooter}>Expected Arrival Time</Text>
             </View>
           </View>
-          <Carousel />
+          <Text style={styles.shipVisArchTitle}>Visual Archive</Text>
+          <Carousel
+            layout={"default"}
+            ref={(c) => {
+              this._carousel = c;
+            }}
+            data={shipData.visualArchive}
+            renderItem={this._renderItem}
+            sliderWidth={1000}
+            itemWidth={200}
+          />
           <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
           <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
         </BlurView>
@@ -64,6 +80,22 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  slideImg: {
+    width: 180,
+    height: 180,
+  },
+  slide: {
+    padding: 10,
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  shipVisArchTitle: {
+    color: "white",
+    fontSize: 25,
+    alignSelf: "flex-start",
+    marginVertical: 10,
+    marginLeft: 10,
   },
   shipHeader: {
     zIndex: 2,
@@ -139,18 +171,16 @@ const styles = StyleSheet.create({
   },
   blurView: {
     alignItems: "center",
-    paddingTop: "20%",
+    paddingTop: "30%",
   },
   blurViewContainer: {
     color: "white",
-    paddingTop: "23%",
-    paddingHorizontal: "6%",
+    marginHorizontal: "6%",
     position: "absolute",
-    top: "65%",
+    top: "75%",
     width: "100%",
     borderRadius: 20,
     overflow: "hidden",
-    backgroundColor: "rgba(0,0,0,0.1)",
     alignSelf: "center",
   },
 });

@@ -41,7 +41,7 @@ export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
-        <ShipSelectionScreen />
+        <RootStack />
       </NavigationContainer>
       <StatusBar style="light" />
     </NativeBaseProvider>
