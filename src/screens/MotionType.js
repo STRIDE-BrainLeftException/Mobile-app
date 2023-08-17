@@ -9,7 +9,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import Colors from "../utils/colors";
+
+import COLORS from "../utils/colors";
 
 const cardDataArray = [
   {
@@ -45,8 +46,7 @@ const cardDataArray = [
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/general-ships-img.png"),
     title: "General Ships",
     superScript: "",
-    description:
-      "Ship across the universe and explore the marvels",
+    description: "Ship across the universe and explore the marvels",
     price: "349",
     hidden_description:
       "Pioneering intergalactic exploration with unparalleled speed and technology. Seamlessly traverse the cosmos, unlocking new frontiers and unraveling celestial mysteries. Elevate your journey, embrace the future of space travel.",
@@ -96,7 +96,9 @@ const CardItem = ({
   );
 };
 
-const Separator = ({seperatorStyle}) => <View style={[styles.separator, seperatorStyle]} />;
+const Separator = ({ seperatorStyle }) => (
+  <View style={[styles.separator, seperatorStyle]} />
+);
 
 const CustomImage = ({ source }) => {
   return (
@@ -110,10 +112,10 @@ const TitleText = ({ title, superScript }) => {
   return (
     <View style={styles.titleContainer}>
       <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-        <Text style={{ fontSize: 24, lineHeight: 30, color: "#EEEEEE" }}>
+        <Text style={{ fontSize: 24, lineHeight: 30, color: COLORS.textColor }}>
           {title}
         </Text>
-        <Text style={{ fontSize: 11, lineHeight: 18, color: "#EEEEEE" }}>
+        <Text style={{ fontSize: 11, lineHeight: 18, color: COLORS.textColor }}>
           {superScript}
         </Text>
       </View>
@@ -128,7 +130,7 @@ const HiddenText = ({ hidden_description }) => {
         style={{
           fontSize: 20,
           lineHeight: 30,
-          color: "#EEEEEE",
+          color: COLORS.textColor,
           textAlign: "left",
           position: "relative",
           left: 20,
@@ -141,7 +143,7 @@ const HiddenText = ({ hidden_description }) => {
         style={{
           fontSize: 11,
           lineHeight: 18,
-          color: "#EEEEEE",
+          color: COLORS.textColor,
           textAlign: "left",
           left: 20,
           right: 20,
@@ -155,7 +157,9 @@ const HiddenText = ({ hidden_description }) => {
 
 const DescriptionText = ({ description }) => {
   return (
-    <Text style={{ fontSize: 11, lineHeight: 18, color: "#EEEEEE", flex: 1 }}>
+    <Text
+      style={{ fontSize: 11, lineHeight: 18, color: COLORS.textColor, flex: 1 }}
+    >
       {description}
     </Text>
   );
@@ -163,11 +167,9 @@ const DescriptionText = ({ description }) => {
 
 const SelectAndContinueBtn = ({ onPress }) => {
   return (
-    // <BlurViewCard containerStyle={styles.buttonContainer}>
-      <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>Select & Continue</Text>
-      </TouchableOpacity>
-    // </BlurViewCard>
+    <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
+      <Text style={styles.buttonText}>Select & Continue</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -185,10 +187,14 @@ const BlurViewCardConents = ({
   handleButtonPress,
 }) => {
   return (
-    <BlurViewCard containerStyle={[styles.cardContainer, isExpanded && styles.clikedCardContainer]}>
+    <BlurViewCard
+      containerStyle={[
+        styles.cardContainer,
+        isExpanded && styles.clikedCardContainer,
+      ]}
+    >
       <TouchableOpacity
         onPress={() => {
-          // console.log("Card pressed for index:", index);
           toggleCardExpansion(index);
         }}
       >
@@ -204,28 +210,24 @@ const BlurViewCardConents = ({
       </TouchableOpacity>
       {isExpanded && <HiddenText hidden_description={hidden_description} />}
       {isExpanded && <SelectAndContinueBtn onPress={handleButtonPress} />}
-      {isExpanded && <Separator seperatorStyle={styles.customSeperatorStyle}/>}
+      {isExpanded && <Separator seperatorStyle={styles.customSeperatorStyle} />}
     </BlurViewCard>
   );
 };
 
 const MotionTypeScreen = () => {
-  const [expandedCardIndex, setExpandedCardIndex] = useState(-1); // Initialize with -1
+  const [expandedCardIndex, setExpandedCardIndex] = useState(-1);
 
   const toggleCardExpansion = (index) => {
-    // console.log("Toggle function called for index:", index);
     if (expandedCardIndex === index) {
-      // console.log("Collapsing card");
       setExpandedCardIndex(-1);
     } else {
-      // console.log("Expanding card");
       setExpandedCardIndex(index);
-      // console.log(index);
     }
   };
 
   const handleButtonPress = () => {
-    // console.log("Button pressed!");
+    // Change it to the next screen
   };
 
   return (
@@ -245,7 +247,7 @@ const MotionTypeScreen = () => {
             index={index}
             expandedCardIndex={expandedCardIndex}
             toggleCardExpansion={toggleCardExpansion}
-            isExpanded={expandedCardIndex === index} // Pass the isExpanded prop
+            isExpanded={expandedCardIndex === index}
             onPress={() => toggleCardExpansion(index)}
             handleButtonPress={handleButtonPress}
           />
@@ -258,14 +260,14 @@ const MotionTypeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  cardContainer:{
+  cardContainer: {
     width: "90%",
   },
-  clikedCardContainer:{
+  clikedCardContainer: {
     height: 400,
   },
   separator: {
-    height: 10, // Adjust the height to your desired spacing
+    height: 10,
   },
   customSeperatorStyle: {
     height: 45,
@@ -292,40 +294,38 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover", // Make the image cover the entire screen
+    resizeMode: "cover",
   },
   bottomText: {
     position: "absolute",
-    bottom: 20, // Adjust this value to position vertically from the bottom
-    right: 80, // Adjust this value to position horizontally from the right
-    fontSize: 10, // Adjust the font size as needed
-    color: "#D0D0D0",
+    bottom: 20,
+    right: 80,
+    fontSize: 10,
+    color: COLORS.lightTextColor,
   },
   priceText: {
     position: "absolute",
     bottom: 10,
     right: 10,
     fontSize: 25,
-    color: Colors.buttonColor,
+    color: COLORS.buttonColor,
   },
   buttonContainer: {
     position: "relative",
-    top:20,
-    width: "50%", // Adjust the width as needed
-    alignSelf: "center", // Center the contents horizontally
-    // borderColor: "#527ffa",
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    top: 20,
+    width: "50%",
+    alignSelf: "center",
+    backgroundColor: COLORS.buttonBGColor,
     opacity: 0.5,
-    borderColor: "rgba(151, 169, 246, 0.5)",
+    borderColor: COLORS.buttonBorderColor,
     borderWidth: 1,
     borderRadius: 20,
     padding: 10,
-    // backgroundColor: "blue",
   },
   buttonText: {
     color: "rgba(255, 255, 255, 1)",
     fontSize: 13,
-    textAlign: "center"
+    textAlign: "center",
   },
 });
 
