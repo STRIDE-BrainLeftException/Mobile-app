@@ -13,6 +13,7 @@ import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
 
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
+import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
@@ -20,7 +21,7 @@ const SecondRoute = () => (
 
 const renderScene = SceneMap({
   home: HomeScreen,
-  second: SecondRoute,
+  second: PlanetSelectedScreen,
   second2: SecondRoute,
   map2: SecondRoute,
   map: MapNavigator,
