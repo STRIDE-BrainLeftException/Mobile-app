@@ -10,11 +10,36 @@ const PackageSelector = () => {
         img={
           '../../assets/images/Booking Process/Package Selection Screen/planet.png'
         }
-        pkg={'krypto'}
-        description={'best pakage'}
+        pkg={'Krypium'}
+        description={
+          'Gourmet food, top health care,pet-friendly, Galaxicony access, language training.'
+        }
       />
-      <PackageBlurViewCard />
-      <PackageBlurViewCard />
+      <PackageBlurViewCard
+        img={
+          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        }
+        pkg={'Omium'}
+        description={
+          '100+ food choices, health care, pet choice, Galaxicony discount, language training.'
+        }
+      />
+      <PackageBlurViewCard
+        img={
+          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        }
+        pkg={'Terynium'}
+        description={
+          '50+ food options, health care, pet space, Galaxicony offer, language discount.'
+        }
+      />
+      <PackageBlurViewCard
+        img={
+          '../../assets/images/Booking Process/Package Selection Screen/planet.png'
+        }
+        pkg={'Serynium'}
+        description={'Varied food, basic health care, worry-free exploration.'}
+      />
     </View>
   );
 };

@@ -48,9 +48,7 @@ const PackageBlurViewCard = ({ image, pkg, description }) => {
             justifyContent: 'center',
             alignItems: 'center',
             // backgroundColor: 'red',
-          }}>
-          <AntDesign name="exclamationcircleo" size={24} color="black" />
-        </View>
+          }}></View>
         {/* </View> */}
       </BlurView>
     </View>
