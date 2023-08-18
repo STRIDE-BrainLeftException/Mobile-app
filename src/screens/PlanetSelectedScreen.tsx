@@ -17,6 +17,7 @@ import {
   BORDER_RADIUS,
 } from "../utils/constants";
 import PlanetStationsView from "../components/PlanetStationsView";
+import { Button } from "native-base";
 
 const planetArrayData = [
   {
@@ -619,6 +620,10 @@ const PlanetSelectedScreen = () => {
     { id: 3, name: "Station 3", degree: 20 },
     // { id: 4, name: "Station 3", degree: 180 },
   ];
+
+  const onContinue = () => {
+    navigation.navigate("DateSelect");
+  };
 
   return (
     <ImageBackground
