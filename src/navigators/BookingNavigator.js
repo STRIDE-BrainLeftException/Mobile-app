@@ -5,10 +5,14 @@ import {
 import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
 import PlanetScreen from "../screens/PlanetScreen";
-import { Animated } from "react-native";
+import { Animated, ImageBackground } from "react-native";
 import MapNavigator from "./MapNavigator";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 import MotionTypeScreen from "../screens/MotionType";
+import DateSelectScreen from "../screens/Calender";
+import SelectPackage from "../screens/SelectPackage";
+import ShipSelectionScreen from "../screens/ShipSelectionScreen";
+import { View } from "native-base";
 
 const Stack = createStackNavigator();
 
@@ -64,20 +68,31 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
 
 function BookingNavigator() {
   return (
-    <Stack.Navigator
-      initialRouteName="Map"
-      screenOptions={
-        {
-          //   cardStyleInterpolator: forSlide,
-          headerShown: false
-        }
-      }
+    <ImageBackground
+      style={{ flex: 1 }}
+      source={require("../assets/images/Booking_BG.png")}
     >
-      <Stack.Screen name="Map" component={MapNavigator} />
-      <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
-      <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
-      {/* <Stack.Screen name="DateSelect" component={} /> */}
-    </Stack.Navigator>
+      <Stack.Navigator
+        initialRouteName="Map"
+        screenOptions={{
+          //   cardStyleInterpolator: forSlide,
+          headerMode: "screen",
+          headerShown: false,
+          cardStyle: { backgroundColor: "transparent"},
+        }}
+      >
+        <Stack.Screen name="Map" component={MapNavigator} />
+        <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
+        <Stack.Screen name="DateSelect" component={DateSelectScreen} />
+        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
+        <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
+        {/* add a cabin select */}
+        {/* add person select */}
+        <Stack.Screen name="PackageSelect" component={SelectPackage} />
+        {/* add checkout */}
+        {/* booking details */}
+      </Stack.Navigator>
+    </ImageBackground>
   );
 }
 

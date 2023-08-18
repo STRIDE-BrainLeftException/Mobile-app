@@ -11,8 +11,9 @@ import {
   WIDTH,
 } from "../utils/constants";
 import PlanetStationsView from "../components/PlanetStationsView";
+import { Button } from "native-base";
 
-const PlanetSelectedScreen = () => {
+const PlanetSelectedScreen = ({ navigation }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [selectedStation, setSelectedStation] = useState();
 
@@ -30,6 +31,10 @@ const PlanetSelectedScreen = () => {
     { id: 3, name: "Station 3", degree: 20 },
     // { id: 4, name: "Station 3", degree: 180 },
   ];
+
+  const onContinue = () => {
+    navigation.navigate("DateSelect");
+  };
 
   return (
     <ImageBackground
@@ -66,6 +71,9 @@ const PlanetSelectedScreen = () => {
         )}
       >
         <BottomSheetScrollView>
+          <Button onPress={onContinue}>
+            <Text>Continue 🎉</Text>
+          </Button>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9.1].map((i) => {
             return (
               <View key={i} style={{ height: 200, width: "90%" }}>
@@ -74,7 +82,6 @@ const PlanetSelectedScreen = () => {
             );
           })}
           {/* <BlurView style={{ flex: 1, width: "100%" }}> */}
-          <Text>Awesome 🎉</Text>
         </BottomSheetScrollView>
         {/* </BlurView> */}
       </BottomSheet>

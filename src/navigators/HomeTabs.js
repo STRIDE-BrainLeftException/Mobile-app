@@ -195,7 +195,7 @@ export default function HomeTabs() {
   return (
     <ImageBackground
       style={{ flex: 1 }}
-      source={require("../assets/images/bookingProcessBackground.png")}
+      source={require("../assets/images/Booking_BG.png")}
     >
       <TabView
         swipeEnabled={false}
