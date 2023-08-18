@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, useWindowDimensions, Text } from "react-native";
+import { View, useWindowDimensions, Text, ImageBackground } from "react-native";
 import { TabView, SceneMap, TabBar, TabBarItem } from "react-native-tab-view";
 import MapNavigator from "./MapNavigator";
 import HomeScreen from "../screens/HomeScreen";
@@ -13,14 +13,23 @@ import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
 
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
+import MotionTypeScreen from "../screens/MotionType";
+import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
 
+// const renderScene = SceneMap({
+//   home: HomeScreen,
+//   second: SecondRoute,
+//   second2: MotionTypeScreen,
+//   map2: SecondRoute,
+//   map: MapNavigator,
+// });
 const renderScene = SceneMap({
   home: HomeScreen,
-  second: SecondRoute,
+  second: PlanetSelectedScreen,
   second2: SecondRoute,
   map2: SecondRoute,
   map: MapNavigator,
@@ -38,6 +47,24 @@ export default function HomeTabs() {
     { key: "second", title: "Second" },
   ]);
 
+  const renderScene = ({ route, jumpTo }) => {
+    if (Math.abs(index - routes.indexOf(route)) > 2) {
+      return <View />;
+    }
+    switch (route.key) {
+      case "home":
+        return <HomeScreen jumpTo={jumpTo} />;
+      case "second":
+        return <PlanetSelectedScreen jumpTo={jumpTo} />;
+      case "second2":
+        return <MotionTypeScreen jumpTo={jumpTo} />;
+      case "map2":
+        return <SecondRoute jumpTo={jumpTo} />;
+      case "map":
+        return <MapNavigator jumpTo={jumpTo} />;
+    }
+  };
+
   const renderIcon = ({ route, focused, color }) => {
     const routes = {
       home: { active: HomeIconActive, default: HomeIcon },
@@ -49,6 +76,7 @@ export default function HomeTabs() {
     console.log({ route });
     return (
       <Image
+        alt={" "}
         source={
           focused ? routes[route.key]["active"] : routes[route.key]["default"]
         }
@@ -75,8 +103,11 @@ export default function HomeTabs() {
         }}
       >
         <BlurView
-        intensity={10}
-          style={{ height: BOTTOM_TAB_BAR_HEIGHT, backgroundColor: "rgba(0,0,0,0.7)",}}
+          intensity={10}
+          style={{
+            height: BOTTOM_TAB_BAR_HEIGHT,
+            backgroundColor: "rgba(0,0,0,0.7)",
+          }}
           tint="dark"
         ></BlurView>
       </View>
@@ -161,20 +192,25 @@ export default function HomeTabs() {
   );
 
   return (
-    <TabView
-      swipeEnabled={false}
-      tabBarPosition="bottom"
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
-      lazy={true}
-      renderTabBar={renderTabBar}
-      renderLazyPlaceholder={() => (
-        <View>
-          <Text>lazy</Text>
-        </View>
-      )}
-    />
+    <ImageBackground
+      style={{ flex: 1 }}
+      source={require("../assets/images/bookingProcessBackground.png")}
+    >
+      <TabView
+        swipeEnabled={false}
+        tabBarPosition="bottom"
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{ width: layout.width }}
+        lazy={true}
+        renderTabBar={renderTabBar}
+        renderLazyPlaceholder={() => (
+          <View>
+            <Text>lazy</Text>
+          </View>
+        )}
+      />
+    </ImageBackground>
   );
 }

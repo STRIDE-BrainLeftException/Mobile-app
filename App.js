@@ -1,18 +1,17 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import MapNavigator from './src/navigators/MapNavigator';
-import OnBoardingNavigator from './src/navigators/OnBoardingNavigator';
-import { NativeBaseProvider } from 'native-base';
-import HomeScreen from './src/screens/HomeScreen';
-import { theme } from './src/utils/theme';
-import HomeTabs from './src/navigators/HomeTabs';
-import LoggedIn from './src/screens/LoggedIn';
-import BiometricLogIn from './src/screens/BiometricLogIn';
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import MapNavigator from "./src/navigators/MapNavigator";
+import OnBoardingNavigator from "./src/navigators/OnBoardingNavigator";
+import { NativeBaseProvider } from "native-base";
+import HomeScreen from "./src/screens/HomeScreen";
+import { theme } from "./src/utils/theme";
+import HomeTabs from "./src/navigators/HomeTabs";
+import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
 
 const Stack = createStackNavigator();
 
@@ -45,7 +44,7 @@ export default function App() {
       <NavigationContainer>
         <RootStack />
       </NavigationContainer>
-      <StatusBar style='light' />
+      <StatusBar style="light" />
     </NativeBaseProvider>
   );
 }
@@ -53,8 +52,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
