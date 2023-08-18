@@ -5,7 +5,9 @@ import {
 import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
 import PlanetScreen from "../screens/PlanetScreen";
-import { Animated } from "react-native";
+import { Animated, Button, Text } from "react-native";
+import { View } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
@@ -39,7 +41,23 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
         }),
         inverted
       ),
+
       transform: [
+        {
+          translateX: Animated.multiply(
+            progress.interpolate({
+              inputRange: [0, 1, 2],
+              outputRange: [
+                -400, // Focused, but offscreen in the beginning
+                0, // Fully focused
+                400, // Fully unfocused
+              ],
+              extrapolate: "clamp",
+            }),
+            inverted
+          ),
+          
+        },
         {
           scale: Animated.multiply(
             progress.interpolate({
@@ -60,19 +78,29 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
 };
 
 function MapNavigator() {
+  const navigation = useNavigation();
+
   return (
-    <Stack.Navigator
-      initialRouteName="Galaxies"
-      screenOptions={{
-        // presentation: "modal",
-        // ...TransitionPresets.SlideFromRightIOS,
-        cardStyleInterpolator: forSlide,
-      }}
-    >
-      <Stack.Screen name="Galaxies" component={GalaxyScreen} />
-      <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
-      <Stack.Screen name="Planets" component={PlanetScreen} />
-    </Stack.Navigator>
+    <View style={{ paddingTop: 20, flex: 1 }}>
+      <Button
+        title="back"
+        style={{ padding: 50 }}
+        onPress={() => navigation.goBack()}
+      />
+      <Stack.Navigator
+        initialRouteName="Galaxies"
+        screenOptions={{
+          headerShown: false,
+          // presentation: "modal",
+          // ...TransitionPresets.SlideFromRightIOS,
+          cardStyleInterpolator: forSlide,
+        }}
+      >
+        <Stack.Screen name="Galaxies" component={GalaxyScreen} />
+        <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
+        <Stack.Screen name="Planets" component={PlanetScreen} />
+      </Stack.Navigator>
+    </View>
   );
 }
 
