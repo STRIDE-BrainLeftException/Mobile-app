@@ -74,7 +74,6 @@ export default function HomeTabs() {
       second: { active: HomeIconActive, default: HomeIcon },
       second2: { active: HomeIconActive, default: HomeIcon },
     };
-    console.log({ route });
     return (
       <Image
         alt={" "}
@@ -131,7 +130,6 @@ export default function HomeTabs() {
         pressColor="transparent"
         renderLabel={(props) => <View />}
         renderTabBarItem={(props) => {
-          console.log({ props });
           if (props.route.key == "map") {
             return (
               <View
