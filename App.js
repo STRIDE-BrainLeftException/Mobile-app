@@ -12,6 +12,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import { theme } from './src/utils/theme';
 import HomeTabs from './src/navigators/HomeTabs';
 import LoggedIn from './src/screens/LoggedIn';
+import BiometricLogIn from './src/screens/BiometricLogIn';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,7 @@ function RootStack() {
     //     options={{ headerShown: false }}
     //   />
     // </Stack.Navigator>
-    <LoggedIn />
+    <BiometricLogIn />
   );
 }
 
