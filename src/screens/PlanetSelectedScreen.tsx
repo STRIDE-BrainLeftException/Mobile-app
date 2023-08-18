@@ -1,19 +1,22 @@
 import React, { useRef, useMemo, useCallback, useState } from "react";
 import { ImageBackground } from "react-native";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import {
+  FlatList,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { BlurView } from "expo-blur";
+import Accordion from "react-native-collapsible/Accordion";
+import BlurViewCard from "../components/basic/BlurViewCard";
+import COLORS from "../utils/colors";
 
 import {
   BLUEVIEW_BORDER_COLOR,
   BLURVIEW_BORDER_WIDTH,
   BORDER_RADIUS,
-  HEIGHT,
-  WIDTH,
 } from "../utils/constants";
 import PlanetStationsView from "../components/PlanetStationsView";
-import { position } from "native-base/lib/typescript/theme/styled-system";
 
 const planetArrayData = [
   {
@@ -24,14 +27,78 @@ const planetArrayData = [
   },
 ];
 
+const stationDetailsArrayData = [
+  {
+    stationName: "Vanezia",
+    subStationName: "Volrizen 30A  |  3000LY",
+    content:
+      "Nestled amidst breathtaking crystalline landscapes, Celestia Prime is a marvel of bioluminescent architecture and advanced technology.",
+    textComponents: [
+      {
+        HighlightedText: "Climate",
+        NormalText: "Harmanized",
+      },
+      {
+        HighlightedText: "Air",
+        NormalText: "Breathable",
+      },
+      {
+        HighlightedText: "Warm",
+        NormalText: "Temperature",
+      },
+    ],
+  },
+  {
+    stationName: "Alderine",
+    subStationName: "Volrizen 30A  |  3000LY",
+    content:
+      "Nestled amidst breathtaking crystalline landscapes, Celestia Prime is a marvel of bioluminescent architecture and advanced technology.",
+    textComponents: [
+      {
+        HighlightedText: "Climate",
+        NormalText: "Harmanized",
+      },
+      {
+        HighlightedText: "Air",
+        NormalText: "Breathable (L2)",
+      },
+      {
+        HighlightedText: "Cold",
+        NormalText: "Temperature",
+      },
+    ],
+  },
+  {
+    stationName: "Alderine",
+    subStationName: "Volrizen 30A  |  3000LY",
+    content:
+      "Nestled amidst breathtaking crystalline landscapes, Celestia Prime is a marvel of bioluminescent architecture and advanced technology.",
+    textComponents: [
+      {
+        HighlightedText: "Climate",
+        NormalText: "Harmanized",
+      },
+      {
+        HighlightedText: "Air",
+        NormalText: "Breathable (L2)",
+      },
+      {
+        HighlightedText: "Cold",
+        NormalText: "Temperature",
+      },
+    ],
+  },
+];
+
 const whereToGoArrayData = [
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img.png"),
-    desitination_name: "Lißa Dune Racing",
+    destination_name: "Lißa Dune Racing",
+    station_number: "Station 1",
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-1.png"),
-    desitination_name: "Hapez Plant Museum",
+    destination_name: "Hapez Plant Museum",
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-2.png"),
@@ -48,6 +115,40 @@ const whereToGoArrayData = [
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-5.png"),
     destination_name: "Aplha Moon Watching",
+  },
+];
+
+const culturalDetailsArrayData = [
+  {
+    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/hobogarians-img.png"),
+    title: "Hobogarians",
+    description:
+      "The native inhabitants of Volrizen, known for their captivating and developed culture.",
+    hiddenDescription:
+      "Residing amidst the tranquil aqua expanse, the Hobogarians have thrived through eons, forging a unique connection with their oceanic realm. With luminous bioluminescent patterns adorning their iridescent skin, they exude an ethereal beauty that mirrors the planet's enigmatic seas.",
+  },
+  {
+    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/noika-img.png"),
+    title: "Noika",
+    description:
+      "Their main language is Noika. Noika contains 20 hand signals and 10 rhythmical claps.",
+    hiddenDescription:
+      "Sometimes they read their minds by holding their hands. Since humans can't read minds they learn the Noika language to communicate. Other than Noika there are about 100 languages but they consider noika as the main language",
+  },
+  {
+    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/Lumina-img.png"),
+    title: "Lumina Spire",
+    description: "A marvel of artistry and spiritual significance.",
+    hiddenDescription:
+      "Rising from the depths like a crystalline beacon, this tower is both an architectural wonder and a sacred sanctuary for the Hobogarian community. Named after the radiant Lumina blooms that grace Volrizen's underwater landscape, the Dreamcatcher Spire embodies the essence of the Hobogarians' spiritual connection to their aquatic realm.",
+  },
+  {
+    image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/stancy-img.png"),
+    title: "Stancy",
+    description:
+      "The predominant faith is Stansy. They originate from the stars.",
+    hiddenDescription:
+      "The main religion is stansy. They believe they are made from the stars because of that they pray for stars. There are about 50 other religions other than stansi.",
   },
 ];
 
@@ -107,8 +208,115 @@ const TitleContainer = ({ stationName, subStationName, content }) => {
   );
 };
 
+const PlanetSelectedTitleContainer = ({
+  stationName,
+  subStationName,
+  content,
+  textComponents,
+}) => {
+  const SmallTextComp = ({ HighlightedText, NormalText }) => (
+    <View style={{ flexDirection: "column", alignItems:"center"}}>
+      <Text
+        style={{
+          fontSize: 20,
+          // lineHeight: 15.38,
+          color: "rgba(29, 187, 255, 1)",
+          textAlign: "left",
+          fontWeight: "bold",
+        }}
+      >
+        {HighlightedText}
+      </Text>
+      <Text
+        style={{
+          fontSize: 8,
+          lineHeight: 15.38,
+          color: "rgba(29, 187, 255, 1)",
+          textAlign: "left",
+        }}
+      >
+        {NormalText}
+      </Text>
+    </View>
+  );
+  
+
+  return (
+    <View style={{ flex: 1, width: "80%", alignSelf: "center" }}>
+      <Text
+        style={{
+          fontSize: 32,
+          lineHeight: 35.2,
+          color: "rgba(255, 255, 255, 1)",
+          alignSelf: "center",
+        }}
+      >
+        {stationName}
+      </Text>
+
+      <Text
+        style={{
+          fontSize: 12,
+          lineHeight: 15.38,
+          color: "rgba(235, 235, 245, 1)",
+          alignSelf: "center",
+        }}
+      >
+        {subStationName}
+      </Text>
+
+      <View style={{ height: 5 }} />
+
+      <Text
+        style={{
+          fontSize: 10,
+          lineHeight: 12.82,
+          color: "rgba(185, 234, 255, 1)",
+          alignSelf: "center",
+          textAlign: "center",
+        }}
+      >
+        {content}
+      </Text>
+
+      <View style={{ height: 10 }} />
+
+      <View style={{ flexDirection: "row", alignContent: "center", alignSelf: "center" }}>
+        <SmallTextComp
+          HighlightedText={textComponents[0].HighlightedText}
+          NormalText={textComponents[0].NormalText}
+        />
+        <View style={{ width: 40 }} />
+        <SmallTextComp
+          HighlightedText={textComponents[1].HighlightedText}
+          NormalText={textComponents[1].NormalText}
+        />
+        <View style={{ width: 40 }} />
+        <SmallTextComp
+          HighlightedText={textComponents[2].HighlightedText}
+          NormalText={textComponents[2].NormalText}
+        />
+      </View>
+
+      <View style={{ height: 10 }} />
+
+      <Text
+        style={{
+          fontSize: 20,
+          lineHeight: 22,
+          color: "rgba(255, 255, 255, 1)",
+          textAlign: "left",
+        }}
+      >
+        Places to visit in {stationName}
+      </Text>
+      <View style={{ height: 20 }} />
+    </View>
+  );
+};
+
 const CustomImage = ({ source }) => {
-  return <Image source={source} style={styles.image} />;
+  return <Image source={source} style={styles.image} resizeMode="cover" />;
 };
 
 const PopularDestinationSection = ({ image_path, destination_name }) => {
@@ -131,27 +339,155 @@ const PopularDestinationSection = ({ image_path, destination_name }) => {
   );
 };
 
+const DefaultContent = ({ image_path, title, description }) => {
+  return (
+    <View style={styles.cultural_container}>
+      <CustomImage source={image_path} />
+
+      <View style={{ width: 10 }} />
+      <View style={{ flexDirection: "column", width: "50%" }}>
+        <Text style={{ fontSize: 24, lineHeight: 30, color: COLORS.textColor }}>
+          {title}
+        </Text>
+
+        <View style={{ height: 17 }} />
+        <Text
+          style={{
+            fontSize: 11,
+            lineHeight: 18,
+            color: COLORS.textColor,
+            flex: 1,
+            textAlign: "left",
+          }}
+        >
+          {description}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const HiddenContent = ({ hiddenDescription }) => {
+  return (
+    <View>
+      <Text
+        style={{
+          fontSize: 20,
+          lineHeight: 22,
+          color: "rgba(255, 255, 255, 1)",
+          left: 7,
+        }}
+      >
+        More ...
+      </Text>
+      <View style={{ height: 6 }} />
+      <Text
+        style={{
+          fontSize: 12,
+          lineHeight: 15.38,
+          color: "rgba(255, 255, 255, 1)",
+          left: 7,
+        }}
+      >
+        {hiddenDescription}
+      </Text>
+    </View>
+  );
+};
+
+const Cultural_Diversity_Section = ({ culturalDetailsArrayData }) => {
+  const SECTIONS = useMemo(
+    () =>
+      culturalDetailsArrayData.map((item) => ({
+        title: item.title,
+        content: <HiddenContent hiddenDescription={item.hiddenDescription} />,
+        image_path: item.image_path,
+        description: item.description,
+      })),
+    [culturalDetailsArrayData]
+  );
+
+  const [activeSections, setActiveSections] = useState([]);
+
+  const renderHeader = useCallback((section, _, isActive) => {
+    return (
+      <BlurViewCard
+        containerStyle={
+          isActive
+            ? {
+                ...styles.container,
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                borderBottomWidth: 0,
+              }
+            : { ...styles.container, marginBottom: 20 }
+        }
+      >
+        <DefaultContent
+          image_path={section.image_path}
+          title={section.title}
+          description={section.description}
+        />
+      </BlurViewCard>
+    );
+  }, []);
+
+  const renderContent = (section) => {
+    return (
+      <BlurViewCard
+        containerStyle={{
+          ...styles.hidden_container,
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+          borderTopWidth: 0,
+          marginBottom: 20,
+        }}
+      >
+        {section.content}
+      </BlurViewCard>
+    );
+  };
+
+  return (
+    <View>
+      <Accordion
+        sections={SECTIONS}
+        activeSections={activeSections}
+        onChange={setActiveSections}
+        renderHeader={renderHeader}
+        renderContent={renderContent}
+        touchableComponent={TouchableWithoutFeedback}
+      />
+      <View style={{ height: 10 }} />
+    </View>
+  );
+};
+
 const Planet_Details_Section = ({}) => {
   const renderItem = ({ item }) => (
     <PopularDestinationSection
       image_path={item.image_path}
-      destination_name={item.desitination_name}
+      destination_name={item.destination_name}
     />
   );
 
-  const Separator = ({ }) => (
-    <View style={{width:10}} />
-  );
-  
+  const Separator = ({}) => <View style={{ width: 10 }} />;
 
   return (
     <BottomSheetScrollView>
-      <TitleContainer
+      {/* <TitleContainer
         stationName={planetArrayData[0].stationName}
         subStationName={planetArrayData[0].subStationName}
         content={planetArrayData[0].content}
+      /> */}
+      <PlanetSelectedTitleContainer
+        stationName={stationDetailsArrayData[0].stationName}
+        subStationName={stationDetailsArrayData[0].subStationName}
+        content={stationDetailsArrayData[0].content}
+        textComponents={stationDetailsArrayData[0].textComponents}
       />
       <View style={{ flexDirection: "row" }}>
+        <View style={{ width: "5%" }} />
         <FlatList
           data={whereToGoArrayData}
           renderItem={renderItem}
@@ -162,6 +498,25 @@ const Planet_Details_Section = ({}) => {
           ItemSeparatorComponent={Separator}
         />
       </View>
+
+      <View style={{ height: 20 }} />
+
+      <Text
+        style={{
+          fontSize: 20,
+          lineHeight: 22,
+          color: "rgba(255, 255, 255, 1)",
+          textAlign: "left",
+          left: 40,
+        }}
+      >
+        Cultural Diversity
+      </Text>
+      <View style={{ height: 20 }} />
+
+      <Cultural_Diversity_Section
+        culturalDetailsArrayData={culturalDetailsArrayData}
+      />
     </BottomSheetScrollView>
   );
 };
@@ -248,8 +603,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 24,
-    backgroundColor: "grey",
+    // padding: 24,
+    // backgroundColor: "grey",
+    width: "85%",
+  },
+  hidden_container: {
+    // bor
+    width: "85%",
   },
   container_where_to_image: {
     overflow: "hidden",
@@ -271,15 +631,17 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: 10,
+    width: 140,
+    height: 140,
   },
   cardContainer: {
     width: "40%",
     position: "relative",
-    // alignSelf: "left",
-    // padding:10,
-    // marginRight:10,
-    // alignSelf: "left",
-    // height: 200,
+  },
+  cultural_container: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 5,
   },
   flatListContent: {
     paddingHorizontal: 10, // Adjust horizontal padding to control spacing
