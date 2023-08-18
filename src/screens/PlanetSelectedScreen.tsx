@@ -69,7 +69,7 @@ const stationDetailsArrayData = [
     ],
   },
   {
-    stationName: "Alderine",
+    stationName: "Alderine2",
     subStationName: "Volrizen 30A  |  3000LY",
     content:
       "Nestled amidst breathtaking crystalline landscapes, Celestia Prime is a marvel of bioluminescent architecture and advanced technology.",
@@ -94,27 +94,32 @@ const whereToGoArrayData = [
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img.png"),
     destination_name: "Lißa Dune Racing",
-    station_number: "Station 1",
+    station_number: 1,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-1.png"),
     destination_name: "Hapez Plant Museum",
+    station_number: 2,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-2.png"),
     destination_name: "Horizon City Tower",
+    station_number: 3,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-3.png"),
     destination_name: "Signal Tower of yore",
+    station_number: 2,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-4.png"),
     destination_name: "Kriptony Dreamer",
+    station_number: 1,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/where_to_go/img-5.png"),
     destination_name: "Aplha Moon Watching",
+    station_number: 1,
   },
 ];
 
@@ -126,6 +131,7 @@ const culturalDetailsArrayData = [
       "The native inhabitants of Volrizen, known for their captivating and developed culture.",
     hiddenDescription:
       "Residing amidst the tranquil aqua expanse, the Hobogarians have thrived through eons, forging a unique connection with their oceanic realm. With luminous bioluminescent patterns adorning their iridescent skin, they exude an ethereal beauty that mirrors the planet's enigmatic seas.",
+    station_number: 1,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/noika-img.png"),
@@ -134,6 +140,7 @@ const culturalDetailsArrayData = [
       "Their main language is Noika. Noika contains 20 hand signals and 10 rhythmical claps.",
     hiddenDescription:
       "Sometimes they read their minds by holding their hands. Since humans can't read minds they learn the Noika language to communicate. Other than Noika there are about 100 languages but they consider noika as the main language",
+    station_number: 2,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/Lumina-img.png"),
@@ -141,6 +148,7 @@ const culturalDetailsArrayData = [
     description: "A marvel of artistry and spiritual significance.",
     hiddenDescription:
       "Rising from the depths like a crystalline beacon, this tower is both an architectural wonder and a sacred sanctuary for the Hobogarian community. Named after the radiant Lumina blooms that grace Volrizen's underwater landscape, the Dreamcatcher Spire embodies the essence of the Hobogarians' spiritual connection to their aquatic realm.",
+    station_number: 3,
   },
   {
     image_path: require("../assets/images/Booking_Process/Planet_Details_Screen/culutural_diversity/stancy-img.png"),
@@ -149,6 +157,7 @@ const culturalDetailsArrayData = [
       "The predominant faith is Stansy. They originate from the stars.",
     hiddenDescription:
       "The main religion is stansy. They believe they are made from the stars because of that they pray for stars. There are about 50 other religions other than stansi.",
+    station_number: 1,
   },
 ];
 
@@ -215,7 +224,7 @@ const PlanetSelectedTitleContainer = ({
   textComponents,
 }) => {
   const SmallTextComp = ({ HighlightedText, NormalText }) => (
-    <View style={{ flexDirection: "column", alignItems:"center"}}>
+    <View style={{ flexDirection: "column", alignItems: "center" }}>
       <Text
         style={{
           fontSize: 20,
@@ -239,7 +248,6 @@ const PlanetSelectedTitleContainer = ({
       </Text>
     </View>
   );
-  
 
   return (
     <View style={{ flex: 1, width: "80%", alignSelf: "center" }}>
@@ -281,7 +289,13 @@ const PlanetSelectedTitleContainer = ({
 
       <View style={{ height: 10 }} />
 
-      <View style={{ flexDirection: "row", alignContent: "center", alignSelf: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignContent: "center",
+          alignSelf: "center",
+        }}
+      >
         <SmallTextComp
           HighlightedText={textComponents[0].HighlightedText}
           NormalText={textComponents[0].NormalText}
@@ -395,16 +409,29 @@ const HiddenContent = ({ hiddenDescription }) => {
   );
 };
 
-const Cultural_Diversity_Section = ({ culturalDetailsArrayData }) => {
+const Cultural_Diversity_Section = ({
+  culturalDetailsArrayData,
+  selectedStation,
+}) => {
+  const filteredCulturalDetails = selectedStation
+    ? culturalDetailsArrayData.filter(
+        (item) => item.station_number === selectedStation.id
+      )
+    : culturalDetailsArrayData;
+  
+  // console.log("selectedStationID", selectedStation?.id);
+  // console.log("filteredCulturalDetails", filteredCulturalDetails);
+  // console.log(culturalDetailsArrayData[0].station_number == selectedStation?.id)
+
   const SECTIONS = useMemo(
     () =>
-      culturalDetailsArrayData.map((item) => ({
+      filteredCulturalDetails.map((item) => ({
         title: item.title,
         content: <HiddenContent hiddenDescription={item.hiddenDescription} />,
         image_path: item.image_path,
         description: item.description,
       })),
-    [culturalDetailsArrayData]
+    [filteredCulturalDetails]
   );
 
   const [activeSections, setActiveSections] = useState([]);
@@ -463,39 +490,89 @@ const Cultural_Diversity_Section = ({ culturalDetailsArrayData }) => {
   );
 };
 
-const Planet_Details_Section = ({}) => {
-  const renderItem = ({ item }) => (
-    <PopularDestinationSection
-      image_path={item.image_path}
-      destination_name={item.destination_name}
-    />
-  );
+const Planet_Details_Section = ({ selectedStation }) => {
+  const renderItem = ({ item, index }) => {
+    // If selectedStation is null or item's station_number matches the selectedStation.id
+    if (!selectedStation || item.station_number === selectedStation.id) {
+      return (
+        <PopularDestinationSection
+          image_path={item.image_path}
+          destination_name={item.destination_name}
+        />
+      );
+    }
+
+    // If the conditions are not met, return null (don't render anything)
+    return null;
+  };
 
   const Separator = ({}) => <View style={{ width: 10 }} />;
 
+  // console.log("titleItem", titleItem);
+  // console.log(titleItem);
+  let previousItemMatchesCondition = true;
+
   return (
     <BottomSheetScrollView>
-      {/* <TitleContainer
-        stationName={planetArrayData[0].stationName}
-        subStationName={planetArrayData[0].subStationName}
-        content={planetArrayData[0].content}
-      /> */}
-      <PlanetSelectedTitleContainer
-        stationName={stationDetailsArrayData[0].stationName}
-        subStationName={stationDetailsArrayData[0].subStationName}
-        content={stationDetailsArrayData[0].content}
-        textComponents={stationDetailsArrayData[0].textComponents}
-      />
+      {selectedStation ? (
+        <PlanetSelectedTitleContainer
+          stationName={
+            stationDetailsArrayData[
+              selectedStation.id ? selectedStation.id - 1 : 0
+            ]?.stationName
+          }
+          subStationName={
+            stationDetailsArrayData[
+              selectedStation.id ? selectedStation.id - 1 : 0
+            ]?.subStationName
+          }
+          content={
+            stationDetailsArrayData[
+              selectedStation.id ? selectedStation.id - 1 : 0
+            ]?.content
+          }
+          textComponents={
+            stationDetailsArrayData[
+              selectedStation.id ? selectedStation.id - 1 : 0
+            ]?.textComponents
+          }
+        />
+      ) : (
+        <TitleContainer
+          stationName={planetArrayData[0].stationName}
+          subStationName={planetArrayData[0].subStationName}
+          content={planetArrayData[0].content}
+        />
+      )}
+
       <View style={{ flexDirection: "row" }}>
         <View style={{ width: "5%" }} />
         <FlatList
           data={whereToGoArrayData}
-          renderItem={renderItem}
+          renderItem={({ item, index }) => {
+            const currentItemMatchesCondition =
+              !selectedStation || item.station_number === selectedStation.id;
+
+            const renderItemResult = renderItem({ item, index });
+
+            // Render separator only if both the previous and current items match the condition
+            const renderSeparator =
+              index > 0 &&
+              (previousItemMatchesCondition || currentItemMatchesCondition);
+
+            previousItemMatchesCondition = currentItemMatchesCondition;
+
+            return (
+              <>
+                {renderSeparator && <Separator />}
+                {renderItemResult}
+              </>
+            );
+          }}
           keyExtractor={(item) => item.destination_name}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.flatListContent}
-          ItemSeparatorComponent={Separator}
         />
       </View>
 
@@ -516,7 +593,10 @@ const Planet_Details_Section = ({}) => {
 
       <Cultural_Diversity_Section
         culturalDetailsArrayData={culturalDetailsArrayData}
+        selectedStation={selectedStation}
       />
+
+      <View style={{ height: 50 }} />
     </BottomSheetScrollView>
   );
 };
@@ -587,7 +667,7 @@ const PlanetSelectedScreen = () => {
         {/* </BottomSheetScrollView> */}
         {/* </BlurView> */}
 
-        <Planet_Details_Section />
+        <Planet_Details_Section selectedStation={selectedStation} />
       </BottomSheet>
     </ImageBackground>
   );
