@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, useCallback, useState } from "react";
 import { ImageBackground } from "react-native";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import {
   FlatList,
   TouchableWithoutFeedback,
@@ -10,14 +10,18 @@ import { BlurView } from "expo-blur";
 import Accordion from "react-native-collapsible/Accordion";
 import BlurViewCard from "../components/basic/BlurViewCard";
 import COLORS from "../utils/colors";
+import { Text } from "native-base";
 
 import {
   BLUEVIEW_BORDER_COLOR,
   BLURVIEW_BORDER_WIDTH,
   BORDER_RADIUS,
+  BOTTOM_TAB_BAR_HEIGHT,
 } from "../utils/constants";
 import PlanetStationsView from "../components/PlanetStationsView";
 import { Button } from "native-base";
+import { UiButton } from "../components/basic/UiButton";
+import { useNavigation } from "@react-navigation/native";
 
 const planetArrayData = [
   {
@@ -419,7 +423,7 @@ const Cultural_Diversity_Section = ({
         (item) => item.station_number === selectedStation.id
       )
     : culturalDetailsArrayData;
-  
+
   // console.log("selectedStationID", selectedStation?.id);
   // console.log("filteredCulturalDetails", filteredCulturalDetails);
   // console.log(culturalDetailsArrayData[0].station_number == selectedStation?.id)
@@ -513,6 +517,11 @@ const Planet_Details_Section = ({ selectedStation }) => {
   // console.log(titleItem);
   let previousItemMatchesCondition = true;
 
+  const navigation = useNavigation()
+  const onContinue = () => {
+    navigation.navigate("DateSelect");
+  };
+
   return (
     <BottomSheetScrollView>
       {selectedStation ? (
@@ -579,6 +588,7 @@ const Planet_Details_Section = ({ selectedStation }) => {
 
       <View style={{ height: 20 }} />
 
+
       <Text
         style={{
           fontSize: 20,
@@ -592,12 +602,20 @@ const Planet_Details_Section = ({ selectedStation }) => {
       </Text>
       <View style={{ height: 20 }} />
 
+
       <Cultural_Diversity_Section
         culturalDetailsArrayData={culturalDetailsArrayData}
         selectedStation={selectedStation}
       />
+      {selectedStation ? (
+        <UiButton onPress={onContinue}>
+          <Text>Continue</Text>
+        </UiButton>
+      ) : (
+        <Text flex={1} textAlign={'center'} mt={5}>Select a station to continue to next screen</Text>
+      )}
 
-      <View style={{ height: 50 }} />
+      <View style={{ height: BOTTOM_TAB_BAR_HEIGHT + 50 }} />
     </BottomSheetScrollView>
   );
 };
@@ -621,9 +639,7 @@ const PlanetSelectedScreen = () => {
     // { id: 4, name: "Station 3", degree: 180 },
   ];
 
-  const onContinue = () => {
-    navigation.navigate("DateSelect");
-  };
+ 
 
   return (
     <ImageBackground

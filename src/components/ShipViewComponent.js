@@ -4,14 +4,19 @@ import {
   StyleSheet,
   ImageBackground,
   StatusBar,
-  Text,
   Image,
   TouchableOpacity,
 } from "react-native";
+import { Text } from "native-base";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { BlurView } from "expo-blur";
+import { UiButton } from "./basic/UiButton";
+import { useNavigation } from "@react-navigation/native";
 
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
+
+  const navigation = useNavigation()
+
   const shipTypeStyle =
     shipData.type === "HyperStride" ? styles.shipType[0] : styles.shipType[1];
 
@@ -67,6 +72,9 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
             sliderWidth={1000}
             itemWidth={200}
           />
+          <UiButton onPress={()=> {navigation.navigate('CabinSelect')}}>
+            <Text>Continue</Text>
+          </UiButton>
           <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
           <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
         </BlurView>

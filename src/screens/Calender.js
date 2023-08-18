@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
+import { UiButton } from "../components/basic/UiButton";
+import { useNavigation } from "@react-navigation/native";
 
 const DateSelectScreen = () => {
   const [selected, setSelected] = useState("");
+  const navigation = useNavigation();
+
   const currentDate = new Date();
   const currentDay = currentDate.getDate();
   const currentMonth = currentDate.getMonth() + 1;
@@ -67,6 +71,14 @@ const DateSelectScreen = () => {
           },
         }}
       />
+
+      <UiButton
+        onPress={() => {
+          navigation.navigate("MotionSelect");
+        }}
+      >
+        <Text>Continue</Text>
+      </UiButton>
     </View>
   );
 };

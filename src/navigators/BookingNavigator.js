@@ -13,6 +13,8 @@ import DateSelectScreen from "../screens/Calender";
 import SelectPackage from "../screens/SelectPackage";
 import ShipSelectionScreen from "../screens/ShipSelectionScreen";
 import { View } from "native-base";
+import CabinSelectScreen from "../screens/CabinSelectScreen";
+import PersonSelectScreen from "../screens/PersonSelectScreen";
 
 const Stack = createStackNavigator();
 
@@ -75,10 +77,9 @@ function BookingNavigator() {
       <Stack.Navigator
         initialRouteName="Map"
         screenOptions={{
-          //   cardStyleInterpolator: forSlide,
           headerMode: "screen",
           headerShown: false,
-          cardStyle: { backgroundColor: "transparent"},
+          cardStyle: { backgroundColor: "transparent" },
         }}
       >
         <Stack.Screen name="Map" component={MapNavigator} />
@@ -86,8 +87,8 @@ function BookingNavigator() {
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
         <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
         <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
-        {/* add a cabin select */}
-        {/* add person select */}
+        <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
+        <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
         <Stack.Screen name="PackageSelect" component={SelectPackage} />
         {/* add checkout */}
         {/* booking details */}

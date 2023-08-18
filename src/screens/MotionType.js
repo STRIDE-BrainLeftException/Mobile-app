@@ -13,6 +13,7 @@ import {
 import { View as MView } from "moti";
 
 import COLORS from "../utils/colors";
+import { useNavigation } from "@react-navigation/native";
 
 const cardDataArray = [
   {
@@ -237,6 +238,7 @@ const BlurViewCardConents = ({
 
 const MotionTypeScreen = ({ jumpTo }) => {
   const [expandedCardIndex, setExpandedCardIndex] = useState(-1);
+  const navigation = useNavigation()
 
   const toggleCardExpansion = (index) => {
     if (expandedCardIndex === index) {
@@ -248,6 +250,7 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
   const handleButtonPress = () => {
     // Change it to the next screen
+    navigation.navigate("CarrierSelect")
   };
 
   return (
