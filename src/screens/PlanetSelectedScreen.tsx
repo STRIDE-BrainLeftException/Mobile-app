@@ -17,11 +17,13 @@ import {
   BLURVIEW_BORDER_WIDTH,
   BORDER_RADIUS,
   BOTTOM_TAB_BAR_HEIGHT,
+  efficientBlurViewStyles,
 } from "../utils/constants";
 import PlanetStationsView from "../components/PlanetStationsView";
 import { Button } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
 import { useNavigation } from "@react-navigation/native";
+import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 
 const planetArrayData = [
   {
@@ -341,7 +343,7 @@ const CustomImage = ({ source }) => {
 const PopularDestinationSection = ({ image_path, destination_name }) => {
   return (
     <View style={styles.container_where_to_image}>
-      <BlurView style={styles.blurView}>
+      <View style={[styles.blurView, efficientBlurViewStyles]}>
         <CustomImage source={image_path} />
         <View style={{ height: 5 }}></View>
         <Text
@@ -353,7 +355,7 @@ const PopularDestinationSection = ({ image_path, destination_name }) => {
         >
           {destination_name}
         </Text>
-      </BlurView>
+      </View>
     </View>
   );
 };
@@ -443,7 +445,7 @@ const Cultural_Diversity_Section = ({
 
   const renderHeader = useCallback((section, _, isActive) => {
     return (
-      <BlurViewCard
+      <EfficientBlurViewCard
         containerStyle={
           isActive
             ? {
@@ -460,13 +462,13 @@ const Cultural_Diversity_Section = ({
           title={section.title}
           description={section.description}
         />
-      </BlurViewCard>
+      </EfficientBlurViewCard>
     );
   }, []);
 
   const renderContent = (section) => {
     return (
-      <BlurViewCard
+      <EfficientBlurViewCard
         containerStyle={{
           ...styles.hidden_container,
           borderTopLeftRadius: 0,
@@ -476,7 +478,7 @@ const Cultural_Diversity_Section = ({
         }}
       >
         {section.content}
-      </BlurViewCard>
+      </EfficientBlurViewCard>
     );
   };
 
@@ -517,7 +519,7 @@ const Planet_Details_Section = ({ selectedStation }) => {
   // console.log(titleItem);
   let previousItemMatchesCondition = true;
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const onContinue = () => {
     navigation.navigate("DateSelect");
   };
@@ -588,7 +590,6 @@ const Planet_Details_Section = ({ selectedStation }) => {
 
       <View style={{ height: 20 }} />
 
-
       <Text
         style={{
           fontSize: 20,
@@ -602,7 +603,6 @@ const Planet_Details_Section = ({ selectedStation }) => {
       </Text>
       <View style={{ height: 20 }} />
 
-
       <Cultural_Diversity_Section
         culturalDetailsArrayData={culturalDetailsArrayData}
         selectedStation={selectedStation}
@@ -612,7 +612,9 @@ const Planet_Details_Section = ({ selectedStation }) => {
           <Text>Continue</Text>
         </UiButton>
       ) : (
-        <Text flex={1} textAlign={'center'} mt={5}>Select a station to continue to next screen</Text>
+        <Text flex={1} textAlign={"center"} mt={5}>
+          Select a station to continue to next screen
+        </Text>
       )}
 
       <View style={{ height: BOTTOM_TAB_BAR_HEIGHT + 50 }} />
@@ -639,8 +641,6 @@ const PlanetSelectedScreen = () => {
     // { id: 4, name: "Station 3", degree: 180 },
   ];
 
- 
-
   return (
     <ImageBackground
       source={require("../assets/images/Booking_BG.png")}
@@ -666,7 +666,8 @@ const PlanetSelectedScreen = () => {
         backgroundComponent={({ style }) => (
           <View style={[styles.contentContainer, style]}>
             <BlurView
-              intensity={15}
+              intensity={50}
+              tint="dark"
               style={[
                 { flex: 1, width: "100%", borderRadius: BORDER_RADIUS },
                 style,
