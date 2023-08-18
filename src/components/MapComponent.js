@@ -6,9 +6,10 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
   runOnJS,
-} from 'react-native-reanimated';
-import { PanGestureHandler } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native-reanimated";
+import { PanGestureHandler } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { View as MView } from "moti";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -56,26 +57,43 @@ const MapComponent = (props) => {
     ...p,
     view: () => {
       return (
-        <TouchableOpacity
-          onPress={() => {
-            console.log('check', { type });
-            if (type == 'galaxies') {
-              console.log({ type });
-              navigation.navigate('SolarSystems', { item: p });
-            }
+        <MView
+          style={{
+            height: p.size,
+            width: p.size,
+            margin: Math.round(Math.random() * 10 + 10),
+            backgroundColor: "#00ff00",
+            position: "absolute",
+            top: convertToDistanceFromEdge(p).x,
+            left: convertToDistanceFromEdge(p).y,
           }}
-          style={[
-            styles.square,
-            {
-              height: p.size,
-              width: p.size,
-              margin: Math.round(Math.random() * 10 + 10),
-              backgroundColor: '#00ff00',
-              position: 'absolute',
-              top: convertToDistanceFromEdge(p).x,
-              left: convertToDistanceFromEdge(p).y,
-            },
-          ]}></TouchableOpacity>
+          from={{
+            scale: 0,
+          }}
+          animate={{
+            scale: 1,
+          }}
+          exit={{
+            scale: 0,
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              console.log("check", { type });
+              if (type == "galaxies") {
+                console.log({ type });
+                navigation.navigate("SolarSystems", { item: p });
+              }
+              if (type == "systems") {
+                navigation.navigate("Planets");
+              }
+              if (type == "planets") {
+                navigation.navigate("StationSelect");
+              }
+            }}
+            style={[styles.square, { height: p.size, width: p.size }]}
+          ></TouchableOpacity>
+        </MView>
       );
     },
   }));
@@ -139,7 +157,7 @@ const MapComponent = (props) => {
 
   return (
     <View style={styles.container}>
-      <View
+      {/* <View
         style={[
           styles.dropzone,
           {
@@ -148,7 +166,8 @@ const MapComponent = (props) => {
             width: '100%',
             position: 'absolute',
           },
-        ]}></View>
+        ]}
+      ></View> */}
       <PanGestureHandler onGestureEvent={panGestureEvent}>
         <Animated.View
           style={[
@@ -176,7 +195,7 @@ const styles = StyleSheet.create({
   },
   square: {
     borderRadius: 15,
-    backgroundColor: 'red',
+    // backgroundColor: "red",
   },
 });
 

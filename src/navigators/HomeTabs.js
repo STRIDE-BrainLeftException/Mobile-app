@@ -15,6 +15,7 @@ import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
 import MotionTypeScreen from "../screens/MotionType";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
+import BookingNavigator from "./BookingNavigator";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
@@ -61,7 +62,7 @@ export default function HomeTabs() {
       case "map2":
         return <SecondRoute jumpTo={jumpTo} />;
       case "map":
-        return <MapNavigator jumpTo={jumpTo} />;
+        return <BookingNavigator jumpTo={jumpTo} />;
     }
   };
 
@@ -194,7 +195,7 @@ export default function HomeTabs() {
   return (
     <ImageBackground
       style={{ flex: 1 }}
-      source={require("../assets/images/bookingProcessBackground.png")}
+      source={require("../assets/images/Booking_BG.png")}
     >
       <TabView
         swipeEnabled={false}

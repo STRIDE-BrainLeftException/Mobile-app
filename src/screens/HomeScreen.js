@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { View, Image, Text, HStack, VStack } from "native-base";
-import BackGroundImage from "../assets/images/bookingProcessBackground.png";
+import BackGroundImage from "../assets/images/Booking_BG.png";
 import { StatusBar } from "expo-status-bar";
 import CarouselCards from "../components/Carousel/Carousel";
 import { SafeAreaView } from "react-native-safe-area-context";

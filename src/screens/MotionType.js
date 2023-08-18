@@ -252,7 +252,7 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
   return (
     <ImageBackground
-      source={require("../assets/images/bookingProcessBackground.png")}
+      source={require("../assets/images/Booking_BG.png")}
       // source={require("../assets/images/Booking_BG.png")}
       style={styles.backgroundImage}
       resizeMode="cover"
