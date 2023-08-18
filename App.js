@@ -12,7 +12,6 @@ import HomeScreen from './src/screens/HomeScreen';
 import { theme } from './src/utils/theme';
 import HomeTabs from './src/navigators/HomeTabs';
 import LoggedIn from './src/screens/LoggedIn';
-import ListSelect from './src/components/basic/ListSelect';
 
 const Stack = createStackNavigator();
 
@@ -35,8 +34,7 @@ function RootStack() {
     //     options={{ headerShown: false }}
     //   />
     // </Stack.Navigator>
-    // <LoggedIn />
-    <ListSelect items={[{ data: 'English' }, { data: 'Nuvar' }]} />
+    <LoggedIn />
   );
 }
 
