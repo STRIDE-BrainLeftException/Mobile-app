@@ -26,7 +26,7 @@ const navTheme = {
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="onBoarding">
       <Stack.Screen
         name="Home"
         component={HomeTabs}
