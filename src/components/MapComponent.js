@@ -141,6 +141,7 @@ const MapComponent = (props) => {
     view: () => {
       return (
         <MView
+        key={p.id}
           style={{
             height: p.size,
             width: p.size,

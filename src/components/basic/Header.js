@@ -4,6 +4,7 @@ import { UiIconButton } from "./UiIconButton";
 import BlurViewCard from "./BlurViewCard";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native";
+import EfficientBlurViewCard from "./EfficientBlurViewCard";
 
 export const Header = ({ title = "Change title", onBackPress = null }) => {
   const navigation = useNavigation();
@@ -27,7 +28,7 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
         // mt={30}
       >
         <HStack flex={0.2} justifyContent={"center"}>
-          <BlurViewCard
+          <EfficientBlurViewCard
             containerStyle={{ borderRadius: 50, height: 50, width: 50 }}
           >
             <UiIconButton
@@ -37,13 +38,15 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
               m={0}
               p={1}
             />
-          </BlurViewCard>
+          </EfficientBlurViewCard>
         </HStack>
 
         <HStack flex={0.6} justifyContent={"center"}>
-          <BlurViewCard containerStyle={{ flex: 0.6, borderRadius: 10 }}>
-            <Text textAlign={"center"}>{title}</Text>
-          </BlurViewCard>
+          <EfficientBlurViewCard containerStyle={{ flex: 1, borderRadius: 10 }}>
+            <Text numberOfLines={1} fontSize={"xl"} textAlign={"center"}>
+              {title}
+            </Text>
+          </EfficientBlurViewCard>
         </HStack>
 
         <HStack flex={0.2}></HStack>
@@ -51,3 +54,22 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
     </SafeAreaView>
   );
 };
+
+export const NavigationHeader = ({ props, mapping }) => {
+  const name = props.route.name;
+  return <Header title={mapping[name]} />;
+};
+
+// const CustomHeader = ({ route, ...props }) => {
+//   console.log({ route });
+//   const name = route.name;
+//   const title =
+//     name == "Galaxies"
+//       ? "Select galaxy"
+//       : name == "SolarSystems"
+//       ? "Select solar system"
+//       : name == "Planets"
+//       ? "Select planet"
+//       : "Error 404";
+//   return <Header title={title} />;
+// };
