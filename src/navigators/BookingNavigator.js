@@ -87,7 +87,7 @@ function BookingNavigator({ jumpTo }) {
   };
 
   return (
-    <ImageBackground
+    <View
       style={{ flex: 1 }}
       source={require("../assets/images/Booking_BG.png")}
     >
@@ -118,7 +118,7 @@ function BookingNavigator({ jumpTo }) {
           {/* booking details */}
         </Stack.Navigator>
       </SafeAreaView>
-    </ImageBackground>
+    </View>
   );
 }
 

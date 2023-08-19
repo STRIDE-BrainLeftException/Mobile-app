@@ -6,17 +6,17 @@ import HomeScreen from "../screens/HomeScreen";
 import BlurViewCard from "../components/basic/BlurViewCard";
 import { BlurView } from "expo-blur";
 
-import HomeIcon from "../assets/icons/app-bar/home_icon_default.png";
-import HomeIconActive from "../assets/icons/app-bar/home_icon_active.png";
-import RideIcon from "../assets/icons/app-bar/ride_icon_default.png";
-import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
+import HomeIcon from "../assets/icons/app-bar-new/home_icon_default.png";
+import HomeIconActive from "../assets/icons/app-bar-new/home_icon_active.png";
+import RideIcon from "../assets/icons/app-bar-new/ride_icon_default.png";
+import RideIconActive from "../assets/icons/app-bar-new/ride_icon_active.png";
 
 import { AnimatePresence, Image, View as MView } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
 import MotionTypeScreen from "../screens/MotionType";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 import BookingNavigator from "./BookingNavigator";
-
+import ShipSelectionScreen from "../screens/ShipSelectionScreen";
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
@@ -31,7 +31,7 @@ const SecondRoute = () => (
 const renderScene = SceneMap({
   home: HomeScreen,
   second: PlanetSelectedScreen,
-  second2: SecondRoute,
+  second2: ShipSelectionScreen,
   map2: SecondRoute,
   map: MapNavigator,
 });
@@ -60,7 +60,7 @@ export default function HomeTabs() {
       case "second2":
         return <MotionTypeScreen jumpTo={jumpTo} />;
       case "map2":
-        return <SecondRoute jumpTo={jumpTo} />;
+        return <ShipSelectionScreen jumpTo={jumpTo} />;
       case "map":
         return <BookingNavigator jumpTo={jumpTo} />;
     }

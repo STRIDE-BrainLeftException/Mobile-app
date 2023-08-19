@@ -20,7 +20,7 @@ import LottieView from "lottie-react-native";
 // import loginAnimation from "../assets/animations/loginAnimated.lottie";
 import loginGif from "../assets/animations/login.gif";
 
-const bg = require("./../assets/images/login/loginScreenBG.png");
+const bg = require("../assets/images/Booking_BG.png");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff",
   },
-  logo: { backgroundColor: "red", alignItems: "center", top: 450 },
+  logo: { backgroundColor: "transparent", alignItems: "center", top: 450 },
   image: { width: "100%", height: "100%" },
   cardHead: { color: "#fff", fontSize: 25 },
   cardText: {
@@ -88,16 +88,19 @@ const BiometricLogIn = () => {
         <View style={{ alignItems: "center", top: 100 }}>
           <View style={styles.outerCard}>
             <BlurView intensity={70} style={{ padding: 10 }}>
-            <View style={styles.card}>
-              <View alignItems={"center"}>
-                <Text style={styles.cardHead}>Galactic ID</Text>
-                <Text style={styles.cardText}>
-                  Acquiring Biometric Information
-                </Text>
-              </View>
-              <View style={{ padding: 6 }}>
-                <Image source={loginGif} style={{ height: WIDTH/3, width: WIDTH/3 }} />
-                {/* <LottieView
+              <View style={styles.card}>
+                <View alignItems={"center"}>
+                  <Text style={styles.cardHead}>Galactic ID</Text>
+                  <Text style={styles.cardText}>
+                    Acquiring Biometric Information
+                  </Text>
+                </View>
+                <View style={{ padding: 6 }}>
+                  <Image
+                    source={loginGif}
+                    style={{ height: WIDTH / 3, width: WIDTH / 3 }}
+                  />
+                  {/* <LottieView
                   style={{
                     width: 200,
                     height: 200,
@@ -107,8 +110,8 @@ const BiometricLogIn = () => {
                   autoPlay
                   loop
                 /> */}
+                </View>
               </View>
-            </View>
             </BlurView>
           </View>
         </View>
