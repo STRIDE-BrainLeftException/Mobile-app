@@ -13,6 +13,10 @@ import { theme } from "./src/utils/theme";
 import HomeTabs from "./src/navigators/HomeTabs";
 import BookingNavigator from "./src/navigators/BookingNavigator";
 import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
+import BiometricLogIn from "./src/screens/BiometricLogIn";
+import LoggedIn from "./src/screens/LoggedIn";
+import { ImageBackground } from "react-native";
+import bg from "./src/assets/images/login/loginScreenBG.png";
 
 const Stack = createStackNavigator();
 
@@ -26,23 +30,46 @@ const navTheme = {
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="onBoarding">
-      <Stack.Screen
-        name="Home"
-        component={HomeTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Booking"
-        component={BookingNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="onBoarding"
-        component={OnBoardingNavigator}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    <ImageBackground
+      style={{ flex: 1 }}
+      source={bg}
+    >
+      <Stack.Navigator
+        // initialRouteName="LoggedIn"
+        initialRouteName="onBoarding"
+        // initialRouteName="LoggedIn"
+        screenOptions={{
+          headerShown: false,
+          cardStyle: { backgroundColor: "transparent" },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Booking"
+          component={BookingNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="onBoarding"
+          component={OnBoardingNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={BiometricLogIn}
+          options={{ animationEnabled: false }}
+        />
+        <Stack.Screen
+          name="LoggedIn"
+          component={LoggedIn}
+          options={{ animationEnabled: false }}
+        />
+      </Stack.Navigator>
+    </ImageBackground>
   );
 }
 
