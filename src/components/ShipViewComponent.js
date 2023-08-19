@@ -4,22 +4,27 @@ import {
   StyleSheet,
   ImageBackground,
   StatusBar,
-  Text,
   Image,
   TouchableOpacity,
 } from "react-native";
+import { Text } from "native-base";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { BlurView } from "expo-blur";
+import { UiButton } from "./basic/UiButton";
+import { useNavigation } from "@react-navigation/native";
+import { efficientBlurViewStyles } from "../utils/constants";
 
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
+  const navigation = useNavigation();
+
   const shipTypeStyle =
     shipData.type === "HyperStride" ? styles.shipType[0] : styles.shipType[1];
 
   _renderItem = ({ item, index }) => {
     return (
-      <BlurView intensity={40} style={styles.slide}>
+      <View style={[styles.slide, efficientBlurViewStyles]}>
         <Image style={styles.slideImg} source={item} />
-      </BlurView>
+      </View>
     );
   };
 
@@ -38,38 +43,51 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.blurViewContainer}>
-        <BlurView style={styles.blurView} tint="dark" intensity={50}>
-          <Text style={styles.shipEngine}>{shipData.engine}</Text>
-          <Text style={styles.shipDescription}>{shipData.description}</Text>
-          <View style={styles.shipStatsContainer}>
-            <View style={styles.shipStatContainer}>
-              <Text style={styles.shipStat}>{shipData.price}</Text>
-              <Text style={styles.shipStatFooter}>Price</Text>
-            </View>
-            <View style={styles.shipStatContainer}>
-              <Text style={styles.shipStat}>{shipData.passengers}</Text>
-              <Text style={styles.shipStatFooter}>Passengers</Text>
-            </View>
-            <View style={styles.shipStatContainer}>
-              <Text style={styles.shipStat}>{shipData.arrivalTime}</Text>
-              <Text style={styles.shipStatFooter}>Expected Arrival Time</Text>
-            </View>
+      <View
+        style={[
+          styles.blurViewContainer,
+          { backgroundColor: "rgba(0,0,0,0.2)" },
+          styles.blurView,
+        ]}
+      >
+        {/* <BlurView style={styles.blurView} tint="dark" intensity={50}> */}
+        <Text style={styles.shipEngine}>{shipData.engine}</Text>
+        <Text style={styles.shipDescription}>{shipData.description}</Text>
+        <View style={styles.shipStatsContainer}>
+          <View style={styles.shipStatContainer}>
+            <Text style={styles.shipStat}>{shipData.price}</Text>
+            <Text style={styles.shipStatFooter}>Price</Text>
           </View>
-          <Text style={styles.shipVisArchTitle}>Visual Archive</Text>
-          <Carousel
-            layout={"default"}
-            ref={(c) => {
-              this._carousel = c;
-            }}
-            data={shipData.visualArchive}
-            renderItem={this._renderItem}
-            sliderWidth={1000}
-            itemWidth={200}
-          />
-          <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
-          <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
-        </BlurView>
+          <View style={styles.shipStatContainer}>
+            <Text style={styles.shipStat}>{shipData.passengers}</Text>
+            <Text style={styles.shipStatFooter}>Passengers</Text>
+          </View>
+          <View style={styles.shipStatContainer}>
+            <Text style={styles.shipStat}>{shipData.arrivalTime}</Text>
+            <Text style={styles.shipStatFooter}>Expected Arrival Time</Text>
+          </View>
+        </View>
+        <Text style={styles.shipVisArchTitle}>Visual Archive</Text>
+        <Carousel
+          layout={"default"}
+          ref={(c) => {
+            this._carousel = c;
+          }}
+          data={shipData.visualArchive}
+          renderItem={this._renderItem}
+          sliderWidth={1000}
+          itemWidth={200}
+        />
+        <UiButton
+          onPress={() => {
+            navigation.navigate("CabinSelect");
+          }}
+        >
+          <Text>Continue</Text>
+        </UiButton>
+        <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
+        <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
+        {/* </BlurView> */}
       </View>
     </View>
   );

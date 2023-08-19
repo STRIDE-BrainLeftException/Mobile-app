@@ -5,9 +5,16 @@ import {
 import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
 import PlanetScreen from "../screens/PlanetScreen";
-import { Animated, Button, Text } from "react-native";
+import { Animated, ImageBackground } from "react-native";
+import MapNavigator from "./MapNavigator";
+import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
+import MotionTypeScreen from "../screens/MotionType";
+import DateSelectScreen from "../screens/Calender";
+import SelectPackage from "../screens/SelectPackage";
+import ShipSelectionScreen from "../screens/ShipSelectionScreen";
 import { View } from "native-base";
-import { useNavigation } from "@react-navigation/native";
+import CabinSelectScreen from "../screens/CabinSelectScreen";
+import PersonSelectScreen from "../screens/PersonSelectScreen";
 
 const Stack = createStackNavigator();
 
@@ -41,23 +48,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
         }),
         inverted
       ),
-
       transform: [
-        {
-          translateX: Animated.multiply(
-            progress.interpolate({
-              inputRange: [0, 1, 2],
-              outputRange: [
-                -400, // Focused, but offscreen in the beginning
-                0, // Fully focused
-                400, // Fully unfocused
-              ],
-              extrapolate: "clamp",
-            }),
-            inverted
-          ),
-          
-        },
         {
           scale: Animated.multiply(
             progress.interpolate({
@@ -77,31 +68,33 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   };
 };
 
-function MapNavigator() {
-  const navigation = useNavigation();
-
+function BookingNavigator() {
   return (
-    <View style={{ paddingTop: 20, flex: 1 }}>
-      <Button
-        title="back"
-        style={{ padding: 50 }}
-        onPress={() => navigation.goBack()}
-      />
+    <ImageBackground
+      style={{ flex: 1 }}
+      source={require("../assets/images/Booking_BG.png")}
+    >
       <Stack.Navigator
-        initialRouteName="Galaxies"
+        initialRouteName="Map"
         screenOptions={{
+          headerMode: "screen",
           headerShown: false,
-          // presentation: "modal",
-          // ...TransitionPresets.SlideFromRightIOS,
-          cardStyleInterpolator: forSlide,
+          cardStyle: { backgroundColor: "transparent" },
         }}
       >
-        <Stack.Screen name="Galaxies" component={GalaxyScreen} />
-        <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
-        <Stack.Screen name="Planets" component={PlanetScreen} />
+        <Stack.Screen name="Map" component={MapNavigator} />
+        <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
+        <Stack.Screen name="DateSelect" component={DateSelectScreen} />
+        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
+        <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
+        <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
+        <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
+        <Stack.Screen name="PackageSelect" component={SelectPackage} />
+        {/* add checkout */}
+        {/* booking details */}
       </Stack.Navigator>
-    </View>
+    </ImageBackground>
   );
 }
 
-export default MapNavigator;
+export default BookingNavigator;
