@@ -32,6 +32,7 @@ const MapComponent = (props) => {
   // We created two shared value for our moveable box x and y value
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
+  // const scale = useSharedValue(1);
 
   const type = props.type;
 
@@ -115,8 +116,8 @@ const MapComponent = (props) => {
             margin: Math.round(Math.random() * 10 + 10),
             // backgroundColor: "#00ff00",
             position: "absolute",
-            top: convertToDistanceFromEdge(p).x,
-            left: convertToDistanceFromEdge(p).y,
+            bottom: convertToDistanceFromEdge(p).y,
+            right: convertToDistanceFromEdge(p).x,
           }}
           from={{
             scale: 1,
@@ -135,18 +136,22 @@ const MapComponent = (props) => {
           <TouchableOpacity
             onPress={() => {
               if (translateY.value == -p.x && translateX.value == -p.y) {
-                if (type == "galaxies") {
-                  navigation.navigate("SolarSystems", { item: p });
-                }
-                if (type == "systems") {
-                  navigation.navigate("Planets");
-                }
-                if (type == "planets") {
-                  navigation.navigate("StationSelect", { planet: p });
-                }
+                setTimeout(() => {
+                  if (type == "galaxies") {
+                    navigation.navigate("SolarSystems", { item: p });
+                  }
+                  if (type == "systems") {
+                    navigation.navigate("Planets");
+                  }
+                  if (type == "planets") {
+                    navigation.navigate("StationSelect", { planet: p });
+                  }
+                }, 10);
               } else {
-                translateY.value = withSpring(-p.x);
-                translateX.value = withSpring(-p.y);
+                translateY.value = withSpring(
+                  type == "planets" ? p.y - 200 : p.y
+                );
+                translateX.value = withSpring(p.x);
                 setTimeout(() => {
                   if (type == "galaxies") {
                     navigation.navigate("SolarSystems", { item: p });
@@ -216,6 +221,7 @@ const MapComponent = (props) => {
   // When shared value changes. animated style update the values accordingly that.
   const rStyle = useAnimatedStyle(() => {
     return {
+      // scale: scale.value,
       transform: [
         {
           translateX: translateX.value,

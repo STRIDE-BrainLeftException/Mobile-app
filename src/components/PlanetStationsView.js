@@ -40,8 +40,8 @@ const PlanetStationsView = ({
         >
           <MView
             from={{
-              opacity: 0,
-              scale: 0.9,
+              opacity: 0.5,
+              scale: 0.2,
             }}
             animate={{
               opacity: 1,
@@ -49,14 +49,14 @@ const PlanetStationsView = ({
               translateX: transform[0].translateX,
               //   translateY: 300,
             }}
-            // transition={{type: "timing"}}
+            transition={{duration: 1000}}
             exit={{
               opacity: 0,
               scale: 0.9,
             }}
             exitTransition={{
               type: "timing",
-              duration: 2500,
+              duration: 500,
             }}
           >
             <View
