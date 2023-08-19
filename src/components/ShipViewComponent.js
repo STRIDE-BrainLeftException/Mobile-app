@@ -8,7 +8,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Text } from "native-base";
+import {
+  Text,
+  ChevronLeftIcon,
+  IconButton,
+  ChevronRightIcon,
+} from "native-base";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { BlurView } from "expo-blur";
 import { UiButton } from "./basic/UiButton";
@@ -20,7 +25,7 @@ import {
   BOTTOM_TAB_BAR_HEIGHT,
   BORDER_RADIUS,
 } from "../utils/constants";
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const navigation = useNavigation();
@@ -72,16 +77,81 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
         <View style={styles.shipHeader}>
           <Text style={shipTypeStyle}>{shipData.type}</Text>
           <View style={styles.shipTitleContainer}>
-            <TouchableOpacity onPress={handleShipSelection.previous}>
-              <Text style={styles.shipSelectButtons}>{`<`}</Text>
-            </TouchableOpacity>
+            <IconButton
+              onPress={handleShipSelection.previous}
+              icon={<ChevronLeftIcon color={"rgb(255,255,255)"} size={"xl"} />}
+            />
             <Text style={styles.shipTitle}>{shipData.title}</Text>
-            <TouchableOpacity onPress={handleShipSelection.next}>
-              <Text style={styles.shipSelectButtons}>{`>`}</Text>
-            </TouchableOpacity>
+            <IconButton
+              onPress={handleShipSelection.next}
+              icon={<ChevronRightIcon color={"rgb(255,255,255)"} size={"xl"} />}
+            />
           </View>
         </View>
-        <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTEXT`}</Text>
+        <BottomSheetScrollView
+          contentContainerStyle={{
+            display: "flex",
+            alignItems: "center",
+            marginHorizontal: "5%",
+            paddingBottom: 100,
+          }}
+        >
+          <Text style={styles.shipEngine}>{shipData.engine}</Text>
+          <Text style={styles.shipDescription}>{shipData.description}</Text>
+          <View style={styles.shipStatsContainer}>
+            <View style={styles.shipStatContainer}>
+              <Text style={styles.shipStat}>{shipData.price}</Text>
+              <Text style={styles.shipStatFooter}>Price</Text>
+            </View>
+            <View style={styles.shipStatContainer}>
+              <Text style={styles.shipStat}>{shipData.passengers}</Text>
+              <Text style={styles.shipStatFooter}>Passengers</Text>
+            </View>
+            <View style={styles.shipStatContainer}>
+              <Text style={styles.shipStat}>{shipData.arrivalTime}</Text>
+              <Text style={styles.shipStatFooter}>Expected Arrival Time</Text>
+            </View>
+          </View>
+          <Text style={styles.shipVisArchTitle}>Visual Archive</Text>
+          <Carousel
+            layout={"default"}
+            ref={(c) => {
+              this._carousel = c;
+            }}
+            data={shipData.visualArchive}
+            renderItem={this._renderItem}
+            sliderWidth={1000}
+            itemWidth={200}
+          />
+          {/* <UiButton
+            onPress={() => {
+              navigation.navigate("CabinSelect");
+            }}
+            style={{ marginTop: 20 }}
+          >
+            <Text>Continue</Text>
+          </UiButton> */}
+
+          <TouchableOpacity
+            style={{
+              borderRadius: 26,
+              overflow: "hidden",
+              alignItems: "center",
+              marginTop: 10,
+            }}
+            onPress={() => {
+              navigation.navigate("CabinSelect");
+            }}
+          >
+            <BlurView
+              style={{ padding: 12, width: 200 * 0.6, alignItems: "center" }}
+            >
+              <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
+                Continue
+              </Text>
+            </BlurView>
+          </TouchableOpacity>
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
@@ -173,7 +243,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     alignSelf: "flex-start",
     marginVertical: 10,
-    marginLeft: 10,
+    // marginLeft: 10,
+    lineHeight: 30,
   },
   shipHeader: {
     // zIndex: 2,
@@ -252,13 +323,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontSize: 30,
     color: "white",
-    // lineHeight: 30,
+    lineHeight: 30,
   },
   shipTitle: {
     fontSize: 40,
     color: "white",
     fontWeight: "bold",
-    // lineHeight: 40,
+    lineHeight: 40,
     marginTop: 5,
   },
   blurView: {
