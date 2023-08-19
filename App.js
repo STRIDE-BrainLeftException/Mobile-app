@@ -20,6 +20,7 @@ import BiometricLogIn from "./src/screens/BiometricLogIn";
 import LoggedIn from "./src/screens/LoggedIn";
 import { ImageBackground } from "react-native";
 import bg from "./src/assets/images/Booking_BG.png";
+import CancelFlow from "./src/screens/CancelFlow";
 
 const Stack = createStackNavigator();
 
@@ -73,6 +74,11 @@ function RootStack() {
         />
       </Stack.Navigator>
     </ImageBackground>
+    // <ImageBackground style={{ flex: 1 }} source={bg}>
+    //   <View alignItems={"center"}>
+    //     <CancelFlow />
+    //   </View>
+    // </ImageBackground>
   );
 }
 
