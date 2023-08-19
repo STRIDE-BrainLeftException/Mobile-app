@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   view: {
     borderRadius: 20,
     borderWidth: 1,
-    width: "90%",
+    // width: "90%",
     alignSelf: "center",
     ...efficientBlurViewStyles
   },

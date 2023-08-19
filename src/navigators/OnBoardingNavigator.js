@@ -146,7 +146,7 @@ function OnBoardingNavigator({ navigation }) {
           <Button
             onPress={() => {
               if(page == screens.length){
-                navigation.navigate("Home");
+                navigation.navigate("Login");
                 return;
               }
               const next = Math.min(page + 1, screens.length);

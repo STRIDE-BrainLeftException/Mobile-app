@@ -16,6 +16,10 @@ import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
 import NumericInput from "./src/components/numeric/NumericInput";
 import PassengerTypeCard from "./src/components/basic/PassengerTypeCard";
 import PersonSelectScreen from "./src/screens/PersonSelectScreen";
+import BiometricLogIn from "./src/screens/BiometricLogIn";
+import LoggedIn from "./src/screens/LoggedIn";
+import { ImageBackground } from "react-native";
+import bg from "./src/assets/images/login/loginScreenBG.png";
 
 const Stack = createStackNavigator();
 
@@ -32,33 +36,43 @@ function RootStack() {
   const [val, setVal] = useState(6);
   ///////////////////////////////////
   return (
-    // <Stack.Navigator initialRouteName="onBoarding">
-    //   <Stack.Screen
-    //     name="Home"
-    //     component={HomeTabs}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="Booking"
-    //     component={BookingNavigator}
-    //     options={{ headerShown: false }}
-    //   />
-    //   <Stack.Screen
-    //     name="onBoarding"
-    //     component={OnBoardingNavigator}
-    //     options={{ headerShown: false }}
-    //   />
-    // </Stack.Navigator>
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "blue",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <PersonSelectScreen numberOfCabins={5} />
-    </View>
+    <ImageBackground style={{ flex: 1 }} source={bg}>
+      <Stack.Navigator
+        // initialRouteName="LoggedIn"
+        initialRouteName="Home"
+        // initialRouteName="LoggedIn"
+        screenOptions={{
+          headerShown: false,
+          cardStyle: { backgroundColor: "transparent" },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Booking"
+          component={BookingNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="onBoarding"
+          component={OnBoardingNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={BiometricLogIn}
+          options={{ animationEnabled: false }}
+        />
+        <Stack.Screen
+          name="LoggedIn"
+          component={LoggedIn}
+          options={{ animationEnabled: false }}
+        />
+      </Stack.Navigator>
+    </ImageBackground>
   );
 }
 

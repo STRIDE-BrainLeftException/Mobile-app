@@ -24,6 +24,7 @@ import { Button } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
 import { useNavigation } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
+import { Header } from "../components/basic/Header";
 
 const planetArrayData = [
   {
