@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-
+import { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
@@ -14,6 +14,8 @@ import HomeTabs from "./src/navigators/HomeTabs";
 import BookingNavigator from "./src/navigators/BookingNavigator";
 import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
 import NumericInput from "./src/components/numeric/NumericInput";
+import PassengerTypeCard from "./src/components/basic/PassengerTypeCard";
+import PersonSelectScreen from "./src/screens/PersonSelectScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,24 +28,37 @@ const navTheme = {
 };
 
 function RootStack() {
+  //Temporary------------------------
+  const [val, setVal] = useState(6);
+  ///////////////////////////////////
   return (
-    <Stack.Navigator initialRouteName="onBoarding">
-      <Stack.Screen
-        name="Home"
-        component={HomeTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Booking"
-        component={BookingNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="onBoarding"
-        component={OnBoardingNavigator}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    // <Stack.Navigator initialRouteName="onBoarding">
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={HomeTabs}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="Booking"
+    //     component={BookingNavigator}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="onBoarding"
+    //     component={OnBoardingNavigator}
+    //     options={{ headerShown: false }}
+    //   />
+    // </Stack.Navigator>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "blue",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <PersonSelectScreen numberOfCabins={5} />
+    </View>
   );
 }
 
