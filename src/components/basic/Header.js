@@ -28,19 +28,7 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
         // mt={30}
       >
         <HStack flex={0.2} justifyContent={"center"}>
-          <TouchableOpacity onPress={onPress}>
-            <EfficientBlurViewCard
-              containerStyle={{
-                borderRadius: 50,
-                height: 50,
-                width: 50,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <ChevronLeftIcon size={"xl"} />
-            </EfficientBlurViewCard>
-          </TouchableOpacity>
+          <UiIconButton icon={<ChevronLeftIcon />} onPress={onPress} />
         </HStack>
 
         <HStack flex={0.6} justifyContent={"center"}>

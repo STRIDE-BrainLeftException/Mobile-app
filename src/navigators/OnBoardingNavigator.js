@@ -10,11 +10,18 @@ import WelcomePage from "../screens/WelcomePage";
 import OnBoardingPage from "../components/OnBoardingPage";
 import { useRoute } from "@react-navigation/native";
 import { NavigationState } from "@react-navigation/native";
-import { HStack, Text, View } from "native-base";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  HStack,
+  Text,
+  View,
+} from "native-base";
 import { Button } from "react-native";
 import { ONBOARDING_BOTTOM_COLOR } from "../utils/constants";
 import AnimatedDotsCarousel from "react-native-animated-dots-carousel";
 import PlaceholderImage from "../assets/images/onboarding/OnboardingScreen2.png";
+import { UiIconButton } from "../components/basic/UiIconButton";
 
 const Screen1 = require("./../assets/images/onboarding/OnboardingScreen1.png");
 const Screen3 = require("./../assets/images/onboarding/OnboardingScreen3.png");
@@ -79,7 +86,7 @@ function OnBoardingNavigator({ navigation }) {
         }}
       >
         <Stack.Screen name={"welcome"}>
-          {(props) => <WelcomePage />}
+          {(props) => <WelcomePage {...props} setPage={setPage} />}
         </Stack.Screen>
         {screens.map((s, index) => (
           <Stack.Screen key={index} name={String(s.page)}>
@@ -135,17 +142,18 @@ function OnBoardingNavigator({ navigation }) {
             ]}
           ></AnimatedDotsCarousel>
           {page != 0 && (
-            <Button
+            <UiIconButton
+              icon={<ChevronLeftIcon />}
               onPress={() => {
                 const prev = Math.max(1, page - 1);
 
                 navigation.navigate(String(prev));
                 setPage(prev);
               }}
-              title="prev"
             />
           )}
-          <Button
+          <UiIconButton
+            icon={<ChevronRightIcon />}
             onPress={() => {
               if (page == screens.length) {
                 navigation.navigate("Login");
@@ -155,17 +163,13 @@ function OnBoardingNavigator({ navigation }) {
               navigation.navigate(String(next));
               setPage(next);
             }}
-            title="next"
+            style={{
+              marginLeft: 10,
+            }}
           />
         </HStack>
       ) : (
-        <Button
-          onPress={() => {
-            navigation.navigate(String(1));
-            setPage(1);
-          }}
-          title={"continue"}
-        ></Button>
+        <View></View>
       )}
     </>
   );

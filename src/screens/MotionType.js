@@ -107,7 +107,7 @@ const Separator = ({ seperatorStyle }) => (
 const CustomImage = ({ source }) => {
   return (
     <View style={styles.imageContainer}>
-      <Image alt={' '} source={source} style={styles.image} />
+      <Image alt={" "} source={source} style={styles.image} />
     </View>
   );
 };
@@ -213,6 +213,7 @@ const BlurViewCardConents = ({
           onPress={() => {
             toggleCardExpansion(index);
           }}
+          disabled={isExpanded}
         >
           <View style={styles.container}>
             <CustomImage source={image_path} />
@@ -239,7 +240,7 @@ const BlurViewCardConents = ({
 
 const MotionTypeScreen = ({ jumpTo }) => {
   const [expandedCardIndex, setExpandedCardIndex] = useState(-1);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const toggleCardExpansion = (index) => {
     if (expandedCardIndex === index) {
@@ -251,7 +252,7 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
   const handleButtonPress = () => {
     // Change it to the next screen
-    navigation.navigate("CarrierSelect")
+    navigation.navigate("CarrierSelect");
   };
 
   return (

@@ -80,16 +80,13 @@ const DateSelectScreen = () => {
           selectedDayBackgroundColor: "gray",
           selectedDayTextColor: "#ffffff",
           todayTextColor: "#00adf5",
-          dayTextColor: "#2d4150",
-          textDisabledColor: "#d9e1e8",
+          dayTextColor: "#d9e1e8",
+          textDisabledColor: "#2d4150",
           dotColor: "#00adf5",
           selectedDotColor: "#ffffff",
           arrowColor: "white",
           monthTextColor: "#00adf5",
           indicatorColor: "#00001a",
-          // textDayFontFamily: "roboto",
-          // textMonthFontFamily: "roboto",
-          textDayHeaderFontFamily: "monospace",
           textDayFontWeight: "300",
           // textMonthFontWeight: "bold",
           textDayHeaderFontWeight: "300",
@@ -154,7 +151,8 @@ const DateSelectScreen = () => {
         disabled={Object.keys(selected).length === 0}
         onPress={() => {
           navigation.navigate("MotionSelect");
-        }}>
+        }}
+      >
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </View>
