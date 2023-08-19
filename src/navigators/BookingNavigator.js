@@ -72,16 +72,14 @@ function BookingNavigator() {
   return (
     <ImageBackground
       style={{ flex: 1 }}
-      source={require("../assets/images/Booking_BG.png")}
-    >
+      source={require("../assets/images/Booking_BG.png")}>
       <Stack.Navigator
         initialRouteName="Map"
         screenOptions={{
           headerMode: "screen",
           headerShown: false,
           cardStyle: { backgroundColor: "transparent" },
-        }}
-      >
+        }}>
         <Stack.Screen name="Map" component={MapNavigator} />
         <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
@@ -91,6 +89,7 @@ function BookingNavigator() {
         <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
         <Stack.Screen name="PackageSelect" component={SelectPackage} />
         {/* add checkout */}
+        {/* <Stack.Screen name="Checkout" component={Checkout} /> */}
         {/* booking details */}
       </Stack.Navigator>
     </ImageBackground>

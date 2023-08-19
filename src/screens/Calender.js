@@ -75,8 +75,7 @@ const DateSelectScreen = () => {
       <UiButton
         onPress={() => {
           navigation.navigate("MotionSelect");
-        }}
-      >
+        }}>
         <Text>Continue</Text>
       </UiButton>
     </View>
