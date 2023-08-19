@@ -142,7 +142,7 @@ const MapComponent = (props) => {
                   navigation.navigate("Planets");
                 }
                 if (type == "planets") {
-                  navigation.navigate("StationSelect");
+                  navigation.navigate("StationSelect", { planet: p });
                 }
               } else {
                 translateY.value = withSpring(-p.x);

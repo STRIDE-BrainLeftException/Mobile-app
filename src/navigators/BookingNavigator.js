@@ -88,36 +88,36 @@ function BookingNavigator({ jumpTo }) {
 
   return (
     <View
-      style={{ flex: 1 }}
+      style={{ flex: 1, paddingTop: 20 }}
       source={require("../assets/images/Booking_BG.png")}
     >
-      <SafeAreaView style={{ flex: 1 }}>
-        <Stack.Navigator
-          initialRouteName="Map"
-          screenOptions={{
-            // headerMode: "screen",
-            cardStyle: { backgroundColor: "transparent" },
-            header: CustomHeader,
-          }}
+      {/* <SafeAreaView style={{ flex: 1 }}> */}
+      <Stack.Navigator
+        initialRouteName="Map"
+        screenOptions={{
+          // headerMode: "screen",
+          cardStyle: { backgroundColor: "transparent" },
+          header: CustomHeader,
+        }}
+      >
+        <Stack.Screen
+          name="Map"
+          // component={MapNavigator}
+          options={{ headerShown: false }}
         >
-          <Stack.Screen
-            name="Map"
-            // component={MapNavigator}
-            options={{ headerShown: false }}
-          >
-            {(props) => <MapNavigator {...props} jumpTo={jumpTo} />}
-          </Stack.Screen>
-          <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
-          <Stack.Screen name="DateSelect" component={DateSelectScreen} />
-          <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
-          <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
-          <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
-          <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
-          <Stack.Screen name="PackageSelect" component={SelectPackage} />
-          <Stack.Screen name="Checkout" component={Checkout} />
-          {/* booking details */}
-        </Stack.Navigator>
-      </SafeAreaView>
+          {(props) => <MapNavigator {...props} jumpTo={jumpTo} />}
+        </Stack.Screen>
+        <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
+        <Stack.Screen name="DateSelect" component={DateSelectScreen} />
+        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
+        <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
+        <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
+        <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
+        <Stack.Screen name="PackageSelect" component={SelectPackage} />
+        <Stack.Screen name="Checkout" component={Checkout} />
+        {/* booking details */}
+      </Stack.Navigator>
+      {/* </SafeAreaView> */}
     </View>
   );
 }

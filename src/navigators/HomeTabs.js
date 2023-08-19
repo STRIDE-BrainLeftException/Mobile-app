@@ -96,9 +96,9 @@ export default function HomeTabs() {
       <AnimatePresence>
         {!hide && (
           <MView
-            from={{ translateY: 100 }}
+            from={{ translateY: BOTTOM_TAB_BAR_HEIGHT }}
             animate={{ translateY: 0 }}
-            exit={{ translateY: 100 }}
+            exit={{ translateY: BOTTOM_TAB_BAR_HEIGHT }}
             transition={{ duration: 500, type: "timing" }}
           >
             <View
