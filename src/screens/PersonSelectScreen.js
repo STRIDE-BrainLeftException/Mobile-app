@@ -164,14 +164,17 @@ const PersonSelectScreen = ({
           <View style={{ height: 20 }} />
           {speciesList.map((data) => {
             return (
-              <PassengerTypeCard
-                img={data.img}
-                ageGroup={data.ageGroup}
-                species={data.species}
-                homePlanet={data.homePlanet}
-                maxVal={available + values[data.species]}
-                valueChange={changeVal}
-              />
+              <View alignItems={"center"}>
+                <PassengerTypeCard
+                  img={data.img}
+                  ageGroup={data.ageGroup}
+                  species={data.species}
+                  homePlanet={data.homePlanet}
+                  maxVal={available + values[data.species]}
+                  valueChange={changeVal}
+                />
+                <View height={5} />
+              </View>
             );
           })}
           <View

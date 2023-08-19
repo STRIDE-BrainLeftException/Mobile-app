@@ -73,13 +73,17 @@ function RootStack() {
           component={LoggedIn}
           options={{ animationEnabled: false }}
         />
+        <Stack.Screen
+          name="PersonTest"
+          component={PersonSelectScreen}
+          options={{ animationEnabled: false }}
+        />
       </Stack.Navigator>
     </ImageBackground>
-    // <ImageBackground style={{ flex: 1 }} source={bg}>
-    //   <View alignItems={"center"}>
-    //     <CancelFlow />
-    //   </View>
-    // </ImageBackground>
+
+    // <View alignItems={"center"}>
+    //   <PersonSelectScreen numberOfCabins={5} />
+    // </View>
   );
 }
 
