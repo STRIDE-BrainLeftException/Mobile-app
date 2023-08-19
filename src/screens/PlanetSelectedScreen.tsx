@@ -24,6 +24,7 @@ import { Button } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
 import { useNavigation } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
+import { Header } from "../components/basic/Header";
 
 const planetArrayData = [
   {
@@ -647,6 +648,7 @@ const PlanetSelectedScreen = () => {
       resizeMode="cover"
       style={{ flex: 1 }}
     >
+      <Header title="Select station" />
       <View style={{ position: "relative", marginTop: 50 }}>
         <PlanetStationsView
           stations={stations}

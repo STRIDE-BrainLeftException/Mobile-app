@@ -7,7 +7,8 @@ import SolarSystemScreen from "../screens/SolarSystemScreen";
 import PlanetScreen from "../screens/PlanetScreen";
 import { Animated, Button, Text } from "react-native";
 import { View } from "native-base";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Header } from "../components/basic/Header";
 
 const Stack = createStackNavigator();
 
@@ -56,7 +57,6 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
             }),
             inverted
           ),
-          
         },
         {
           scale: Animated.multiply(
@@ -79,18 +79,30 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
 
 function MapNavigator() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const state = navigation.getState();
+
+  const CustomHeader = ({ route, ...props }) => {
+    console.log({ route });
+    const name = route.name;
+    const title =
+      name == "Galaxies"
+        ? "Select galaxy"
+        : name == "SolarSystems"
+        ? "Select solar system"
+        : name == "Planets"
+        ? "Select planet"
+        : "Error 404";
+    return <Header title={title} />;
+  };
 
   return (
     <View style={{ paddingTop: 20, flex: 1 }}>
-      <Button
-        title="back"
-        style={{ padding: 50 }}
-        onPress={() => navigation.goBack()}
-      />
       <Stack.Navigator
         initialRouteName="Galaxies"
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
+          header: CustomHeader,
           // presentation: "modal",
           // ...TransitionPresets.SlideFromRightIOS,
           cardStyleInterpolator: forSlide,
