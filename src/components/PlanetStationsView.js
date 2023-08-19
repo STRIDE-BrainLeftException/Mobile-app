@@ -2,6 +2,7 @@ import { Image, TouchableOpacity } from "react-native";
 import { View } from "native-base";
 import { WIDTH } from "../utils/constants";
 import { View as MView, AnimatePresence } from "moti";
+import dotAnimation from "../assets/animations/WhiteDotLoading.gif";
 
 const PlanetStationsView = ({
   stations,
@@ -11,7 +12,7 @@ const PlanetStationsView = ({
   const points = stations;
 
   const PLANET_RADIUS = (WIDTH / 2) * 0.9;
-  const DOT_SIZE = 20;
+  const DOT_SIZE = 60;
 
   const scale = selectedStation ? 1.5 : 1;
   const transform = selectedStation
@@ -32,7 +33,7 @@ const PlanetStationsView = ({
         // transform: transform,
         translateY: transform[0].translateY,
       }}
-    //   transition={{type: "timing"}}
+      //   transition={{type: "timing"}}
     >
       <MView
         from={{
@@ -43,7 +44,7 @@ const PlanetStationsView = ({
           opacity: 1,
           scale: scale,
           translateX: transform[0].translateX,
-        //   translateY: 300,
+          //   translateY: 300,
         }}
         // transition={{type: "timing"}}
         exit={{
@@ -78,9 +79,9 @@ const PlanetStationsView = ({
                   setSelectedStation(p);
                 }}
                 style={{
-                  borderRadius: DOT_SIZE,
-                  width: DOT_SIZE,
-                  height: DOT_SIZE,
+                  // borderRadius: DOT_SIZE,
+                  // width: DOT_SIZE,
+                  // height: DOT_SIZE,
                   position: "absolute",
                   top:
                     WIDTH / 2 -
@@ -90,9 +91,14 @@ const PlanetStationsView = ({
                     WIDTH / 2 -
                     PLANET_RADIUS * Math.sin((p.degree / 180) * Math.PI) -
                     DOT_SIZE / 2,
-                  backgroundColor: "white",
+                  // backgroundColor: "white",
                 }}
-              />
+              >
+                <Image
+                  source={dotAnimation}
+                  style={{ height: DOT_SIZE, width: DOT_SIZE }}
+                />
+              </TouchableOpacity>
             );
           })}
         </View>

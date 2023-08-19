@@ -8,17 +8,21 @@ import Logo from "../components/basic/Logo";
 import { WIDTH } from "../utils/constants";
 import { AnimatePresence } from "moti";
 import AnimatedView from "../components/basic/AnimatedView";
+import { Header } from "../components/basic/Header";
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <Image alt={' '}
+
+      <Image
+        alt={" "}
         style={[StyleSheet.absoluteFill, styles.image]}
         source={BackGroundImage}
       />
       <SafeAreaView>
         <AnimatePresence>
+          <Header />
           <VStack space={5}>
             <HStack>
               <Logo size={WIDTH / 2.5} isBlue={true} />
