@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    height: "30%",
+    height: 251,
   },
   ticketHeader: {
     width: "60%",
