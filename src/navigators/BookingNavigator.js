@@ -1,6 +1,7 @@
 import {
   createStackNavigator,
   TransitionPresets,
+  TransitionSpecs,
 } from "@react-navigation/stack";
 import GalaxyScreen from "../screens/GalaxyScreen";
 import SolarSystemScreen from "../screens/SolarSystemScreen";
@@ -103,11 +104,20 @@ function BookingNavigator({ jumpTo }) {
         <Stack.Screen
           name="Map"
           // component={MapNavigator}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            ...TransitionPresets.ScaleFromCenterAndroid,
+          }}
         >
           {(props) => <MapNavigator {...props} jumpTo={jumpTo} />}
         </Stack.Screen>
-        <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
+        <Stack.Screen
+          name="StationSelect"
+          component={PlanetSelectedScreen}
+          options={{
+            ...TransitionPresets.ScaleFromCenterAndroid,
+          }}
+        />
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
         <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
         <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />

@@ -81,6 +81,7 @@ function OnBoardingNavigator({ navigation }) {
         initialRouteName={"welcome"}
         screenOptions={{
           headerShown: false,
+          gestureEnabled: false,
           ...TransitionPresets.SlideFromRightIOS,
         }}
       >
