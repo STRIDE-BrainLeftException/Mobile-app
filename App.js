@@ -12,28 +12,30 @@ import HomeScreen from "./src/screens/HomeScreen";
 import { theme } from "./src/utils/theme";
 import HomeTabs from "./src/navigators/HomeTabs";
 import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
+import NumericInput from "./src/components/numeric/NumericInput";
 
 const Stack = createStackNavigator();
 
 function RootStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={HomeTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Map"
-        component={MapNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="onBoarding"
-        component={OnBoardingNavigator}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    // <Stack.Navigator initialRouteName="Home">
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={HomeTabs}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="Map"
+    //     component={MapNavigator}
+    //     options={{ headerShown: false }}
+    //   />
+    //   <Stack.Screen
+    //     name="onBoarding"
+    //     component={OnBoardingNavigator}
+    //     options={{ headerShown: false }}
+    //   />
+    // </Stack.Navigator>
+    <NumericInput />
   );
 }
 
