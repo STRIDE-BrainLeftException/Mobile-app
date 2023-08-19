@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from "react-native";
 import Animated, {
   useAnimatedGestureHandler,
@@ -16,6 +17,10 @@ import Animated, {
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { View as MView } from "moti";
+import { PLANETS } from "../utils/data";
+import EfficientBlurViewCard from "./basic/EfficientBlurViewCard";
+import { Text } from "native-base";
+import BlurViewCard from "./basic/BlurViewCard";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -31,43 +36,51 @@ const MapComponent = (props) => {
   // We created two shared value for our moveable box x and y value
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
+  // const scale = useSharedValue(1);
 
   const type = props.type;
 
   const navigation = useNavigation();
 
   const types = {
-    galaxies: [{
-      id: 2,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
-      x: -250,
-      y: -150,
-      size: 200,
-    },
-    {
-      id: 3,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
-      x: 200,
-      y: -250,
-      size: 200,
-    },
-    {
-      id: 4,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
-      x: -150,
-      y: 200,
-      size: 200,
-    },
-    {
-      id: 5,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
-      x: 0,
-      y: 0,
-      size: 200,
-    },],
+    galaxies: [
+      {
+        id: 2,
+        name: "fndpaf",
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
+        x: -250,
+        y: -150,
+        size: 200,
+      },
+      {
+        id: 3,
+        name: "fndpaf",
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
+        x: 200,
+        y: -250,
+        size: 200,
+      },
+      {
+        id: 4,
+        name: "fndpaf",
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
+        x: -150,
+        y: 200,
+        size: 200,
+      },
+      {
+        id: 5,
+        name: "fndpaf",
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
+        x: 0,
+        y: 0,
+        size: 200,
+      },
+    ],
     systems: [
       {
         id: 2,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_1.png"),
         x: -250,
         y: -150,
@@ -75,6 +88,7 @@ const MapComponent = (props) => {
       },
       {
         id: 3,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_4.png"),
         x: 200,
         y: -250,
@@ -82,6 +96,7 @@ const MapComponent = (props) => {
       },
       {
         id: 4,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_2.png"),
         x: -150,
         y: 200,
@@ -89,49 +104,14 @@ const MapComponent = (props) => {
       },
       {
         id: 5,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_3.png"),
         x: 0,
         y: 0,
         size: 200,
       },
     ],
-    planets: [
-      {
-        id: 1,
-        image: require("../assets/images/SearchScreen/planets/planet_1.png"),
-        x: 200,
-        y: 250,
-        size: 200,
-      },
-      {
-        id: 2,
-        image: require("../assets/images/SearchScreen/planets/planet_3.png"),
-        x: -250,
-        y: -150,
-        size: 200,
-      },
-      {
-        id: 3,
-        image: require("../assets/images/SearchScreen/planets/planet_4.png"),
-        x: 200,
-        y: -250,
-        size: 200,
-      },
-      {
-        id: 4,
-        image: require("../assets/images/SearchScreen/planets/planet_5.png"),
-        x: -150,
-        y: 200,
-        size: 200,
-      },
-      {
-        id: 5,
-        image: require("../assets/images/SearchScreen/planets/planet_6.png"),
-        x: 0,
-        y: 0,
-        size: 200,
-      },
-    ],
+    planets: PLANETS,
   };
 
   const _points = types[type];
@@ -141,21 +121,25 @@ const MapComponent = (props) => {
     view: () => {
       return (
         <MView
-        key={p.id}
+          key={p.id}
           style={{
             height: p.size,
             width: p.size,
             margin: Math.round(Math.random() * 10 + 10),
             // backgroundColor: "#00ff00",
             position: "absolute",
-            top: convertToDistanceFromEdge(p).x,
-            left: convertToDistanceFromEdge(p).y,
+            bottom: convertToDistanceFromEdge(p).y,
+            right: convertToDistanceFromEdge(p).x,
           }}
           from={{
             scale: 1,
+            // translateX: -p.y,
+            // translateY: -p.x,
           }}
           animate={{
             scale: 1,
+            // translateX: 0,
+            // translateY: 0
           }}
           exit={{
             scale: 1,
@@ -164,18 +148,6 @@ const MapComponent = (props) => {
           <TouchableOpacity
             onPress={() => {
               if (translateY.value == -p.x && translateX.value == -p.y) {
-                if (type == "galaxies") {
-                  navigation.navigate("SolarSystems", { item: p });
-                }
-                if (type == "systems") {
-                  navigation.navigate("Planets");
-                }
-                if (type == "planets") {
-                  navigation.navigate("StationSelect");
-                }
-              } else {
-                translateY.value = withSpring(-p.x);
-                translateX.value = withSpring(-p.y);
                 setTimeout(() => {
                   if (type == "galaxies") {
                     navigation.navigate("SolarSystems", { item: p });
@@ -184,17 +156,51 @@ const MapComponent = (props) => {
                     navigation.navigate("Planets");
                   }
                   if (type == "planets") {
-                    navigation.navigate("StationSelect");
+                    navigation.navigate("StationSelect", { planet: p });
+                  }
+                }, 10);
+              } else {
+                translateY.value = withSpring(
+                  type == "planets" ? p.y - 200 : p.y
+                );
+                translateX.value = withSpring(p.x);
+                setTimeout(() => {
+                  if (type == "galaxies") {
+                    navigation.navigate("SolarSystems", { item: p });
+                  }
+                  if (type == "systems") {
+                    navigation.navigate("Planets");
+                  }
+                  if (type == "planets") {
+                    navigation.navigate("StationSelect", { planet: p });
                   }
                 }, 10);
               }
             }}
             // style={[styles.square, { height: p.size, width: p.size }]}
           >
-            <Image
-              style={{ height: p.size, width: p.size, resizeMode: "contain" }}
+            <ImageBackground
+              style={{
+                height: p.size,
+                width: p.size,
+                resizeMode: "contain",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
               source={p.image}
-            />
+            >
+              <BlurViewCard
+              intensity={10}
+                containerStyle={{
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                  borderWidth: 0,
+                  borderRadius: 10,
+                  // padding: 30,
+                }}
+              >
+                <Text textAlign={"center"}>{p.name}</Text>
+              </BlurViewCard>
+            </ImageBackground>
           </TouchableOpacity>
         </MView>
       );
@@ -245,6 +251,7 @@ const MapComponent = (props) => {
   // When shared value changes. animated style update the values accordingly that.
   const rStyle = useAnimatedStyle(() => {
     return {
+      // scale: scale.value,
       transform: [
         {
           translateX: translateX.value,
@@ -257,7 +264,7 @@ const MapComponent = (props) => {
   });
 
   return (
-    <View style={styles.container}>
+    <MView style={styles.container} from={{ scale: 0 }} animate={{ scale: 1 }}>
       {/* <View
         style={[
           styles.dropzone,
@@ -282,7 +289,7 @@ const MapComponent = (props) => {
           ))}
         </Animated.View>
       </PanGestureHandler>
-    </View>
+    </MView>
   );
 };
 

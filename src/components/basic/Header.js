@@ -3,7 +3,7 @@ import { APP_HEADER_HEIGHT, WIDTH } from "../../utils/constants";
 import { UiIconButton } from "./UiIconButton";
 import BlurViewCard from "./BlurViewCard";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, TouchableOpacity } from "react-native";
 import EfficientBlurViewCard from "./EfficientBlurViewCard";
 
 export const Header = ({ title = "Change title", onBackPress = null }) => {
@@ -28,25 +28,15 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
         // mt={30}
       >
         <HStack flex={0.2} justifyContent={"center"}>
-          <EfficientBlurViewCard
-            containerStyle={{ borderRadius: 50, height: 50, width: 50 }}
-          >
-            <UiIconButton
-              onPress={onPress}
-              icon={<ChevronLeftIcon />}
-              size={"lg"}
-              m={0}
-              p={1}
-            />
-          </EfficientBlurViewCard>
+          <UiIconButton icon={<ChevronLeftIcon />} onPress={onPress} />
         </HStack>
 
         <HStack flex={0.6} justifyContent={"center"}>
-          <EfficientBlurViewCard containerStyle={{ flex: 1, borderRadius: 10 }}>
+          <BlurViewCard containerStyle={{ flex: 1, borderRadius: 10 }}>
             <Text numberOfLines={1} fontSize={"xl"} textAlign={"center"}>
               {title}
             </Text>
-          </EfficientBlurViewCard>
+          </BlurViewCard>
         </HStack>
 
         <HStack flex={0.2}></HStack>

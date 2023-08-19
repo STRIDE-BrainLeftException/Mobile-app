@@ -5,6 +5,7 @@ import { View as MView, AnimatePresence } from "moti";
 import dotAnimation from "../assets/animations/WhiteDotLoading.gif";
 
 const PlanetStationsView = ({
+  planet,
   stations,
   selectedStation,
   setSelectedStation,
@@ -27,83 +28,87 @@ const PlanetStationsView = ({
     : [{ translateX: 0, translateY: 0 }];
 
   return (
-    <MView
-      animate={{
-        opacity: 1,
-        // transform: transform,
-        translateY: transform[0].translateY,
-      }}
-      //   transition={{type: "timing"}}
-    >
-      <MView
-        from={{
-          opacity: 0,
-          scale: 0.9,
-        }}
-        animate={{
-          opacity: 1,
-          scale: scale,
-          translateX: transform[0].translateX,
-          //   translateY: 300,
-        }}
-        // transition={{type: "timing"}}
-        exit={{
-          opacity: 0,
-          scale: 0.9,
-        }}
-        exitTransition={{
-          type: "timing",
-          duration: 2500,
-        }}
-      >
-        <View
-        // backgroundColor={"red.400"}
+    <>
+      {planet && (
+        <MView
+          animate={{
+            opacity: 1,
+            // transform: transform,
+            translateY: transform[0].translateY,
+          }}
+          //   transition={{type: "timing"}}
         >
-          <TouchableOpacity
-            onPress={() => {
-              console.log("pressed");
-              setSelectedStation(null);
+          <MView
+            from={{
+              opacity: 0.5,
+              scale: 0.2,
+            }}
+            animate={{
+              opacity: 1,
+              scale: scale,
+              translateX: transform[0].translateX,
+              //   translateY: 300,
+            }}
+            transition={{duration: 1000}}
+            exit={{
+              opacity: 0,
+              scale: 0.9,
+            }}
+            exitTransition={{
+              type: "timing",
+              duration: 500,
             }}
           >
-            <Image
-              source={require("../assets/images/Booking_Process/planet.png")}
-              style={{ height: WIDTH, width: WIDTH }}
-            />
-          </TouchableOpacity>
-          {points.map((p) => {
-            return (
+            <View
+            // backgroundColor={"red.400"}
+            >
               <TouchableOpacity
-                key={p.id}
                 onPress={() => {
-                  console.log("station selected");
-                  setSelectedStation(p);
-                }}
-                style={{
-                  // borderRadius: DOT_SIZE,
-                  // width: DOT_SIZE,
-                  // height: DOT_SIZE,
-                  position: "absolute",
-                  top:
-                    WIDTH / 2 -
-                    PLANET_RADIUS * Math.cos((p.degree / 180) * Math.PI) -
-                    DOT_SIZE / 2,
-                  left:
-                    WIDTH / 2 -
-                    PLANET_RADIUS * Math.sin((p.degree / 180) * Math.PI) -
-                    DOT_SIZE / 2,
-                  // backgroundColor: "white",
+                  console.log("pressed");
+                  setSelectedStation(null);
                 }}
               >
                 <Image
-                  source={dotAnimation}
-                  style={{ height: DOT_SIZE, width: DOT_SIZE }}
+                  source={planet.image}
+                  style={{ height: WIDTH, width: WIDTH }}
                 />
               </TouchableOpacity>
-            );
-          })}
-        </View>
-      </MView>
-    </MView>
+              {points.map((p) => {
+                return (
+                  <TouchableOpacity
+                    key={p.id}
+                    onPress={() => {
+                      console.log("station selected");
+                      setSelectedStation(p);
+                    }}
+                    style={{
+                      // borderRadius: DOT_SIZE,
+                      // width: DOT_SIZE,
+                      // height: DOT_SIZE,
+                      position: "absolute",
+                      top:
+                        WIDTH / 2 -
+                        PLANET_RADIUS * Math.cos((p.degree / 180) * Math.PI) -
+                        DOT_SIZE / 2,
+                      left:
+                        WIDTH / 2 -
+                        PLANET_RADIUS * Math.sin((p.degree / 180) * Math.PI) -
+                        DOT_SIZE / 2,
+                      // backgroundColor: "white",
+                    }}
+                  >
+                    <Image
+                      source={dotAnimation}
+                      style={{ height: DOT_SIZE, width: DOT_SIZE }}
+                    />
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </MView>
+        </MView>
+      )}
+    </>
   );
 };
 

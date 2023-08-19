@@ -11,7 +11,7 @@ import HomeIconActive from "../assets/icons/app-bar-new/home_icon_active.png";
 import RideIcon from "../assets/icons/app-bar-new/ride_icon_default.png";
 import RideIconActive from "../assets/icons/app-bar-new/ride_icon_active.png";
 
-import { Image } from "moti";
+import { AnimatePresence, Image, View as MView } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
 import MotionTypeScreen from "../screens/MotionType";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
@@ -87,112 +87,125 @@ export default function HomeTabs() {
     );
   };
 
-  const renderTabBar = (props) => (
-    <>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 20,
-          right: 20,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          overflow: "hidden",
-          // borderWidth: 1.5,
-          // borderColor: "rgba(255,255,255,0.1)",
-          // borderBottomWidth: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.521)",
-          height: BOTTOM_TAB_BAR_HEIGHT,
-        }}
-      >
-        <BlurView
-          intensity={80}
-          style={{
-            width: "100%",
-            height: "100%",
-            // borderRadius: 20,
-          }}
-          tint="dark"
-        />
-      </View>
-      <TabBar
-        {...props}
-        indicatorStyle={{ backgroundColor: "white" }}
-        style={{
-          backgroundColor: "transparent",
-          justifyContent: "space-between",
-          position: "absolute",
-          bottom: 0,
-          left: 20,
-          right: 20,
-          // height: BOTTOM_TAB_BAR_HEIGHT + 70,
-          // backgroundColor: "red",
-          justifyContent: "flex-end",
-        }}
-        contentContainerStyle={{ height: BOTTOM_TAB_BAR_HEIGHT + 20 }}
-        pressOpacity={0}
-        pressColor="transparent"
-        renderLabel={(props) => <View />}
-        renderTabBarItem={(props) => {
-          if (props.route.key == "map") {
-            return (
-              <View
-                style={{
-                  width: props.defaultTabWidth,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  left: 0,
-                  right: 0,
-                  height: 70,
-                  transform: [{ translateY: 0 }],
-                }}
-              >
-                <View
-                  style={{
-                    borderRadius: 50,
-                    overflow: "hidden",
-                  }}
-                >
-                  <BlurView
-                    style={{
-                      alignItems: "center",
-                      backgroundColor: "rgba(0,0,50,0.5)",
-                    }}
-                    tint="dark"
-                    intensity={30}
-                  >
-                    <TabBarItem
-                      {...props}
-                      style={{
-                        width: 70,
-                        // position: "absolute",
-                        height: 70,
-                        // borderRadius: 70,
-                        // backgroundColor: "red",
-                        // backgroundColor: "transparent",
-                        // bottom: 50,
-                      }}
-                    />
-                  </BlurView>
-                </View>
-              </View>
-            );
-          }
-          return (
-            <TabBarItem
-              {...props}
-              height={BOTTOM_TAB_BAR_HEIGHT + 30}
+  const renderTabBar = (props) => {
+    const index = props?.navigationState?.index;
+    const routes = props?.navigationState?.routes;
+
+    // console.log({ index, routes });
+    const hide = index && routes && routes[index].key === "map";
+    return (
+      <AnimatePresence>
+        {!hide && (
+          <MView
+            from={{ translateY: BOTTOM_TAB_BAR_HEIGHT }}
+            animate={{ translateY: 0 }}
+            exit={{ translateY: BOTTOM_TAB_BAR_HEIGHT }}
+            transition={{ duration: 500, type: "timing" }}
+          >
+            <View
               style={{
-                justifyContent: "flex-end",
-                backgroundColor: "transparent",
+                position: "absolute",
+                bottom: 0,
+                left: 20,
+                right: 20,
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                overflow: "hidden",
+                // borderWidth: 1.5,
+                borderColor: "rgba(255,255,255,0.1)",
+                borderBottomWidth: 0,
               }}
+            >
+              <BlurView
+                intensity={10}
+                style={{
+                  height: BOTTOM_TAB_BAR_HEIGHT,
+                  backgroundColor: "rgba(0,0,0,0.7)",
+                }}
+                tint="dark"
+              ></BlurView>
+            </View>
+            <TabBar
+              {...props}
+              indicatorStyle={{ backgroundColor: "white" }}
+              style={{
+                backgroundColor: "transparent",
+                justifyContent: "space-between",
+                position: "absolute",
+                bottom: 0,
+                left: 20,
+                right: 20,
+                // height: BOTTOM_TAB_BAR_HEIGHT + 70,
+                // backgroundColor: "red",
+                justifyContent: "flex-end",
+              }}
+              contentContainerStyle={{ height: BOTTOM_TAB_BAR_HEIGHT + 20 }}
+              pressOpacity={0}
+              pressColor="transparent"
+              renderLabel={(props) => <View />}
+              renderTabBarItem={(props) => {
+                if (props.route.key == "map") {
+                  return (
+                    <View
+                      style={{
+                        width: props.defaultTabWidth,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        left: 0,
+                        right: 0,
+                        height: 70,
+                        transform: [{ translateY: 0 }],
+                      }}
+                    >
+                      <View
+                        style={{
+                          borderRadius: 50,
+                          overflow: "hidden",
+                        }}
+                      >
+                        <BlurView
+                          style={{
+                            alignItems: "center",
+                            backgroundColor: "rgba(0,0,50,0.5)",
+                          }}
+
+                          // tint="dark"
+                        >
+                          <TabBarItem
+                            {...props}
+                            style={{
+                              width: 70,
+                              // position: "absolute",
+                              height: 70,
+                              // borderRadius: 70,
+                              // backgroundColor: "red",
+                              // backgroundColor: "transparent",
+                              // bottom: 50,
+                            }}
+                          />
+                        </BlurView>
+                      </View>
+                    </View>
+                  );
+                }
+                return (
+                  <TabBarItem
+                    {...props}
+                    height={BOTTOM_TAB_BAR_HEIGHT + 30}
+                    style={{
+                      justifyContent: "flex-end",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                );
+              }}
+              renderIcon={renderIcon}
             />
-          );
-        }}
-        renderIcon={renderIcon}
-      />
-    </>
-  );
+          </MView>
+        )}
+      </AnimatePresence>
+    );
+  };
 
   return (
     <ImageBackground
