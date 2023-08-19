@@ -9,7 +9,7 @@ import { Animated, ImageBackground } from "react-native";
 import MapNavigator from "./MapNavigator";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 import MotionTypeScreen from "../screens/MotionType";
-import DateSelectScreen from "../screens/Calender";
+import DateSelectScreen from "../screens/Calendar";
 import SelectPackage from "../screens/SelectPackage";
 import ShipSelectionScreen from "../screens/ShipSelectionScreen";
 import { View } from "native-base";
