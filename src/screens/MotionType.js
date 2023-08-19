@@ -13,6 +13,8 @@ import {
 import { View as MView } from "moti";
 
 import COLORS from "../utils/colors";
+import { useNavigation } from "@react-navigation/native";
+import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 
 const cardDataArray = [
   {
@@ -201,7 +203,7 @@ const BlurViewCardConents = ({
       }}
       exit={{ opacity: 0, scale: 0.5 }}
     >
-      <BlurViewCard
+      <EfficientBlurViewCard
         containerStyle={[
           styles.cardContainer,
           isExpanded && styles.clickedCardContainer,
@@ -230,13 +232,14 @@ const BlurViewCardConents = ({
             </>
           )}
         </TouchableOpacity>
-      </BlurViewCard>
+      </EfficientBlurViewCard>
     </MView>
   );
 };
 
 const MotionTypeScreen = ({ jumpTo }) => {
   const [expandedCardIndex, setExpandedCardIndex] = useState(-1);
+  const navigation = useNavigation()
 
   const toggleCardExpansion = (index) => {
     if (expandedCardIndex === index) {
@@ -248,11 +251,12 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
   const handleButtonPress = () => {
     // Change it to the next screen
+    navigation.navigate("CarrierSelect")
   };
 
   return (
     <ImageBackground
-      source={require("../assets/images/bookingProcessBackground.png")}
+      source={require("../assets/images/Booking_BG.png")}
       // source={require("../assets/images/Booking_BG.png")}
       style={styles.backgroundImage}
       resizeMode="cover"

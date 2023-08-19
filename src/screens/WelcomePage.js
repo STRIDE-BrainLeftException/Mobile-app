@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
 
 // const PlaceholderImage = require('./../../assets/splash.png');
-import PlaceholderImage from '../assets/images/bookingProcessBackground.png';
+import PlaceholderImage from '../assets/images/Booking_BG.png';
 import { ONBOARDING_BOTTOM_COLOR } from '../utils/constants';
 import Logo from '../components/basic/Logo';
 const hostess = require('./../assets/images/onboarding/OnboardingScreen1.png');

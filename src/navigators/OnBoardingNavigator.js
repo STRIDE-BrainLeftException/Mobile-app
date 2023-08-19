@@ -133,6 +133,7 @@ function OnBoardingNavigator({ navigation }) {
               },
             ]}
           ></AnimatedDotsCarousel>
+          {page != 0 &&
           <Button
             onPress={() => {
               const prev = Math.max(1, page - 1);
@@ -141,9 +142,13 @@ function OnBoardingNavigator({ navigation }) {
               setPage(prev);
             }}
             title='prev'
-          />
+          />}
           <Button
             onPress={() => {
+              if(page == screens.length){
+                navigation.navigate("Login");
+                return;
+              }
               const next = Math.min(page + 1, screens.length);
               navigation.navigate(String(next));
               setPage(next);

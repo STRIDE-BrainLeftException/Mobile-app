@@ -1,33 +1,118 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import GalaxyScreen from '../screens/GalaxyScreen';
-import SolarSystemScreen from '../screens/SolarSystemScreen';
-import Calender from '../screens/Calender';
-import SelectPackage from '../screens/SelectPackage';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
+import GalaxyScreen from "../screens/GalaxyScreen";
+import SolarSystemScreen from "../screens/SolarSystemScreen";
+import PlanetScreen from "../screens/PlanetScreen";
+import { Animated, Button, Text } from "react-native";
+import { View } from "native-base";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Header } from "../components/basic/Header";
 
 const Stack = createStackNavigator();
 
-const config = {
-  animation: "spring",
-  config: {
-    stiffness: 1000,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
+const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
+  const progress = Animated.add(
+    current.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    }),
+    next
+      ? next.progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1],
+          extrapolate: "clamp",
+        })
+      : 0
+  );
+
+  return {
+    cardStyle: {
+      opacity: Animated.multiply(
+        progress.interpolate({
+          inputRange: [0, 1, 2],
+          outputRange: [
+            1, // Focused, but offscreen in the beginning
+            1, // Fully focused
+            0, // Fully unfocused
+          ],
+          extrapolate: "clamp",
+        }),
+        inverted
+      ),
+
+      transform: [
+        {
+          translateX: Animated.multiply(
+            progress.interpolate({
+              inputRange: [0, 1, 2],
+              outputRange: [
+                0, // Focused, but offscreen in the beginning
+                0, // Fully focused
+                200, // Fully unfocused
+              ],
+              extrapolate: "clamp",
+            }),
+            inverted
+          ),
+        },
+        {
+          scale: Animated.multiply(
+            progress.interpolate({
+              inputRange: [0, 1, 2],
+              outputRange: [
+                0, // Focused, but offscreen in the beginning
+                1, // Fully focused
+                2, // Fully unfocused
+              ],
+              extrapolate: "clamp",
+            }),
+            inverted
+          ),
+        },
+      ],
+    },
+  };
 };
 
 function MapNavigator() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const state = navigation.getState();
+
+  const CustomHeader = ({ route, ...props }) => {
+    console.log({ route });
+    const name = route.name;
+    const title =
+      name == "Galaxies"
+        ? "Select galaxy"
+        : name == "SolarSystems"
+        ? "Select solar system"
+        : name == "Planets"
+        ? "Select planet"
+        : "Error 404";
+    return <Header title={title} />;
+  };
+
   return (
-    <Stack.Navigator
-      initialRouteName="SelectPackage"
-      screenOptions={{ presentation: 'transparentModal' }}>
-      <Stack.Screen name="SelectPackage" component={SelectPackage} />
-      <Stack.Screen name="Calender" component={Calender} />
-      <Stack.Screen name="Galaxies" component={GalaxyScreen} />
-      <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
-    </Stack.Navigator>
+    <View style={{ paddingTop: 20, flex: 1 }}>
+      <Stack.Navigator
+        initialRouteName="Galaxies"
+        screenOptions={{
+          headerShown: true,
+          header: CustomHeader,
+          // presentation: "modal",
+          // ...TransitionPresets.SlideFromRightIOS,
+          cardStyleInterpolator: forSlide,
+        }}
+      >
+        <Stack.Screen name="Galaxies" component={GalaxyScreen} />
+        <Stack.Screen name="SolarSystems" component={SolarSystemScreen} />
+        <Stack.Screen name="Planets" component={PlanetScreen} />
+      </Stack.Navigator>
+    </View>
   );
 }
 

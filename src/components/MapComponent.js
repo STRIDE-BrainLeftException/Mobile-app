@@ -1,14 +1,21 @@
-import React from 'react';
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import React from "react";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import Animated, {
   useAnimatedGestureHandler,
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   runOnJS,
-} from 'react-native-reanimated';
-import { PanGestureHandler } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native-reanimated";
+import { PanGestureHandler } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { View as MView } from "moti";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -29,53 +36,167 @@ const MapComponent = (props) => {
 
   const navigation = useNavigation();
 
-  const _points = [
-    {
-      id: 1,
-      x: 200,
-      y: 250,
-      size: 200,
-    },
-    {
+  const types = {
+    galaxies: [{
       id: 2,
+      image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
       x: -250,
       y: -150,
       size: 200,
     },
     {
       id: 3,
+      image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
       x: 200,
       y: -250,
       size: 200,
     },
-    { id: 4, x: -150, y: 200, size: 200 },
-    { id: 5, x: 0, y: 0, size: 200 },
-  ];
+    {
+      id: 4,
+      image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
+      x: -150,
+      y: 200,
+      size: 200,
+    },
+    {
+      id: 5,
+      image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
+      x: 0,
+      y: 0,
+      size: 200,
+    },],
+    systems: [
+      {
+        id: 2,
+        image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_1.png"),
+        x: -250,
+        y: -150,
+        size: 200,
+      },
+      {
+        id: 3,
+        image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_4.png"),
+        x: 200,
+        y: -250,
+        size: 200,
+      },
+      {
+        id: 4,
+        image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_2.png"),
+        x: -150,
+        y: 200,
+        size: 200,
+      },
+      {
+        id: 5,
+        image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_3.png"),
+        x: 0,
+        y: 0,
+        size: 200,
+      },
+    ],
+    planets: [
+      {
+        id: 1,
+        image: require("../assets/images/SearchScreen/planets/planet_1.png"),
+        x: 200,
+        y: 250,
+        size: 200,
+      },
+      {
+        id: 2,
+        image: require("../assets/images/SearchScreen/planets/planet_3.png"),
+        x: -250,
+        y: -150,
+        size: 200,
+      },
+      {
+        id: 3,
+        image: require("../assets/images/SearchScreen/planets/planet_4.png"),
+        x: 200,
+        y: -250,
+        size: 200,
+      },
+      {
+        id: 4,
+        image: require("../assets/images/SearchScreen/planets/planet_5.png"),
+        x: -150,
+        y: 200,
+        size: 200,
+      },
+      {
+        id: 5,
+        image: require("../assets/images/SearchScreen/planets/planet_6.png"),
+        x: 0,
+        y: 0,
+        size: 200,
+      },
+    ],
+  };
+
+  const _points = types[type];
 
   const points = _points.map((p) => ({
     ...p,
     view: () => {
       return (
-        <TouchableOpacity
-          onPress={() => {
-            console.log('check', { type });
-            if (type == 'galaxies') {
-              console.log({ type });
-              navigation.navigate('SolarSystems', { item: p });
-            }
+        <MView
+        key={p.id}
+          style={{
+            height: p.size,
+            width: p.size,
+            margin: Math.round(Math.random() * 10 + 10),
+            // backgroundColor: "#00ff00",
+            position: "absolute",
+            top: convertToDistanceFromEdge(p).x,
+            left: convertToDistanceFromEdge(p).y,
           }}
-          style={[
-            styles.square,
-            {
-              height: p.size,
-              width: p.size,
-              margin: Math.round(Math.random() * 10 + 10),
-              backgroundColor: '#00ff00',
-              position: 'absolute',
-              top: convertToDistanceFromEdge(p).x,
-              left: convertToDistanceFromEdge(p).y,
-            },
-          ]}></TouchableOpacity>
+          from={{
+            scale: 1,
+          }}
+          animate={{
+            scale: 1,
+          }}
+          exit={{
+            scale: 1,
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              if (translateY.value == -p.x && translateX.value == -p.y) {
+                if (type == "galaxies") {
+                  navigation.navigate("SolarSystems", { item: p });
+                }
+                if (type == "systems") {
+                  navigation.navigate("Planets");
+                }
+                if (type == "planets") {
+                  navigation.navigate("StationSelect");
+                }
+              } else {
+                translateY.value = withSpring(-p.x);
+                translateX.value = withSpring(-p.y);
+                setTimeout(() => {
+                  if (type == "galaxies") {
+                    navigation.navigate("SolarSystems", { item: p });
+                  }
+                  if (type == "systems") {
+                    navigation.navigate("Planets");
+                  }
+                  if (type == "planets") {
+                    navigation.navigate("StationSelect");
+                  }
+                }, 10);
+              }
+            }}
+            // style={[styles.square, { height: p.size, width: p.size }]}
+          >
+            <Image
+              style={{ height: p.size, width: p.size, resizeMode: "contain" }}
+              source={p.image}
+            />
+          </TouchableOpacity>
+        </MView>
       );
     },
   }));
@@ -83,8 +204,6 @@ const MapComponent = (props) => {
   function distance(p, point) {
     return Math.sqrt(Math.pow(point.x - p.x, 2) + Math.pow(point.y - p.y, 2));
   }
-
-  const point = { x: 100, y: 200 };
 
   const getClosest = (point) => {
     var closest = points.reduce((a, b) =>
@@ -139,7 +258,7 @@ const MapComponent = (props) => {
 
   return (
     <View style={styles.container}>
-      <View
+      {/* <View
         style={[
           styles.dropzone,
           {
@@ -148,14 +267,16 @@ const MapComponent = (props) => {
             width: '100%',
             position: 'absolute',
           },
-        ]}></View>
+        ]}
+      ></View> */}
       <PanGestureHandler onGestureEvent={panGestureEvent}>
         <Animated.View
           style={[
             styles.square,
             { height: MAP_HEIGHT, width: MAP_WIDTH },
             rStyle,
-          ]}>
+          ]}
+        >
           {points.map((point, index) => (
             <point.view key={index} />
           ))}
@@ -168,15 +289,15 @@ const MapComponent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   dropzone: {
-    backgroundColor: 'rgba(0, 0, 123, 0.5)',
+    backgroundColor: "rgba(0, 0, 123, 0.5)",
   },
   square: {
     borderRadius: 15,
-    backgroundColor: 'red',
+    // backgroundColor: "red",
   },
 });
 
