@@ -16,7 +16,7 @@ import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
 import BiometricLogIn from "./src/screens/BiometricLogIn";
 import LoggedIn from "./src/screens/LoggedIn";
 import { ImageBackground } from "react-native";
-import bg from "./src/assets/images/login/loginScreenBG.png";
+import bg from "./src/assets/images/Booking_BG.png";
 
 const Stack = createStackNavigator();
 
@@ -30,10 +30,7 @@ const navTheme = {
 
 function RootStack() {
   return (
-    <ImageBackground
-      style={{ flex: 1 }}
-      source={bg}
-    >
+    <ImageBackground style={{ flex: 1 }} source={bg}>
       <Stack.Navigator
         // initialRouteName="LoggedIn"
         initialRouteName="onBoarding"

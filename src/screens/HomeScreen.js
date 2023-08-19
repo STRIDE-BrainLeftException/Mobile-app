@@ -13,10 +13,11 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <Image alt={' '}
+      {/* <Image
+        alt={" "}
         style={[StyleSheet.absoluteFill, styles.image]}
         source={BackGroundImage}
-      />
+      /> */}
       <SafeAreaView>
         <AnimatePresence>
           <VStack space={5}>

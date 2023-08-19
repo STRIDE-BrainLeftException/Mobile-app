@@ -6,10 +6,10 @@ import HomeScreen from "../screens/HomeScreen";
 import BlurViewCard from "../components/basic/BlurViewCard";
 import { BlurView } from "expo-blur";
 
-import HomeIcon from "../assets/icons/app-bar/home_icon_default.png";
-import HomeIconActive from "../assets/icons/app-bar/home_icon_active.png";
-import RideIcon from "../assets/icons/app-bar/ride_icon_default.png";
-import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
+import HomeIcon from "../assets/icons/app-bar-new/home_icon_default.png";
+import HomeIconActive from "../assets/icons/app-bar-new/home_icon_active.png";
+import RideIcon from "../assets/icons/app-bar-new/ride_icon_default.png";
+import RideIconActive from "../assets/icons/app-bar-new/ride_icon_active.png";
 
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
@@ -100,17 +100,12 @@ export default function HomeTabs() {
           borderWidth: 1.5,
           borderColor: "rgba(255,255,255,0.1)",
           borderBottomWidth: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.521)",
+          filter: "blur(10px)",
+          backdropFilter: "invert(10px)",
+          height: BOTTOM_TAB_BAR_HEIGHT,
         }}
-      >
-        <BlurView
-          intensity={10}
-          style={{
-            height: BOTTOM_TAB_BAR_HEIGHT,
-            backgroundColor: "rgba(0,0,0,0.7)",
-          }}
-          tint="dark"
-        ></BlurView>
-      </View>
+      />
       <TabBar
         {...props}
         indicatorStyle={{ backgroundColor: "white" }}
