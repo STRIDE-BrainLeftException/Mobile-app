@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import {
   View,
   StyleSheet,
   ImageBackground,
   StatusBar,
   Image,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { Text } from "native-base";
@@ -12,13 +13,31 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import { BlurView } from "expo-blur";
 import { UiButton } from "./basic/UiButton";
 import { useNavigation } from "@react-navigation/native";
-import { efficientBlurViewStyles } from "../utils/constants";
+import {
+  BLUEVIEW_BORDER_COLOR,
+  BLURVIEW_BORDER_WIDTH,
+  efficientBlurViewStyles,
+  BOTTOM_TAB_BAR_HEIGHT,
+  BORDER_RADIUS,
+} from "../utils/constants";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const navigation = useNavigation();
 
   const shipTypeStyle =
     shipData.type === "HyperStride" ? styles.shipType[0] : styles.shipType[1];
+
+  // ref
+  const bottomSheetRef = useRef(null);
+
+  // variables
+  const snapPoints = useMemo(() => ["60%"], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
+  }, []);
 
   _renderItem = ({ item, index }) => {
     return (
@@ -27,6 +46,45 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
       </View>
     );
   };
+
+  return (
+    <View style={styles.root}>
+      <Image source={shipData.image} style={styles.shipImage} />
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={0}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        backgroundStyle={{ backgroundColor: "transparent" }}
+        backgroundComponent={({ style }) => (
+          <View style={[styles.contentContainer, style]}>
+            <BlurView
+              intensity={50}
+              tint="dark"
+              style={[
+                { flex: 1, width: "100%", borderRadius: BORDER_RADIUS },
+                style,
+              ]}
+            />
+          </View>
+        )}
+      >
+        <View style={styles.shipHeader}>
+          <Text style={shipTypeStyle}>{shipData.type}</Text>
+          <View style={styles.shipTitleContainer}>
+            <TouchableOpacity onPress={handleShipSelection.previous}>
+              <Text style={styles.shipSelectButtons}>{`<`}</Text>
+            </TouchableOpacity>
+            <Text style={styles.shipTitle}>{shipData.title}</Text>
+            <TouchableOpacity onPress={handleShipSelection.next}>
+              <Text style={styles.shipSelectButtons}>{`>`}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTEXT`}</Text>
+      </BottomSheet>
+    </View>
+  );
 
   return (
     <View style={styles.root}>
@@ -43,12 +101,12 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View
+      <ScrollView
         style={[
           styles.blurViewContainer,
           { backgroundColor: "rgba(0,0,0,0.2)" },
-          styles.blurView,
         ]}
+        contentContainerStyle={{ paddingTop: 100, alignItems: "center" }}
       >
         {/* <BlurView style={styles.blurView} tint="dark" intensity={50}> */}
         <Text style={styles.shipEngine}>{shipData.engine}</Text>
@@ -88,13 +146,14 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
         <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
         <Text>{`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`}</Text>
         {/* </BlurView> */}
-      </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
+    flex: 1,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -102,6 +161,7 @@ const styles = StyleSheet.create({
   slideImg: {
     width: 180,
     height: 180,
+    resizeMode: "cover",
   },
   slide: {
     padding: 10,
@@ -116,12 +176,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   shipHeader: {
-    zIndex: 2,
+    // zIndex: 2,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    position: "absolute",
-    top: "85%",
+    // position: "absolute",
+    // top: "82%",
   },
   shipType: [
     {
@@ -154,10 +214,11 @@ const styles = StyleSheet.create({
     color: "#1dbbff",
     fontSize: 25,
     fontWeight: "bold",
+    lineHeight: 30,
   },
   shipStatFooter: {
     color: "#1dbbff",
-    fontSize: 8,
+    fontSize: 10,
   },
   shipEngine: {
     color: "white",
@@ -174,18 +235,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   shipImage: {
-    position: "relative",
-    zIndex: 1,
+    // position: "relative",
+    // zIndex: 1,
+  },
+  contentContainer: {
+    borderWidth: BLURVIEW_BORDER_WIDTH,
+    borderColor: BLUEVIEW_BORDER_COLOR,
+    borderRadius: BORDER_RADIUS,
+    overflow: "hidden",
+    width: "100%",
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "transparent",
   },
   shipSelectButtons: {
     paddingHorizontal: 20,
     fontSize: 30,
     color: "white",
+    // lineHeight: 30,
   },
   shipTitle: {
     fontSize: 40,
     color: "white",
     fontWeight: "bold",
+    // lineHeight: 40,
+    marginTop: 5,
   },
   blurView: {
     alignItems: "center",
@@ -194,8 +268,8 @@ const styles = StyleSheet.create({
   blurViewContainer: {
     color: "white",
     marginHorizontal: "6%",
-    position: "absolute",
-    top: "75%",
+    // position: "absolute",
+    // top: "77%",
     width: "100%",
     borderRadius: 20,
     overflow: "hidden",

@@ -649,7 +649,7 @@ const PlanetSelectedScreen = () => {
       style={{ flex: 1 }}
     >
       <Header title="Select station" />
-      <View style={{ position: "relative", marginTop: 50 }}>
+      <View style={{ position: "relative" }}>
         <PlanetStationsView
           stations={stations}
           selectedStation={selectedStation}

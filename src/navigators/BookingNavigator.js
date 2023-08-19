@@ -70,7 +70,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
 
 function BookingNavigator() {
   return (
-    <ImageBackground
+    <View
       style={{ flex: 1 }}
       source={require("../assets/images/Booking_BG.png")}
     >
@@ -93,7 +93,7 @@ function BookingNavigator() {
         {/* add checkout */}
         {/* booking details */}
       </Stack.Navigator>
-    </ImageBackground>
+    </View>
   );
 }
 
