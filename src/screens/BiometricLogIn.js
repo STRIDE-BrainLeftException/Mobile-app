@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff",
   },
-  logo: { backgroundColor: "red", alignItems: "center", top: 450 },
+  logo: { backgroundColor: "transparent", alignItems: "center", top: 450 },
   image: { width: "100%", height: "100%" },
   cardHead: { color: "#fff", fontSize: 25 },
   cardText: {
