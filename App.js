@@ -32,8 +32,8 @@ function RootStack() {
   return (
     <ImageBackground style={{ flex: 1 }} source={bg}>
       <Stack.Navigator
-        // initialRouteName="LoggedIn"
-        initialRouteName="Home"
+        initialRouteName="onBoarding"
+        // initialRouteName="Home"
         // initialRouteName="LoggedIn"
         screenOptions={{
           headerShown: false,

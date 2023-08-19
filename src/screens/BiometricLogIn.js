@@ -3,7 +3,7 @@
 //Animation of login
 //After scanning move into LoggedIn screen
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BlurView } from "expo-blur";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,6 +19,8 @@ import LottieView from "lottie-react-native";
 // import loginAnimation from "../assets/animations/lottieLoginAnimation.json";
 // import loginAnimation from "../assets/animations/loginAnimated.lottie";
 import loginGif from "../assets/animations/login.gif";
+import * as LocalAuthentication from "expo-local-authentication";
+import { getUniqueId } from "../utils/data";
 
 const bg = require("../assets/images/Booking_BG.png");
 const styles = StyleSheet.create({
@@ -66,15 +68,27 @@ const styles = StyleSheet.create({
 
 const BiometricLogIn = () => {
   const navigation = useNavigation();
+  const [scanned, setScanned] = useState(false);
+  const [id, setId] = useState("");
 
   const onConfirm = () => {
     navigation.navigate("LoggedIn");
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      onConfirm();
-    }, 3000);
+    getUniqueId().then((value) => {
+      console.log({ uniqueId: value });
+      setId(value);
+    });
+    LocalAuthentication.authenticateAsync().then((result) => {
+      if (result.success == true) {
+        setScanned(true);
+        console.log({ result });
+        setTimeout(() => {
+          onConfirm();
+        }, 3000);
+      }
+    });
   }, []);
 
   return (
@@ -96,10 +110,12 @@ const BiometricLogIn = () => {
                   </Text>
                 </View>
                 <View style={{ padding: 6 }}>
-                  <Image
-                    source={loginGif}
-                    style={{ height: WIDTH / 3, width: WIDTH / 3 }}
-                  />
+                  {scanned && (
+                    <Image
+                      source={loginGif}
+                      style={{ height: WIDTH / 3, width: WIDTH / 3 }}
+                    />
+                  )}
                   {/* <LottieView
                   style={{
                     width: 200,

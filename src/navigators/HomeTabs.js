@@ -110,7 +110,7 @@ export default function HomeTabs() {
                 borderTopLeftRadius: 20,
                 borderTopRightRadius: 20,
                 overflow: "hidden",
-                borderWidth: 1.5,
+                // borderWidth: 1.5,
                 borderColor: "rgba(255,255,255,0.1)",
                 borderBottomWidth: 0,
               }}
