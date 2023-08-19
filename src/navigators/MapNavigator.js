@@ -19,7 +19,6 @@ const forSlide = ({
   layouts: { screen },
   ...rest
 }) => {
-  console.log({ rest, current, next });
   const progress = Animated.add(
     current.progress.interpolate({
       inputRange: [0, 1],
@@ -90,7 +89,7 @@ function MapNavigator({ jumpTo }) {
   const state = navigation.getState();
 
   const CustomHeader = ({ route, ...props }) => {
-    console.log({ route });
+    // console.log({ route });
     const name = route.name;
     const title =
       name == "Galaxies"

@@ -16,6 +16,7 @@ import Animated, {
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { View as MView } from "moti";
+import { PLANETS } from "../utils/data";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -97,43 +98,7 @@ const MapComponent = (props) => {
         size: 200,
       },
     ],
-    planets: [
-      {
-        id: 1,
-        image: require("../assets/images/SearchScreen/planets/planet_1.png"),
-        x: 200,
-        y: 250,
-        size: 200,
-      },
-      {
-        id: 2,
-        image: require("../assets/images/SearchScreen/planets/planet_3.png"),
-        x: -250,
-        y: -150,
-        size: 200,
-      },
-      {
-        id: 3,
-        image: require("../assets/images/SearchScreen/planets/planet_4.png"),
-        x: 200,
-        y: -250,
-        size: 200,
-      },
-      {
-        id: 4,
-        image: require("../assets/images/SearchScreen/planets/planet_5.png"),
-        x: -150,
-        y: 200,
-        size: 200,
-      },
-      {
-        id: 5,
-        image: require("../assets/images/SearchScreen/planets/planet_6.png"),
-        x: 0,
-        y: 0,
-        size: 200,
-      },
-    ],
+    planets: PLANETS,
   };
 
   const _points = types[type];
@@ -190,7 +155,7 @@ const MapComponent = (props) => {
                     navigation.navigate("Planets");
                   }
                   if (type == "planets") {
-                    navigation.navigate("StationSelect");
+                    navigation.navigate("StationSelect", { planet: p });
                   }
                 }, 10);
               }

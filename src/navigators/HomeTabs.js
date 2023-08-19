@@ -87,11 +87,10 @@ export default function HomeTabs() {
   };
 
   const renderTabBar = (props) => {
-    console.log({ props: props.navigationState });
     const index = props?.navigationState?.index;
     const routes = props?.navigationState?.routes;
 
-    console.log({ index, routes });
+    // console.log({ index, routes });
     const hide = index && routes && routes[index].key === "map";
     return (
       <AnimatePresence>

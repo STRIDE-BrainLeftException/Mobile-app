@@ -95,7 +95,7 @@ function BookingNavigator({ jumpTo }) {
         <Stack.Navigator
           initialRouteName="Map"
           screenOptions={{
-            headerMode: "screen",
+            // headerMode: "screen",
             cardStyle: { backgroundColor: "transparent" },
             header: CustomHeader,
           }}

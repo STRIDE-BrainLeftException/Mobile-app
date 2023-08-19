@@ -32,6 +32,7 @@ import { UiButton } from "../components/basic/UiButton";
 import { useNavigation } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 import { Header } from "../components/basic/Header";
+import { PLANETS } from "../utils/data";
 
 const planetArrayData = [
   {
@@ -634,7 +635,8 @@ const Planet_Details_Section = ({ selectedStation }) => {
   );
 };
 
-const PlanetSelectedScreen = () => {
+const PlanetSelectedScreen = ({ route }) => {
+  const planet = PLANETS.find((p) => p.id == route?.params?.planet?.id);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [selectedStation, setSelectedStation] = useState();
 
@@ -648,13 +650,14 @@ const PlanetSelectedScreen = () => {
 
   return (
     <ImageBackground
+      // source={planet.image}
       source={require("../assets/images/Booking_BG.png")}
       resizeMode="cover"
       style={{ flex: 1 }}
     >
-      <Header title="Select station" />
       <View style={{ position: "relative" }}>
         <PlanetStationsView
+          planet={planet}
           stations={stationDetailsArrayData}
           selectedStation={selectedStation}
           setSelectedStation={setSelectedStation}

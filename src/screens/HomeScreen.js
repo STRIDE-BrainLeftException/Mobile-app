@@ -16,7 +16,6 @@ const HomeScreen = () => {
       <StatusBar style="light" />
       <SafeAreaView>
         <AnimatePresence>
-          <Header />
           <VStack space={5}>
             <HStack>
               <Logo size={WIDTH / 2.5} isBlue={true} />
