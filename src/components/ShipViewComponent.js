@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   shipImage: {
+    marginTop: -50,
     // position: "relative",
     // zIndex: 1,
   },
