@@ -59,7 +59,7 @@ const ShipSelectionScreen = () => {
   };
 
   return (
-    <ImageBackground
+    <View
       source={require("../assets/images/Booking_BG.png")}
       style={styles.backgroundImage}
     >
@@ -68,7 +68,7 @@ const ShipSelectionScreen = () => {
         shipData={shipData[selectedShipID]}
         handleShipSelection={handleShipSelection}
       />
-    </ImageBackground>
+    </View>
   );
 };
 

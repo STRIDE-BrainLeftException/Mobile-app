@@ -42,8 +42,10 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
         </HStack>
 
         <HStack flex={0.6} justifyContent={"center"}>
-          <EfficientBlurViewCard containerStyle={{ flex: 1, borderRadius: 10}}>
-            <Text numberOfLines={1} fontSize={'xl'} textAlign={"center"}>{title}</Text>
+          <EfficientBlurViewCard containerStyle={{ flex: 1, borderRadius: 10 }}>
+            <Text numberOfLines={1} fontSize={"xl"} textAlign={"center"}>
+              {title}
+            </Text>
           </EfficientBlurViewCard>
         </HStack>
 
