@@ -1,3 +1,17 @@
+import * as Application from "expo-application";
+import { Platform } from "react-native";
+
+export const getUniqueId = async () => {
+  if (Platform.OS == "ios") {
+    const id = await Application.getIosIdForVendorAsync();
+    return id;
+  } else if (Platform.OS == "android") {
+    return Application.androidId;
+  } else {
+    return Math.random();
+  }
+};
+
 export const PLANETS = [
   {
     id: 1,
