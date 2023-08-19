@@ -27,6 +27,7 @@ import { ChevronRightIcon, HStack, Modal } from "native-base";
 import bg from "./../assets/images/login/loginScreenBG.png";
 import tempDP from "./../assets/images/login/loginScreenUser.png";
 import { useNavigation } from "@react-navigation/native";
+import { AnimatePresence, View as MotiView } from "moti";
 
 const styles = StyleSheet.create({
   container: {
@@ -122,7 +123,7 @@ const LoggedIn = () => {
     setLoading(true);
     setTimeout(() => {
       navigation.navigate("Home");
-    }, 100);
+    }, 500);
   };
 
   useEffect(() => {
@@ -131,171 +132,192 @@ const LoggedIn = () => {
     }, 100);
   }, []);
 
-  if (loading) {
-    return <View />;
-  }
-
   return (
-    <View style={styles.container}>
-      <Modal isOpen={modalOpenLang} onClose={() => setOpenLang(false)}>
-        <Modal.Content maxWidth="400px">
-          {/* <Modal.Body> */}
-          <BlurView style={styles.listTextBox}>
-            {languages.map((language) => (
-              <Text
-                key={language.data}
-                style={styles.listItems}
-                onPress={() => {
-                  setOpenLang(false);
-                  setLang(language.data);
-                }}
-              >
-                {language.data}
-              </Text>
-            ))}
-          </BlurView>
-          {/* </Modal.Body> */}
-        </Modal.Content>
-      </Modal>
-      <Modal isOpen={modalOpenCurr} onClose={() => setOpenCurr(false)}>
-        <Modal.Content maxWidth="400px">
-          {/* <Modal.Body> */}
-          <BlurView style={styles.listTextBox}>
-            {currencies.map((curr) => (
-              <Text
-                key={curr.data}
-                style={styles.listItems}
-                onPress={() => {
-                  setOpenCurr(false);
-                  setCurrency(curr.data);
-                }}
-              >
-                {curr.data}
-              </Text>
-            ))}
-          </BlurView>
-          {/* </Modal.Body> */}
-        </Modal.Content>
-      </Modal>
-      <View source={bg} style={styles.image} resizeMode="cover">
-        <View style={styles.textBoxHeading}>
-          <Text style={styles.text}>Log In</Text>
-          <Text style={styles.text}>Lő Nìƴțū</Text>
-        </View>
-        <View style={styles.profilepic}>
-          <Image
-            source={tempDP}
-            style={{ width: w, height: w, borderRadius: w / 2 }}
-          />
-        </View>
-        <View style={{ alignItems: "center" }}>
-          <View style={styles.outerCard}>
-            <BlurView intensity={70} style={{ padding: 4, width: WIDTH * 0.9 }}>
-              <View style={styles.card}>
-                <Text style={{ fontSize: 20, color: "#fff" }}>{tempName}</Text>
-                <Text style={{ fontSize: 12, color: "#fff", paddingBottom: 8 }}>
-                  {planet | galaxy}
-                </Text>
-                <View style={{ padding: 6 }}></View>
-                <View
-                  style={{
-                    borderRadius: 12,
-                    overflow: "hidden",
-                    alignItems: "center",
-                  }}
-                >
-                  <BlurView
-                    intensity={120}
-                    style={{ padding: 4, width: WIDTH * 0.7 }}
+    <AnimatePresence>
+      {!loading && (
+        <MotiView
+          from={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 1, opacity: 0 }}
+          style={styles.container}
+          transition={{
+            type: "timing",
+            duration: 500,
+          }}
+        >
+          <Modal isOpen={modalOpenLang} onClose={() => setOpenLang(false)}>
+            <Modal.Content maxWidth="400px">
+              {/* <Modal.Body> */}
+              <BlurView style={styles.listTextBox}>
+                {languages.map((language) => (
+                  <Text
+                    key={language.data}
+                    style={styles.listItems}
+                    onPress={() => {
+                      setOpenLang(false);
+                      setLang(language.data);
+                    }}
                   >
-                    <HStack style={{ padding: 8 }} space={100}>
-                      <Text style={{ fontSize: 14, color: "#fff" }}>
-                        Language
-                      </Text>
-                      <HStack space={4}>
-                        <Text
-                          onPress={onPressLang}
-                          style={{ fontSize: 14, color: "#fff" }}
-                        >
-                          {lang}
-                        </Text>
-                        <ChevronRightIcon size={3} style={{ top: 4 }} />
-                      </HStack>
-                    </HStack>
-                  </BlurView>
-                </View>
-                <View style={{ padding: 6 }}></View>
-                <View
-                  style={{
-                    borderRadius: 12,
-                    overflow: "hidden",
-                    alignItems: "center",
-                  }}
-                >
-                  <BlurView
-                    intensity={120}
-                    style={{ padding: 4, width: WIDTH * 0.7 }}
+                    {language.data}
+                  </Text>
+                ))}
+              </BlurView>
+              {/* </Modal.Body> */}
+            </Modal.Content>
+          </Modal>
+          <Modal isOpen={modalOpenCurr} onClose={() => setOpenCurr(false)}>
+            <Modal.Content maxWidth="400px">
+              {/* <Modal.Body> */}
+              <BlurView style={styles.listTextBox}>
+                {currencies.map((curr) => (
+                  <Text
+                    key={curr.data}
+                    style={styles.listItems}
+                    onPress={() => {
+                      setOpenCurr(false);
+                      setCurrency(curr.data);
+                    }}
                   >
-                    <HStack style={{ padding: 8 }} space={108}>
-                      <Text style={{ fontSize: 14, color: "#fff" }}>
-                        Currency
-                      </Text>
-                      <HStack space={4}>
-                        <Text
-                          onPress={onPressCurr}
-                          style={{ fontSize: 14, color: "#fff" }}
-                        >
-                          {currency}
-                        </Text>
-                        <ChevronRightIcon size={3} style={{ top: 4 }} />
-                      </HStack>
-                    </HStack>
-                  </BlurView>
-                </View>
+                    {curr.data}
+                  </Text>
+                ))}
+              </BlurView>
+              {/* </Modal.Body> */}
+            </Modal.Content>
+          </Modal>
+          <View source={bg} style={styles.image} resizeMode="cover">
+            <View style={styles.textBoxHeading}>
+              <Text style={styles.text}>Log In</Text>
+              <Text style={styles.text}>Lő Nìƴțū</Text>
+            </View>
+            <View style={styles.profilepic}>
+              <Image
+                source={tempDP}
+                style={{ width: w, height: w, borderRadius: w / 2 }}
+              />
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <View style={styles.outerCard}>
+                <BlurView
+                  intensity={70}
+                  style={{ padding: 4, width: WIDTH * 0.9 }}
+                >
+                  <View style={styles.card}>
+                    <Text style={{ fontSize: 20, color: "#fff" }}>
+                      {tempName}
+                    </Text>
+                    <Text
+                      style={{ fontSize: 12, color: "#fff", paddingBottom: 8 }}
+                    >
+                      {planet | galaxy}
+                    </Text>
+                    <View style={{ padding: 6 }}></View>
+                    <View
+                      style={{
+                        borderRadius: 12,
+                        overflow: "hidden",
+                        alignItems: "center",
+                      }}
+                    >
+                      <BlurView
+                        intensity={120}
+                        style={{ padding: 4, width: WIDTH * 0.7 }}
+                      >
+                        <HStack style={{ padding: 8 }} space={100}>
+                          <Text style={{ fontSize: 14, color: "#fff" }}>
+                            Language
+                          </Text>
+                          <HStack space={4}>
+                            <Text
+                              onPress={onPressLang}
+                              style={{ fontSize: 14, color: "#fff" }}
+                            >
+                              {lang}
+                            </Text>
+                            <ChevronRightIcon size={3} style={{ top: 4 }} />
+                          </HStack>
+                        </HStack>
+                      </BlurView>
+                    </View>
+                    <View style={{ padding: 6 }}></View>
+                    <View
+                      style={{
+                        borderRadius: 12,
+                        overflow: "hidden",
+                        alignItems: "center",
+                      }}
+                    >
+                      <BlurView
+                        intensity={120}
+                        style={{ padding: 4, width: WIDTH * 0.7 }}
+                      >
+                        <HStack style={{ padding: 8 }} space={108}>
+                          <Text style={{ fontSize: 14, color: "#fff" }}>
+                            Currency
+                          </Text>
+                          <HStack space={4}>
+                            <Text
+                              onPress={onPressCurr}
+                              style={{ fontSize: 14, color: "#fff" }}
+                            >
+                              {currency}
+                            </Text>
+                            <ChevronRightIcon size={3} style={{ top: 4 }} />
+                          </HStack>
+                        </HStack>
+                      </BlurView>
+                    </View>
+                  </View>
+                  <View style={{ padding: 6 }}></View>
+                </BlurView>
               </View>
-              <View style={{ padding: 6 }}></View>
-            </BlurView>
-          </View>
-        </View>
-        <View style={styles.tickOath}>
-          <HStack
-            space={3}
-            style={{ padding: 8, width: "60%", paddingBottom: 18 }}
-          >
-            <Checkbox
-              colorScheme={"green"}
-              onChange={() => setCheck(!check)}
-              top={1}
-            >
-              <Text style={{ fontSize: 12, color: "#fff" }}>
-                I agree to be bound by the Intergalactic Oath and Stride Oath
-              </Text>
-            </Checkbox>
-          </HStack>
+            </View>
+            <View style={styles.tickOath}>
+              <HStack
+                space={3}
+                style={{ padding: 8, width: "60%", paddingBottom: 18 }}
+              >
+                <Checkbox
+                  colorScheme={"green"}
+                  onChange={() => setCheck(!check)}
+                  top={1}
+                >
+                  <Text style={{ fontSize: 12, color: "#fff" }}>
+                    I agree to be bound by the Intergalactic Oath and Stride
+                    Oath
+                  </Text>
+                </Checkbox>
+              </HStack>
 
-          <TouchableOpacity
-            style={{
-              borderRadius: 26,
-              overflow: "hidden",
-              alignItems: "center",
-            }}
-            onPress={() => {
-              if (check) {
-                pressContinue();
-              }
-            }}
-          >
-            <BlurView
-              style={{ padding: 12, width: WIDTH * 0.6, alignItems: "center" }}
-            >
-              <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
-                Continue
-              </Text>
-            </BlurView>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+              <TouchableOpacity
+                style={{
+                  borderRadius: 26,
+                  overflow: "hidden",
+                  alignItems: "center",
+                }}
+                onPress={() => {
+                  if (check) {
+                    pressContinue();
+                  }
+                }}
+              >
+                <BlurView
+                  style={{
+                    padding: 12,
+                    width: WIDTH * 0.6,
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
+                    Continue
+                  </Text>
+                </BlurView>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </MotiView>
+      )}
+    </AnimatePresence>
   );
 };
 
