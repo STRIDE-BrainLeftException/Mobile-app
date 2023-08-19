@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-
+import { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import MapNavigator from "./src/navigators/MapNavigator";
@@ -13,10 +13,14 @@ import { theme } from "./src/utils/theme";
 import HomeTabs from "./src/navigators/HomeTabs";
 import BookingNavigator from "./src/navigators/BookingNavigator";
 import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
+import NumericInput from "./src/components/numeric/NumericInput";
+import PassengerTypeCard from "./src/components/basic/PassengerTypeCard";
+import PersonSelectScreen from "./src/screens/PersonSelectScreen";
 import BiometricLogIn from "./src/screens/BiometricLogIn";
 import LoggedIn from "./src/screens/LoggedIn";
 import { ImageBackground } from "react-native";
 import bg from "./src/assets/images/Booking_BG.png";
+import CancelFlow from "./src/screens/CancelFlow";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +33,9 @@ const navTheme = {
 };
 
 function RootStack() {
+  //Temporary------------------------
+  const [val, setVal] = useState(6);
+  ///////////////////////////////////
   return (
     <ImageBackground style={{ flex: 1 }} source={bg}>
       <Stack.Navigator
@@ -67,6 +74,11 @@ function RootStack() {
         />
       </Stack.Navigator>
     </ImageBackground>
+    // <ImageBackground style={{ flex: 1 }} source={bg}>
+    //   <View alignItems={"center"}>
+    //     <CancelFlow />
+    //   </View>
+    // </ImageBackground>
   );
 }
 
