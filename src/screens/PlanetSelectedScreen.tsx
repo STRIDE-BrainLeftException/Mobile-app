@@ -10,7 +10,14 @@ import { BlurView } from "expo-blur";
 import Accordion from "react-native-collapsible/Accordion";
 import BlurViewCard from "../components/basic/BlurViewCard";
 import COLORS from "../utils/colors";
-import { Text } from "native-base";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  HStack,
+  IconButton,
+  Text,
+  VStack,
+} from "native-base";
 
 import {
   BLUEVIEW_BORDER_COLOR,
@@ -35,8 +42,17 @@ const planetArrayData = [
   },
 ];
 
+const stations = [
+  { id: 1, name: "Station 1", degree: 90 },
+  { id: 2, name: "Station 2", degree: 270 },
+  { id: 3, name: "Station 3", degree: 20 },
+  // { id: 4, name: "Station 3", degree: 180 },
+];
+
 const stationDetailsArrayData = [
   {
+    id: 1,
+    degree: 90,
     stationName: "Vanezia",
     subStationName: "Volrizen 30A  |  3000LY",
     content:
@@ -57,6 +73,8 @@ const stationDetailsArrayData = [
     ],
   },
   {
+    id: 2,
+    degree: 270,
     stationName: "Alderine",
     subStationName: "Volrizen 30A  |  3000LY",
     content:
@@ -77,6 +95,8 @@ const stationDetailsArrayData = [
     ],
   },
   {
+    id: 3,
+    degree: 20,
     stationName: "Alderine2",
     subStationName: "Volrizen 30A  |  3000LY",
     content:
@@ -171,7 +191,7 @@ const culturalDetailsArrayData = [
 
 const TitleContainer = ({ stationName, subStationName, content }) => {
   return (
-    <View style={{ flex: 1, width: "80%", alignSelf: "center" }}>
+    <View style={{ width: "80%", alignSelf: "center" }}>
       <Text
         style={{
           fontSize: 32,
@@ -207,19 +227,6 @@ const TitleContainer = ({ stationName, subStationName, content }) => {
       >
         {content}
       </Text>
-
-      <View style={{ height: 10 }} />
-
-      <Text
-        style={{
-          fontSize: 20,
-          lineHeight: 22,
-          color: "rgba(255, 255, 255, 1)",
-          textAlign: "left",
-        }}
-      >
-        Where to Go
-      </Text>
       <View style={{ height: 20 }} />
     </View>
   );
@@ -230,6 +237,9 @@ const PlanetSelectedTitleContainer = ({
   subStationName,
   content,
   textComponents,
+  selectedStation,
+  setSelectedStation,
+  stations,
 }) => {
   const SmallTextComp = ({ HighlightedText, NormalText }) => (
     <View style={{ flexDirection: "column", alignItems: "center" }}>
@@ -257,29 +267,61 @@ const PlanetSelectedTitleContainer = ({
     </View>
   );
 
-  return (
-    <View style={{ flex: 1, width: "80%", alignSelf: "center" }}>
-      <Text
-        style={{
-          fontSize: 32,
-          lineHeight: 35.2,
-          color: "rgba(255, 255, 255, 1)",
-          alignSelf: "center",
-        }}
-      >
-        {stationName}
-      </Text>
+  const onNextPressed = () => {
+    const maxIndex = stationDetailsArrayData.length - 1;
+    const index = stationDetailsArrayData.findIndex(
+      (i) => i == selectedStation
+    );
+    setSelectedStation(
+      stationDetailsArrayData[index == maxIndex ? 0 : index + 1]
+    );
+  };
 
-      <Text
-        style={{
-          fontSize: 12,
-          lineHeight: 15.38,
-          color: "rgba(235, 235, 245, 1)",
-          alignSelf: "center",
-        }}
-      >
-        {subStationName}
-      </Text>
+  const onPrevPressed = () => {
+    const maxIndex = stationDetailsArrayData.length - 1;
+    const index = stationDetailsArrayData.findIndex(
+      (i) => i == selectedStation
+    );
+    setSelectedStation(
+      stationDetailsArrayData[index == 0 ? maxIndex : index - 1]
+    );
+  };
+
+  return (
+    <View style={{ width: "80%", alignSelf: "center" }}>
+      <HStack justifyContent={"space-between"}>
+        <IconButton
+          onPress={onPrevPressed}
+          icon={<ChevronLeftIcon color={"rgb(255,255,255)"} size={"xl"} />}
+        />
+        <VStack>
+          <Text
+            style={{
+              fontSize: 32,
+              lineHeight: 35.2,
+              color: "rgba(255, 255, 255, 1)",
+              alignSelf: "center",
+            }}
+          >
+            {stationName}
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 12,
+              lineHeight: 15.38,
+              color: "rgba(235, 235, 245, 1)",
+              alignSelf: "center",
+            }}
+          >
+            {subStationName}
+          </Text>
+        </VStack>
+        <IconButton
+          onPress={onNextPressed}
+          icon={<ChevronRightIcon color={"rgb(255,255,255)"} size={"xl"} />}
+        />
+      </HStack>
 
       <View style={{ height: 5 }} />
 
@@ -321,18 +363,6 @@ const PlanetSelectedTitleContainer = ({
       </View>
 
       <View style={{ height: 10 }} />
-
-      <Text
-        style={{
-          fontSize: 20,
-          lineHeight: 22,
-          color: "rgba(255, 255, 255, 1)",
-          textAlign: "left",
-        }}
-      >
-        Places to visit in {stationName}
-      </Text>
-      <View style={{ height: 20 }} />
     </View>
   );
 };
@@ -527,37 +557,18 @@ const Planet_Details_Section = ({ selectedStation }) => {
 
   return (
     <BottomSheetScrollView>
-      {selectedStation ? (
-        <PlanetSelectedTitleContainer
-          stationName={
-            stationDetailsArrayData[
-              selectedStation.id ? selectedStation.id - 1 : 0
-            ]?.stationName
-          }
-          subStationName={
-            stationDetailsArrayData[
-              selectedStation.id ? selectedStation.id - 1 : 0
-            ]?.subStationName
-          }
-          content={
-            stationDetailsArrayData[
-              selectedStation.id ? selectedStation.id - 1 : 0
-            ]?.content
-          }
-          textComponents={
-            stationDetailsArrayData[
-              selectedStation.id ? selectedStation.id - 1 : 0
-            ]?.textComponents
-          }
-        />
-      ) : (
-        <TitleContainer
-          stationName={planetArrayData[0].stationName}
-          subStationName={planetArrayData[0].subStationName}
-          content={planetArrayData[0].content}
-        />
-      )}
-
+      <Text
+        style={{
+          fontSize: 20,
+          lineHeight: 22,
+          color: "rgba(255, 255, 255, 1)",
+          textAlign: "left",
+          paddingLeft: 40,
+        }}
+      >
+        Places to visit
+      </Text>
+      <View style={{ height: 20 }} />
       <View style={{ flexDirection: "row" }}>
         <View style={{ width: "5%" }} />
         <FlatList
@@ -628,19 +639,12 @@ const PlanetSelectedScreen = () => {
   const [selectedStation, setSelectedStation] = useState();
 
   // variables
-  const snapPoints = useMemo(() => ["60%", "100%"], []);
+  const snapPoints = useMemo(() => ["60%", "90%"], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
     // console.log("handleSheetChanges", index);
   }, []);
-
-  const stations = [
-    { id: 1, name: "Station 1", degree: 90 },
-    { id: 2, name: "Station 2", degree: 270 },
-    { id: 3, name: "Station 3", degree: 20 },
-    // { id: 4, name: "Station 3", degree: 180 },
-  ];
 
   return (
     <ImageBackground
@@ -650,7 +654,7 @@ const PlanetSelectedScreen = () => {
     >
       <View style={{ position: "relative", marginTop: 50 }}>
         <PlanetStationsView
-          stations={stations}
+          stations={stationDetailsArrayData}
           selectedStation={selectedStation}
           setSelectedStation={setSelectedStation}
         />
@@ -689,7 +693,23 @@ const PlanetSelectedScreen = () => {
         {/* <Text>Awesome 🎉</Text> */}
         {/* </BottomSheetScrollView> */}
         {/* </BlurView> */}
-
+        {selectedStation ? (
+          <PlanetSelectedTitleContainer
+            selectedStation={selectedStation}
+            setSelectedStation={setSelectedStation}
+            stations={stationDetailsArrayData}
+            stationName={selectedStation?.stationName}
+            subStationName={selectedStation?.subStationName}
+            content={selectedStation?.content}
+            textComponents={selectedStation?.textComponents}
+          />
+        ) : (
+          <TitleContainer
+            stationName={planetArrayData[0].stationName}
+            subStationName={planetArrayData[0].subStationName}
+            content={planetArrayData[0].content}
+          />
+        )}
         <Planet_Details_Section selectedStation={selectedStation} />
       </BottomSheet>
     </ImageBackground>
