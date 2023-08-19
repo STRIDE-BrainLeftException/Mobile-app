@@ -71,7 +71,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   };
 };
 
-function BookingNavigator() {
+function BookingNavigator({ jumpTo }) {
   const CustomHeader = (props) => {
     const mapping = {
       StationSelect: "Select station",
@@ -91,7 +91,7 @@ function BookingNavigator() {
       style={{ flex: 1 }}
       source={require("../assets/images/Booking_BG.png")}
     >
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Stack.Navigator
           initialRouteName="Map"
           screenOptions={{
@@ -102,9 +102,11 @@ function BookingNavigator() {
         >
           <Stack.Screen
             name="Map"
-            component={MapNavigator}
+            // component={MapNavigator}
             options={{ headerShown: false }}
-          />
+          >
+            {(props) => <MapNavigator {...props} jumpTo={jumpTo} />}
+          </Stack.Screen>
           <Stack.Screen name="StationSelect" component={PlanetSelectedScreen} />
           <Stack.Screen name="DateSelect" component={DateSelectScreen} />
           <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />

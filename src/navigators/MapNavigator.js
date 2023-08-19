@@ -12,7 +12,14 @@ import { Header } from "../components/basic/Header";
 
 const Stack = createStackNavigator();
 
-const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
+const forSlide = ({
+  current,
+  next,
+  inverted,
+  layouts: { screen },
+  ...rest
+}) => {
+  console.log({ rest, current, next });
   const progress = Animated.add(
     current.progress.interpolate({
       inputRange: [0, 1],
@@ -34,7 +41,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
         progress.interpolate({
           inputRange: [0, 1, 2],
           outputRange: [
-            1, // Focused, but offscreen in the beginning
+            0, // Focused, but offscreen in the beginning
             1, // Fully focused
             0, // Fully unfocused
           ],
@@ -49,7 +56,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
             progress.interpolate({
               inputRange: [0, 1, 2],
               outputRange: [
-                0, // Focused, but offscreen in the beginning
+                -200, // Focused, but offscreen in the beginning
                 0, // Fully focused
                 200, // Fully unfocused
               ],
@@ -63,7 +70,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
             progress.interpolate({
               inputRange: [0, 1, 2],
               outputRange: [
-                0, // Focused, but offscreen in the beginning
+                0 ,// Focused, but offscreen in the beginning
                 1, // Fully focused
                 2, // Fully unfocused
               ],
@@ -77,7 +84,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   };
 };
 
-function MapNavigator() {
+function MapNavigator({ jumpTo }) {
   const navigation = useNavigation();
   const route = useRoute();
   const state = navigation.getState();
@@ -93,7 +100,18 @@ function MapNavigator() {
         : name == "Planets"
         ? "Select planet"
         : "Error 404";
-    return <Header title={title} />;
+    return (
+      <Header
+        title={title}
+        onBackPress={
+          name == "Galaxies"
+            ? () => {
+                jumpTo("home");
+              }
+            : null
+        }
+      />
+    );
   };
 
   return (

@@ -37,34 +37,36 @@ const MapComponent = (props) => {
   const navigation = useNavigation();
 
   const types = {
-    galaxies: [{
-      id: 2,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
-      x: -250,
-      y: -150,
-      size: 200,
-    },
-    {
-      id: 3,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
-      x: 200,
-      y: -250,
-      size: 200,
-    },
-    {
-      id: 4,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
-      x: -150,
-      y: 200,
-      size: 200,
-    },
-    {
-      id: 5,
-      image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
-      x: 0,
-      y: 0,
-      size: 200,
-    },],
+    galaxies: [
+      {
+        id: 2,
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
+        x: -250,
+        y: -150,
+        size: 200,
+      },
+      {
+        id: 3,
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
+        x: 200,
+        y: -250,
+        size: 200,
+      },
+      {
+        id: 4,
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
+        x: -150,
+        y: 200,
+        size: 200,
+      },
+      {
+        id: 5,
+        image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
+        x: 0,
+        y: 0,
+        size: 200,
+      },
+    ],
     systems: [
       {
         id: 2,
@@ -141,7 +143,7 @@ const MapComponent = (props) => {
     view: () => {
       return (
         <MView
-        key={p.id}
+          key={p.id}
           style={{
             height: p.size,
             width: p.size,
@@ -153,9 +155,13 @@ const MapComponent = (props) => {
           }}
           from={{
             scale: 1,
+            // translateX: -p.y,
+            // translateY: -p.x,
           }}
           animate={{
             scale: 1,
+            // translateX: 0,
+            // translateY: 0
           }}
           exit={{
             scale: 1,
@@ -257,7 +263,7 @@ const MapComponent = (props) => {
   });
 
   return (
-    <View style={styles.container}>
+    <MView style={styles.container} from={{ scale: 0 }} animate={{ scale: 1 }}>
       {/* <View
         style={[
           styles.dropzone,
@@ -282,7 +288,7 @@ const MapComponent = (props) => {
           ))}
         </Animated.View>
       </PanGestureHandler>
-    </View>
+    </MView>
   );
 };
 
