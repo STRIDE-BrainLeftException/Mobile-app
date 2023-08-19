@@ -13,6 +13,7 @@ import { theme } from "./src/utils/theme";
 import HomeTabs from "./src/navigators/HomeTabs";
 import BookingNavigator from "./src/navigators/BookingNavigator";
 import ShipSelectionScreen from "./src/screens/ShipSelectionScreen";
+import PostCheckoutScreen from "./src/screens/PostCheckout";
 import NumericInput from "./src/components/numeric/NumericInput";
 import PassengerTypeCard from "./src/components/basic/PassengerTypeCard";
 import PersonSelectScreen from "./src/screens/PersonSelectScreen";
@@ -39,8 +40,8 @@ function RootStack() {
   return (
     <ImageBackground style={{ flex: 1 }} source={bg}>
       <Stack.Navigator
-        initialRouteName="onBoarding"
-        // initialRouteName="Home"
+        // initialRouteName="onBoarding"
+        initialRouteName="Home"
         // initialRouteName="LoggedIn"
         screenOptions={{
           headerShown: false,

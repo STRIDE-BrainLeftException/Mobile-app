@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from "react-native";
 import Animated, {
   useAnimatedGestureHandler,
@@ -17,6 +18,9 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { View as MView } from "moti";
 import { PLANETS } from "../utils/data";
+import EfficientBlurViewCard from "./basic/EfficientBlurViewCard";
+import { Text } from "native-base";
+import BlurViewCard from "./basic/BlurViewCard";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -42,6 +46,7 @@ const MapComponent = (props) => {
     galaxies: [
       {
         id: 2,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
         x: -250,
         y: -150,
@@ -49,6 +54,7 @@ const MapComponent = (props) => {
       },
       {
         id: 3,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
         x: 200,
         y: -250,
@@ -56,6 +62,7 @@ const MapComponent = (props) => {
       },
       {
         id: 4,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
         x: -150,
         y: 200,
@@ -63,6 +70,7 @@ const MapComponent = (props) => {
       },
       {
         id: 5,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
         x: 0,
         y: 0,
@@ -72,6 +80,7 @@ const MapComponent = (props) => {
     systems: [
       {
         id: 2,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_1.png"),
         x: -250,
         y: -150,
@@ -79,6 +88,7 @@ const MapComponent = (props) => {
       },
       {
         id: 3,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_4.png"),
         x: 200,
         y: -250,
@@ -86,6 +96,7 @@ const MapComponent = (props) => {
       },
       {
         id: 4,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_2.png"),
         x: -150,
         y: 200,
@@ -93,6 +104,7 @@ const MapComponent = (props) => {
       },
       {
         id: 5,
+        name: "fndpaf",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_3.png"),
         x: 0,
         y: 0,
@@ -167,10 +179,28 @@ const MapComponent = (props) => {
             }}
             // style={[styles.square, { height: p.size, width: p.size }]}
           >
-            <Image
-              style={{ height: p.size, width: p.size, resizeMode: "contain" }}
+            <ImageBackground
+              style={{
+                height: p.size,
+                width: p.size,
+                resizeMode: "contain",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
               source={p.image}
-            />
+            >
+              <BlurViewCard
+              intensity={10}
+                containerStyle={{
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                  borderWidth: 0,
+                  borderRadius: 10,
+                  // padding: 30,
+                }}
+              >
+                <Text textAlign={"center"}>{p.name}</Text>
+              </BlurViewCard>
+            </ImageBackground>
           </TouchableOpacity>
         </MView>
       );

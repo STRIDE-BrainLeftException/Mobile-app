@@ -17,6 +17,7 @@ import MotionTypeScreen from "../screens/MotionType";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 import BookingNavigator from "./BookingNavigator";
 import ShipSelectionScreen from "../screens/ShipSelectionScreen";
+import PostCheckoutScreen from "../screens/PostCheckout";
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
@@ -58,7 +59,7 @@ export default function HomeTabs() {
       case "second":
         return <PlanetSelectedScreen jumpTo={jumpTo} />;
       case "second2":
-        return <MotionTypeScreen jumpTo={jumpTo} />;
+        return <PostCheckoutScreen jumpTo={jumpTo} />;
       case "map2":
         return <ShipSelectionScreen jumpTo={jumpTo} />;
       case "map":
