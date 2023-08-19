@@ -34,7 +34,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
         progress.interpolate({
           inputRange: [0, 1, 2],
           outputRange: [
-            0, // Focused, but offscreen in the beginning
+            1, // Focused, but offscreen in the beginning
             1, // Fully focused
             0, // Fully unfocused
           ],
@@ -49,9 +49,9 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
             progress.interpolate({
               inputRange: [0, 1, 2],
               outputRange: [
-                -400, // Focused, but offscreen in the beginning
+                0, // Focused, but offscreen in the beginning
                 0, // Fully focused
-                400, // Fully unfocused
+                200, // Fully unfocused
               ],
               extrapolate: "clamp",
             }),
