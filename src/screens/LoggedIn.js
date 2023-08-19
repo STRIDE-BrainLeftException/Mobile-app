@@ -177,7 +177,7 @@ const LoggedIn = () => {
           {/* </Modal.Body> */}
         </Modal.Content>
       </Modal>
-      <ImageBackground source={bg} style={styles.image} resizeMode="cover">
+      <View source={bg} style={styles.image} resizeMode="cover">
         <View style={styles.textBoxHeading}>
           <Text style={styles.text}>Log In</Text>
           <Text style={styles.text}>Lő Nìƴțū</Text>
@@ -294,7 +294,7 @@ const LoggedIn = () => {
             </BlurView>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

@@ -14,12 +14,6 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-
-      <Image
-        alt={" "}
-        style={[StyleSheet.absoluteFill, styles.image]}
-        source={BackGroundImage}
-      />
       <SafeAreaView>
         <AnimatePresence>
           <Header />

@@ -19,7 +19,7 @@ import PersonSelectScreen from "./src/screens/PersonSelectScreen";
 import BiometricLogIn from "./src/screens/BiometricLogIn";
 import LoggedIn from "./src/screens/LoggedIn";
 import { ImageBackground } from "react-native";
-import bg from "./src/assets/images/login/loginScreenBG.png";
+import bg from "./src/assets/images/Booking_BG.png";
 
 const Stack = createStackNavigator();
 

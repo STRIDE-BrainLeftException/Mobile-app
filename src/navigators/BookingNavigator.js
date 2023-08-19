@@ -87,11 +87,11 @@ function BookingNavigator() {
   };
 
   return (
-    <ImageBackground
+    <View
       style={{ flex: 1 }}
       source={require("../assets/images/Booking_BG.png")}
     >
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Stack.Navigator
           initialRouteName="Map"
           screenOptions={{
@@ -116,7 +116,7 @@ function BookingNavigator() {
           {/* booking details */}
         </Stack.Navigator>
       </SafeAreaView>
-    </ImageBackground>
+    </View>
   );
 }
 

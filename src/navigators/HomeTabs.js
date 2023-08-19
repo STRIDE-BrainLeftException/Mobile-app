@@ -6,17 +6,17 @@ import HomeScreen from "../screens/HomeScreen";
 import BlurViewCard from "../components/basic/BlurViewCard";
 import { BlurView } from "expo-blur";
 
-import HomeIcon from "../assets/icons/app-bar/home_icon_default.png";
-import HomeIconActive from "../assets/icons/app-bar/home_icon_active.png";
-import RideIcon from "../assets/icons/app-bar/ride_icon_default.png";
-import RideIconActive from "../assets/icons/app-bar/ride_icon_active.png";
+import HomeIcon from "../assets/icons/app-bar-new/home_icon_default.png";
+import HomeIconActive from "../assets/icons/app-bar-new/home_icon_active.png";
+import RideIcon from "../assets/icons/app-bar-new/ride_icon_default.png";
+import RideIconActive from "../assets/icons/app-bar-new/ride_icon_active.png";
 
 import { Image } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
 import MotionTypeScreen from "../screens/MotionType";
 import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 import BookingNavigator from "./BookingNavigator";
-
+import ShipSelectionScreen from "../screens/ShipSelectionScreen";
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
@@ -31,7 +31,7 @@ const SecondRoute = () => (
 const renderScene = SceneMap({
   home: HomeScreen,
   second: PlanetSelectedScreen,
-  second2: SecondRoute,
+  second2: ShipSelectionScreen,
   map2: SecondRoute,
   map: MapNavigator,
 });
@@ -60,7 +60,7 @@ export default function HomeTabs() {
       case "second2":
         return <MotionTypeScreen jumpTo={jumpTo} />;
       case "map2":
-        return <SecondRoute jumpTo={jumpTo} />;
+        return <ShipSelectionScreen jumpTo={jumpTo} />;
       case "map":
         return <BookingNavigator jumpTo={jumpTo} />;
     }
@@ -97,19 +97,22 @@ export default function HomeTabs() {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           overflow: "hidden",
-          borderWidth: 1.5,
-          borderColor: "rgba(255,255,255,0.1)",
-          borderBottomWidth: 0,
+          // borderWidth: 1.5,
+          // borderColor: "rgba(255,255,255,0.1)",
+          // borderBottomWidth: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.521)",
+          height: BOTTOM_TAB_BAR_HEIGHT,
         }}
       >
         <BlurView
-          intensity={10}
+          intensity={80}
           style={{
-            height: BOTTOM_TAB_BAR_HEIGHT,
-            backgroundColor: "rgba(0,0,0,0.7)",
+            width: "100%",
+            height: "100%",
+            // borderRadius: 20,
           }}
           tint="dark"
-        ></BlurView>
+        />
       </View>
       <TabBar
         {...props}
@@ -154,8 +157,8 @@ export default function HomeTabs() {
                       alignItems: "center",
                       backgroundColor: "rgba(0,0,50,0.5)",
                     }}
-
-                    // tint="dark"
+                    tint="dark"
+                    intensity={30}
                   >
                     <TabBarItem
                       {...props}
