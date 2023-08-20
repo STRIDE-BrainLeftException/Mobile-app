@@ -43,7 +43,7 @@ function RootStack() {
       <Stack.Navigator
         // initialRouteName="onBoarding"
         initialRouteName="Home"
-        // initialRouteName="LoggedIn"
+        // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,
           cardStyle: { backgroundColor: "transparent" },
@@ -72,6 +72,11 @@ function RootStack() {
         <Stack.Screen
           name="LoggedIn"
           component={LoggedIn}
+          options={{ animationEnabled: false }}
+        />
+        <Stack.Screen
+          name="checkoutTest"
+          component={Checkout}
           options={{ animationEnabled: false }}
         />
 
