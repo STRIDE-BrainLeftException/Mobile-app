@@ -17,7 +17,18 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
   };
 
   return (
-    <SafeAreaView>
+    // <SafeAreaView>
+    <BlurViewCard
+      containerStyle={{
+        borderRadius: 10,
+        borderWidth: 0,
+        padding: 0,
+        margin: 0,
+        width: "100%",
+      }}
+      tint={"dark"}
+      intensity={30}
+    >
       <HStack
         height={APP_HEADER_HEIGHT}
         width={WIDTH}
@@ -32,16 +43,20 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
         </HStack>
 
         <HStack flex={0.6} justifyContent={"center"}>
-          <BlurViewCard containerStyle={{ flex: 1, borderRadius: 10 }}>
-            <Text numberOfLines={1} fontSize={"xl"} textAlign={"center"}>
-              {title}
-            </Text>
-          </BlurViewCard>
+          <Text
+            numberOfLines={1}
+            fontSize={35}
+            fontWeight={"bold"}
+            textAlign={"center"}
+          >
+            {title}
+          </Text>
         </HStack>
 
         <HStack flex={0.2}></HStack>
       </HStack>
-    </SafeAreaView>
+    </BlurViewCard>
+    // </SafeAreaView>
   );
 };
 

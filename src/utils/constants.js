@@ -13,8 +13,8 @@ export const BLURVIEW_BORDER_WIDTH = 1;
 export const BLUEVIEW_BORDER_COLOR = "rgba(255,255,255,0.2)";
 
 export const efficientBlurViewStyles = {
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    borderWidth: 1,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    borderWidth: 0,
     borderColor: 'rgba(255,255,255,0.2)'
 
 };

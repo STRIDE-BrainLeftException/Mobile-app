@@ -642,7 +642,7 @@ const PlanetSelectedScreen = ({ route }) => {
   const [show, setShow] = useState(false);
 
   // variables
-  const snapPoints = useMemo(() => ["60%", "90%"], []);
+  const snapPoints = useMemo(() => ["60%", "100%"], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -656,10 +656,10 @@ const PlanetSelectedScreen = ({ route }) => {
   }, []);
 
   return (
-    <ImageBackground
+    <View
       // source={planet.image}
-      source={require("../assets/images/Booking_BG.png")}
-      resizeMode="cover"
+      // source={require("../assets/images/Booking_BG.png")}
+      // resizeMode="cover"
       style={{ flex: 1 }}
     >
       <View style={{ position: "relative" }}>
@@ -725,7 +725,7 @@ const PlanetSelectedScreen = ({ route }) => {
           <Planet_Details_Section selectedStation={selectedStation} />
         </BottomSheet>
       )}
-    </ImageBackground>
+    </View>
   );
 };
 
