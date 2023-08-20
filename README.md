@@ -16,6 +16,7 @@ Submission for RootCode Tri-athlon 2023
 ### Run ###
 
 1. `yarn start` or `npm start`
+2. Use the expo go app and scan the QR code to run the app on expo go app.
 
 ## BackEnd
 
