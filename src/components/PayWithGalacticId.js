@@ -61,16 +61,19 @@ export const PayWithGalacticId = () => {
   const MODAL_WIDTH = 600;
 
   useEffect(() => {
-    setStatus("INITIAL");
-    setTimeout(() => {
-      setStatus("PENDING");
+    if (open) {
+      setStatus("INITIAL");
       setTimeout(() => {
-        setStatus("COMPLETED");
+        setStatus("PENDING");
         setTimeout(() => {
-          navigation.navigate("Confirmation");
-        }, 2000);
+          setStatus("COMPLETED");
+          setTimeout(() => {
+            setOpen(false);
+            navigation.navigate("Confirmation");
+          }, 2000);
+        }, 3000);
       }, 3000);
-    }, 3000);
+    }
   }, [open]);
 
   return (
