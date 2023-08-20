@@ -87,68 +87,77 @@ export const PayWithGalacticId = () => {
         }}
       />
 
-      <Modal isOpen={open} onClose={() => setOpen(false)}>
-          {/* <Modal.Body> */}
-          {/* <View style={styles.outerCard}> */}
-            <BlurViewCard tint="dark" containerStyle={styles.outerCard}>
-              {/* <View style={styles.card}> */}
+      <Modal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        animationPreset="slide"
+        transparent={true}
+      >
+        {/* <Modal.Body> */}
+        {/* <View style={styles.outerCard}> */}
+        <BlurViewCard
+          tint="dark"
+          containerStyle={styles.outerCard}
+          intensity={20}
+        >
+          {/* <View style={styles.card}> */}
 
-              <View
-                alignItems={"center"}
-                style={{ width: MODAL_WIDTH, ...styles.card }}
-              >
-                <View style={{ padding: 6 }}>
-                  {true && (
-                    <Image
-                      source={loginGif}
-                      style={{ height: WIDTH / 3, width: WIDTH / 3 }}
-                    />
-                  )}
-                </View>
-                <Text style={styles.cardHead}>Galactic ID</Text>
+          <View
+            alignItems={"center"}
+            style={{ width: MODAL_WIDTH, ...styles.card }}
+          >
+            <View style={{ padding: 6 }}>
+              {true && (
+                <Image
+                  source={loginGif}
+                  style={{ height: WIDTH / 3, width: WIDTH / 3 }}
+                />
+              )}
+            </View>
+            <Text style={styles.cardHead}>Galactic ID</Text>
 
-                <AnimatePresence exitBeforeEnter>
-                  {status == "INITIAL" && (
-                    <MText
-                      key={"initial"}
-                      from={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1000 }}
-                      style={styles.cardText}
-                    >
-                      Acquiring Biometric Information
-                    </MText>
-                  )}
-                  {status == "PENDING" && (
-                    <MText
-                      key="pending"
-                      from={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1000 }}
-                      style={styles.cardText}
-                    >
-                      Biometric Information acquired
-                    </MText>
-                  )}
-                  {status == "COMPLETED" && (
-                    <MText
-                      key="completed"
-                      from={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1000 }}
-                      style={styles.cardText}
-                    >
-                      Payment complete
-                    </MText>
-                  )}
-                </AnimatePresence>
-              </View>
-            </BlurViewCard>
-          {/* </View> */}
-          {/* </Modal.Body> */}
+            <AnimatePresence exitBeforeEnter>
+              {status == "INITIAL" && (
+                <MText
+                  key={"initial"}
+                  from={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1000 }}
+                  style={styles.cardText}
+                >
+                  Acquiring Biometric Information
+                </MText>
+              )}
+              {status == "PENDING" && (
+                <MText
+                  key="pending"
+                  from={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1000 }}
+                  style={styles.cardText}
+                >
+                  Biometric Information acquired
+                </MText>
+              )}
+              {status == "COMPLETED" && (
+                <MText
+                  key="completed"
+                  from={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1000 }}
+                  style={styles.cardText}
+                >
+                  Payment complete
+                </MText>
+              )}
+            </AnimatePresence>
+          </View>
+        </BlurViewCard>
+        {/* </View> */}
+        {/* </Modal.Body> */}
       </Modal>
     </>
   );

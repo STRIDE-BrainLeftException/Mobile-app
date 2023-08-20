@@ -108,15 +108,17 @@ const PackageSelector = () => {
               }}
               isOpen={open}
               onClose={() => setOpen(false)}
+              animationPreset="slide"
+              transparent={true}
             >
               <View style={{ width: 400, alignItems: "center" }}>
                 <BlurViewCard
-                  intensity={10}
-                  tint="light"
+                  intensity={60}
+                  tint="dark"
                   containerStyle={{
                     width: 400,
                     alignItems: "center",
-                    backgroundColor: "rgba(0,0,0,0.8)",
+                    // backgroundColor: "rgba(0,0,0,0.8)",
                   }}
                 >
                   <Modal.Content style={{ backgroundColor: "transparent" }}>

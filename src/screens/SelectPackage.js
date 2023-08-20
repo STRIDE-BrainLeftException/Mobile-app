@@ -12,7 +12,7 @@ const SelectPackage = () => {
       style={{ flex: 1, resizeMode: "cover" }}
     >
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text
+        {/* <Text
           style={{
             fontSize: 32,
             lineHeight: 35.2,
@@ -24,7 +24,7 @@ const SelectPackage = () => {
           }}
         >
           Select Your Package
-        </Text>
+        </Text> */}
         <PackageSelector />
       </View>
     </View>

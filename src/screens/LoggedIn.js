@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12,
     tintColor: "dark",
-    backgroundColor: "rgba(0,0,0,0.8)",
+    // backgroundColor: "rgba(0,0,0,0.8)",
   },
   listItems: {
     padding: 8,
@@ -150,13 +150,18 @@ const LoggedIn = () => {
             duration: 500,
           }}
         >
-          <Modal isOpen={modalOpenLang} onClose={() => setOpenLang(false)}>
+          <Modal
+            isOpen={modalOpenLang}
+            onClose={() => setOpenLang(false)}
+            animationPreset="slide"
+            transparent={true}
+          >
             <Modal.Content
               maxWidth="400px"
               style={{ backgroundColor: "transparent" }}
             >
               {/* <Modal.Body> */}
-              <BlurView style={styles.listTextBox} intensity={5}>
+              <BlurView style={styles.listTextBox} intensity={50} tint="dark">
                 {languages.map((language) => (
                   <Text
                     key={language.data}
@@ -173,13 +178,18 @@ const LoggedIn = () => {
               {/* </Modal.Body> */}
             </Modal.Content>
           </Modal>
-          <Modal isOpen={modalOpenCurr} onClose={() => setOpenCurr(false)}>
+          <Modal
+            isOpen={modalOpenCurr}
+            onClose={() => setOpenCurr(false)}
+            animationPreset="slide"
+            transparent={true}
+          >
             <Modal.Content
               maxWidth="400px"
               style={{ backgroundColor: "transparent" }}
             >
               {/* <Modal.Body> */}
-              <BlurView style={styles.listTextBox} intensity={5}>
+              <BlurView style={styles.listTextBox} intensity={50} tint="dark">
                 {currencies.map((curr) => (
                   <Text
                     key={curr.data}
@@ -230,25 +240,24 @@ const LoggedIn = () => {
                         alignItems: "center",
                       }}
                     >
-                      <BlurView
-                        intensity={120}
-                        style={{ padding: 4, width: WIDTH * 0.7 }}
-                      >
-                        <HStack style={{ padding: 8 }} space={100}>
-                          <Text style={{ fontSize: 14, color: "#fff" }}>
-                            Language
-                          </Text>
-                          <HStack space={4}>
-                            <Text
-                              onPress={onPressLang}
-                              style={{ fontSize: 14, color: "#fff" }}
-                            >
-                              {lang}
+                      <TouchableOpacity onPress={onPressLang}>
+                        <BlurView
+                          intensity={120}
+                          style={{ padding: 4, width: WIDTH * 0.7 }}
+                        >
+                          <HStack style={{ padding: 8 }} space={100}>
+                            <Text style={{ fontSize: 14, color: "#fff" }}>
+                              Language
                             </Text>
-                            <ChevronRightIcon size={3} style={{ top: 4 }} />
+                            <HStack space={4}>
+                              <Text style={{ fontSize: 14, color: "#fff" }}>
+                                {lang}
+                              </Text>
+                              <ChevronRightIcon size={3} style={{ top: 4 }} />
+                            </HStack>
                           </HStack>
-                        </HStack>
-                      </BlurView>
+                        </BlurView>
+                      </TouchableOpacity>
                     </View>
                     <View style={{ padding: 6 }}></View>
                     <View
@@ -258,25 +267,24 @@ const LoggedIn = () => {
                         alignItems: "center",
                       }}
                     >
-                      <BlurView
-                        intensity={120}
-                        style={{ padding: 4, width: WIDTH * 0.7 }}
-                      >
-                        <HStack style={{ padding: 8 }} space={108}>
-                          <Text style={{ fontSize: 14, color: "#fff" }}>
-                            Currency
-                          </Text>
-                          <HStack space={4}>
-                            <Text
-                              onPress={onPressCurr}
-                              style={{ fontSize: 14, color: "#fff" }}
-                            >
-                              {currency}
+                      <TouchableOpacity onPress={onPressCurr}>
+                        <BlurView
+                          intensity={120}
+                          style={{ padding: 4, width: WIDTH * 0.7 }}
+                        >
+                          <HStack style={{ padding: 8 }} space={108}>
+                            <Text style={{ fontSize: 14, color: "#fff" }}>
+                              Currency
                             </Text>
-                            <ChevronRightIcon size={3} style={{ top: 4 }} />
+                            <HStack space={4}>
+                              <Text style={{ fontSize: 14, color: "#fff" }}>
+                                {currency}
+                              </Text>
+                              <ChevronRightIcon size={3} style={{ top: 4 }} />
+                            </HStack>
                           </HStack>
-                        </HStack>
-                      </BlurView>
+                        </BlurView>
+                      </TouchableOpacity>
                     </View>
                   </View>
                   <View style={{ padding: 6 }}></View>
@@ -289,7 +297,7 @@ const LoggedIn = () => {
                 style={{ padding: 8, width: "60%", paddingBottom: 18 }}
               >
                 <Checkbox
-                  colorScheme={"green"}
+                  colorScheme={"blue"}
                   onChange={() => setCheck(!check)}
                   top={1}
                 >
