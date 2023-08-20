@@ -1,6 +1,6 @@
 import { Dimensions } from "react-native";
 
-export const BASE_URL = "http://intergalactic-stride.com";
+export const BASE_URL = "http://192.168.1.82:8000";
 
 export const WIDTH = Dimensions.get("window").width;
 export const HEIGHT = Dimensions.get("window").height;

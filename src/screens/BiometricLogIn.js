@@ -21,6 +21,7 @@ import LottieView from "lottie-react-native";
 import loginGif from "../assets/animations/login.gif";
 import * as LocalAuthentication from "expo-local-authentication";
 import { getUniqueId } from "../utils/data";
+import login from "../utils/auth";
 
 const bg = require("../assets/images/Booking_BG.png");
 const styles = StyleSheet.create({
@@ -78,16 +79,16 @@ const BiometricLogIn = () => {
   useEffect(() => {
     getUniqueId().then((value) => {
       console.log({ uniqueId: value });
-      setId(value);
-    });
-    LocalAuthentication.authenticateAsync().then((result) => {
-      if (result.success == true) {
-        setScanned(true);
-        console.log({ result });
-        setTimeout(() => {
-          onConfirm();
-        }, 3000);
-      }
+      setId("C3B72561-5753-4C2E-8E69-4FCDF03E4B16");
+      LocalAuthentication.authenticateAsync().then(async (result) => {
+        if (result.success == true) {
+          setScanned(true);
+          console.log({ result, id });
+          login(id).then(() => {
+            onConfirm();
+          }, 3000);
+        }
+      });
     });
   }, []);
 

@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { LogBox, StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
@@ -50,9 +50,9 @@ function RootStack() {
   return (
     <ImageBackground style={{ flex: 1 }} source={bg}>
       <Stack.Navigator
-        // initialRouteName="onBoarding"
-        // initialRouteName="LuxuryTest"
         initialRouteName="onBoarding"
+        // initialRouteName="LuxuryTest"
+        // initialRouteName="LoggedIn"
         // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,
@@ -117,6 +117,7 @@ export default function App() {
   const sagaMiddleware = createSagaMiddleware();
 
   const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
+  LogBox.ignoreAllLogs();
 
   sagaMiddleware.run(rootSaga);
 
