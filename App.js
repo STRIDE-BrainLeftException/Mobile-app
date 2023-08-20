@@ -46,7 +46,7 @@ function RootStack() {
       <Stack.Navigator
         // initialRouteName="onBoarding"
         // initialRouteName="LuxuryTest"
-        initialRouteName="motionTypeTest"
+        initialRouteName="Home"
         // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,
