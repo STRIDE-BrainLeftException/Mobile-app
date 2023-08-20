@@ -28,6 +28,7 @@ import bg from "./../assets/images/login/loginScreenBG.png";
 import tempDP from "./../assets/images/login/loginScreenUser.png";
 import { useNavigation } from "@react-navigation/native";
 import { AnimatePresence, View as MotiView } from "moti";
+import { UiButton } from "../components/basic/UiButton";
 
 const styles = StyleSheet.create({
   container: {
@@ -120,10 +121,12 @@ const LoggedIn = () => {
 
   const pressContinue = () => {
     //To be implemented
-    setLoading(true);
-    setTimeout(() => {
-      navigation.navigate("Home");
-    }, 500);
+    if (check) {
+      setLoading(true);
+      setTimeout(() => {
+        navigation.navigate("Home");
+      }, 500);
+    }
   };
 
   useEffect(() => {
@@ -209,7 +212,7 @@ const LoggedIn = () => {
                     <Text
                       style={{ fontSize: 12, color: "#fff", paddingBottom: 8 }}
                     >
-                      {planet | galaxy}
+                      {planet} | {galaxy}
                     </Text>
                     <View style={{ padding: 6 }}></View>
                     <View
@@ -289,30 +292,7 @@ const LoggedIn = () => {
                 </Checkbox>
               </HStack>
 
-              <TouchableOpacity
-                style={{
-                  borderRadius: 26,
-                  overflow: "hidden",
-                  alignItems: "center",
-                }}
-                onPress={() => {
-                  if (check) {
-                    pressContinue();
-                  }
-                }}
-              >
-                <BlurView
-                  style={{
-                    padding: 12,
-                    width: WIDTH * 0.6,
-                    alignItems: "center",
-                  }}
-                >
-                  <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
-                    Continue
-                  </Text>
-                </BlurView>
-              </TouchableOpacity>
+              <UiButton label={"Continue"} onTap={pressContinue} />
             </View>
           </View>
         </MotiView>

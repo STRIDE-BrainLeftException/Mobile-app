@@ -229,7 +229,7 @@ const DateSelectScreen = () => {
         }}>
         <Text>Continue</Text>
       </UiButton> */}
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={[
                 styles.buttonContainer,
                 Object.keys(selected).length > 0
@@ -242,7 +242,20 @@ const DateSelectScreen = () => {
               }}
             >
               <Text style={styles.buttonText}>Continue</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <UiButton
+              label={"Continue"}
+              onTap={() => {
+                navigation.navigate("MotionSelect");
+              }}
+              disabled={Object.keys(selected).length === 0}
+              style={[
+                styles.buttonContainer,
+                Object.keys(selected).length > 0
+                  ? styles.buttonContainer
+                  : styles.disabledButton,
+              ]}
+            />
           </View>
         </VStack>
       </BottomSheet>

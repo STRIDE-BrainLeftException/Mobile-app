@@ -63,34 +63,7 @@ const BookingPageData = [
 ];
 
 const DeckBtn = ({ deckname, onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress}>
-      <View
-        style={{
-          width: 198.2,
-          height: 45.53,
-          borderRadius: 34,
-          borderWidth: 1,
-          borderColor: "rgba(151, 169, 246, 0.5)",
-          backgroundColor: "rgba(255, 255, 255, 0.2)",
-          alignSelf: "center",
-          paddingTop: 11,
-          paddingBottom: 11,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 15.32,
-            lineHeight: 19.82,
-            alignSelf: "center",
-            fontWeight: 300,
-          }}
-        >
-          {deckname}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+  return <UiButton onTap={onPress} label={deckname} />;
 };
 
 // console.log(BookingPageData[0].deck[0].deck_seats);

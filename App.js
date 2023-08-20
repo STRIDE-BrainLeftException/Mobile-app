@@ -24,6 +24,7 @@ import bg from "./src/assets/images/Booking_BG.png";
 import CancelFlow from "./src/screens/CancelFlow";
 import SelectPackage from "./src/screens/SelectPackage";
 import Checkout from "./src/screens/Checkout";
+import { UiButton } from "./src/components/basic/UiButton";
 
 const Stack = createStackNavigator();
 

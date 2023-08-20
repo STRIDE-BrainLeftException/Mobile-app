@@ -9,6 +9,7 @@ import { Image } from "react-native";
 import { WIDTH } from "../utils/constants";
 import { AnimatePresence, View as MViev, Text as MText } from "moti";
 import { useNavigation } from "@react-navigation/native";
+import { UiButton } from "./basic/UiButton";
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -78,14 +79,12 @@ export const PayWithGalacticId = () => {
 
   return (
     <>
-      <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={() => {
+      <UiButton
+        label={"Pay with Galactic ID"}
+        onTap={() => {
           setOpen(true);
         }}
-      >
-        <Text style={styles.buttonText}>Pay with Galactic ID</Text>
-      </TouchableOpacity>
+      />
 
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <Modal.Content>
