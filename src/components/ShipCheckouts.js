@@ -6,7 +6,8 @@ const ShipCheckouts = (data) => {
     <View
       style={{
         marginVertical: 10,
-      }}>
+      }}
+    >
       <BlurViewCard containerStyle={styles.blurCardStyles}>
         <View style={styles.cardContainer}>
           <Image
@@ -15,7 +16,7 @@ const ShipCheckouts = (data) => {
           />
           <View style={styles.textContainer}>
             <Text style={styles.shipName}>{data.name}</Text>
-            <Text style={styles.seatID}>Seat ID : {data.seatID}</Text>
+            <Text style={styles.seatID}>QTY : {data.quantity}</Text>
             <Text style={styles.seatDescription}>{data.description}</Text>
             <Text style={styles.rate}>
               Rate per person:

@@ -1,34 +1,37 @@
 import React from "react";
 import { Text } from "react-native";
-const CheckoutDetailsCard = () => {
+const CheckoutDetailsCard = ({ planetName, galaxyName, description }) => {
   return (
     <Text
       style={{
         color: "white",
         textAlign: "center",
         paddingHorizontal: 20,
-      }}>
+      }}
+    >
       <Text
         style={{
           fontSize: 32,
           fontWeight: "bold",
-        }}>
-        Volrizen 30A{"\n"}
+        }}
+      >
+        {planetName + "\n"}
       </Text>
 
       <Text
         style={{
           fontSize: 12,
-        }}>
-        Albarexperia | 3000LY{"\n"}
+        }}
+      >
+        {galaxyName + "\n"}
       </Text>
       <Text
         style={{
           fontSize: 12,
           color: "#3DC5FF",
-        }}>
-        Ancient forests, teeming waters, and untamed coasts host creatures
-        reminiscent of Earth's past.{"\n"}
+        }}
+      >
+        {description + "\n"}
       </Text>
     </Text>
   );
