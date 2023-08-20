@@ -24,6 +24,7 @@ export const UiButton = ({
         onPress={() => {
           onTap();
         }}
+        disabled={disabled}
       >
         <BlurView
           style={{

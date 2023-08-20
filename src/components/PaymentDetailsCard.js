@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../utils/colors";
 import { PayWithGalacticId } from "./PayWithGalacticId";
-const PaymentDetailsCard = (data) => {
+const PaymentDetailsCard = ({ disablePay, ...data }) => {
   return (
     <View
       style={{
@@ -28,7 +28,7 @@ const PaymentDetailsCard = (data) => {
       {/* <TouchableOpacity style={styles.buttonContainer} onPress>
         <Text style={styles.buttonText}>Pay with Galactic ID</Text>
       </TouchableOpacity> */}
-      <PayWithGalacticId />
+      {!disablePay && <PayWithGalacticId />}
     </View>
   );
 };
