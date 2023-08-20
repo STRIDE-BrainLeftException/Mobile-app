@@ -22,6 +22,7 @@ import LoggedIn from "./src/screens/LoggedIn";
 import { ImageBackground } from "react-native";
 import bg from "./src/assets/images/Booking_BG.png";
 import CancelFlow from "./src/screens/CancelFlow";
+import Checkout from "./src/screens/Checkout";
 
 const Stack = createStackNavigator();
 
@@ -73,11 +74,7 @@ function RootStack() {
           component={LoggedIn}
           options={{ animationEnabled: false }}
         />
-        <Stack.Screen
-          name="PersonTest"
-          component={PersonSelectScreen}
-          options={{ animationEnabled: false }}
-        />
+
       </Stack.Navigator>
     </ImageBackground>
 

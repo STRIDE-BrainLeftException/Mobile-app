@@ -45,11 +45,11 @@ const speciesList = [
 //Number of cabins is given as input from cabin select page
 //User can select only upto number of cabins
 const PersonSelectScreen = ({
-  numberOfCabins,
   transportationMode = "Hyper Stride",
   shipName = "Star Dust C90",
 }) => {
   //number of tickets available
+  const numberOfCabins = 3;
   const [available, setAvailable] = useState(numberOfCabins);
   const [values, setValues] = useState({
     "Grown-Human": 0,
@@ -58,6 +58,8 @@ const PersonSelectScreen = ({
     "Brannigan-Adult": 0,
     "Brannigan-Young": 0,
   });
+
+  const navigation = useNavigation();
 
   const changeVal = (species, newVal) => {
     const newDict = values;
@@ -72,9 +74,10 @@ const PersonSelectScreen = ({
     setValues(newDict);
   };
 
-  const pressContinue = () => {};
+  const pressContinue = () => {
+    navigation.navigate("PackageSelect");
+  };
 
-  const navigation = useNavigation();
   return (
     <View flex={1} alignItems={"center"} justifyContent={"center"}>
       <ImageBackground
@@ -193,9 +196,9 @@ const PersonSelectScreen = ({
                 alignItems: "center",
               }}
               onPress={() => {
-                if (available > 0) {
-                  pressContinue();
-                }
+                // if (available > 0) {
+                pressContinue();
+                // }
               }}
             >
               <BlurView

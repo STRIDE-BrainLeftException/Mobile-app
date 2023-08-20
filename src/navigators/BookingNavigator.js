@@ -19,6 +19,7 @@ import PersonSelectScreen from "../screens/PersonSelectScreen";
 import Checkout from "../screens/Checkout";
 import { NavigationHeader } from "../components/basic/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
+import PostCheckoutScreen from "../screens/PostCheckout";
 
 const Stack = createStackNavigator();
 
@@ -27,42 +28,30 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
     current.progress.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
-      extrapolate: "clamp",
+      extrapolate: 'clamp',
     }),
     next
       ? next.progress.interpolate({
           inputRange: [0, 1],
           outputRange: [0, 1],
-          extrapolate: "clamp",
+          extrapolate: 'clamp',
         })
       : 0
   );
 
   return {
     cardStyle: {
-      opacity: Animated.multiply(
-        progress.interpolate({
-          inputRange: [0, 1, 2],
-          outputRange: [
-            0, // Focused, but offscreen in the beginning
-            1, // Fully focused
-            0, // Fully unfocused
-          ],
-          extrapolate: "clamp",
-        }),
-        inverted
-      ),
       transform: [
         {
-          scale: Animated.multiply(
+          translateX: Animated.multiply(
             progress.interpolate({
               inputRange: [0, 1, 2],
               outputRange: [
-                0, // Focused, but offscreen in the beginning
-                1, // Fully focused
-                2, // Fully unfocused
+                screen.width, // Focused, but offscreen in the beginning
+                0, // Fully focused
+                -screen.width, // Fully unfocused
               ],
-              extrapolate: "clamp",
+              extrapolate: 'clamp',
             }),
             inverted
           ),
@@ -99,6 +88,7 @@ function BookingNavigator({ jumpTo }) {
           // headerMode: "screen",
           cardStyle: { backgroundColor: "transparent" },
           header: CustomHeader,
+          cardStyleInterpolator: forSlide
         }}
       >
         <Stack.Screen
@@ -125,7 +115,7 @@ function BookingNavigator({ jumpTo }) {
         <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
         <Stack.Screen name="PackageSelect" component={SelectPackage} />
         <Stack.Screen name="Checkout" component={Checkout} />
-        {/* booking details */}
+        <Stack.Screen name="Confirmation" component={PostCheckoutScreen} />
       </Stack.Navigator>
       {/* </SafeAreaView> */}
     </View>
