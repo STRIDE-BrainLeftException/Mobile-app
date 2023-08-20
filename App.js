@@ -74,18 +74,13 @@ function RootStack() {
           component={LoggedIn}
           options={{ animationEnabled: false }}
         />
-         <Stack.Screen
-          name="checkoutTest"
-          component={Checkout}
-          options={{ animationEnabled: false }}
-        />
+
       </Stack.Navigator>
     </ImageBackground>
-    // <ImageBackground style={{ flex: 1 }} source={bg}>
-    //   <View alignItems={"center"}>
-    //     <CancelFlow />
-    //   </View>
-    // </ImageBackground>
+
+    // <View alignItems={"center"}>
+    //   <PersonSelectScreen numberOfCabins={5} />
+    // </View>
   );
 }
 
