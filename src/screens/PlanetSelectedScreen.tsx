@@ -621,9 +621,9 @@ const Planet_Details_Section = ({ selectedStation }) => {
         selectedStation={selectedStation}
       />
       {selectedStation ? (
-        <UiButton onPress={onContinue}>
-          <Text>Continue</Text>
-        </UiButton>
+        <UiButton label={'Continue'} onTap={onContinue}/>
+          
+        
       ) : (
         <Text flex={1} textAlign={"center"} mt={5}>
           Select a station to continue to next screen

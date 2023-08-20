@@ -15,6 +15,7 @@ import { View as MView } from "moti";
 import COLORS from "../utils/colors";
 import { useNavigation } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
+import { UiButton } from "../components/basic/UiButton";
 
 const cardDataArray = [
   {
@@ -170,11 +171,7 @@ const DescriptionText = ({ description }) => {
 };
 
 const SelectAndContinueBtn = ({ onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-      <Text style={styles.buttonText}>Select & Continue</Text>
-    </TouchableOpacity>
-  );
+  return <UiButton label={"Select and Continue"} onTap={onPress} />;
 };
 
 const BlurViewCardConents = ({
