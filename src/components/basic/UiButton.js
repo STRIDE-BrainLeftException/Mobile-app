@@ -6,12 +6,18 @@ import { WIDTH } from "../../utils/constants";
 import { Text } from "react-native";
 
 //Styles appliable to view
-export const UiButton = ({ label = "Continue", onTap, styles = {} }) => {
+export const UiButton = ({
+  label = "Continue",
+  onTap,
+  styles = {},
+  size = 8,
+}) => {
   return (
     <View style={{ alignItems: "center", ...styles }}>
+      <View height={5} />
       <TouchableOpacity
         style={{
-          borderRadius: 26,
+          borderRadius: size * 2,
           overflow: "hidden",
           alignItems: "center",
         }}
@@ -21,12 +27,12 @@ export const UiButton = ({ label = "Continue", onTap, styles = {} }) => {
       >
         <BlurView
           style={{
-            padding: 12,
+            padding: size - 1,
             width: WIDTH * 0.6,
             alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
+          <Text style={{ fontSize: 16, color: "#fff", padding: 2 }}>
             {label}
           </Text>
         </BlurView>
