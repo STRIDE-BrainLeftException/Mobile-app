@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   },
   longCard: { alignItems: "center", justifyContent: "space-evenly" },
   shortCard: { alignItems: "center" },
-  shortCardText: { fontSize: 10, fontWeight: "500", textAlign: "center" },
+  shortCardText: { fontSize: 13, fontWeight: "500", textAlign: "center" },
   image: {
     width: "100%",
     height: "100%",
@@ -156,14 +156,13 @@ const styles = StyleSheet.create({
   },
   cardH: {
     width: "100%",
-
     alignItems: "center",
     justifyContent: "space-evenly",
     padding: 15,
   },
   servicesText: { fontSize: 16, paddingBottom: 5, fontWeight: "500" },
-  description: { fontSize: 9, lineHeight: 10 },
-  serviceImage: { width: 100, height: 100, borderRadius: 25 },
+  description: { fontSize: 12, lineHeight: 15 },
+  serviceImage: { width: 150, height: 150, borderRadius: 25 },
   page: {
     paddingHorizontal: 20,
     alignItems: "center",

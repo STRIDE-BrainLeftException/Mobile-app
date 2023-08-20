@@ -30,6 +30,8 @@ import ActivityPage from "./src/screens/ActivityPage";
 import { createStoreHook, Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { applyMiddleware, createStore } from "redux";
+import appReducer from "./src/redux/reducers/appReducer";
+import rootSaga from "./src/redux/sagas/rootSagas";
 
 const Stack = createStackNavigator();
 
@@ -50,7 +52,7 @@ function RootStack() {
       <Stack.Navigator
         // initialRouteName="onBoarding"
         // initialRouteName="LuxuryTest"
-        initialRouteName="Home"
+        initialRouteName="onBoarding"
         // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,

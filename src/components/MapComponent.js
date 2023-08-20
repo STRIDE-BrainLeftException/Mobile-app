@@ -125,8 +125,6 @@ const MapComponent = (props) => {
           style={{
             height: p.size,
             width: p.size,
-            margin: Math.round(Math.random() * 10 + 10),
-            // backgroundColor: "#00ff00",
             position: "absolute",
             bottom: convertToDistanceFromEdge(p).y,
             right: convertToDistanceFromEdge(p).x,
@@ -146,6 +144,7 @@ const MapComponent = (props) => {
           }}
         >
           <TouchableOpacity
+            style={{ height: p.size, width: p.size }}
             onPress={() => {
               if (translateY.value == -p.x && translateX.value == -p.y) {
                 setTimeout(() => {
@@ -190,7 +189,7 @@ const MapComponent = (props) => {
               source={p.image}
             >
               <BlurViewCard
-              intensity={10}
+                intensity={10}
                 containerStyle={{
                   backgroundColor: "rgba(0,0,0,0.5)",
                   borderWidth: 0,
