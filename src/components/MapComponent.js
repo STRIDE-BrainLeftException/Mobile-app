@@ -46,7 +46,7 @@ const MapComponent = (props) => {
     galaxies: [
       {
         id: 2,
-        name: "fndpaf",
+        name: "Albarexperia",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-1.png"),
         x: -250,
         y: -150,
@@ -54,7 +54,7 @@ const MapComponent = (props) => {
       },
       {
         id: 3,
-        name: "fndpaf",
+        name: "Ayuzorius NE",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-4.png"),
         x: 200,
         y: -250,
@@ -62,7 +62,7 @@ const MapComponent = (props) => {
       },
       {
         id: 4,
-        name: "fndpaf",
+        name: "Zengilome",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-3.png"),
         x: -150,
         y: 200,
@@ -70,7 +70,7 @@ const MapComponent = (props) => {
       },
       {
         id: 5,
-        name: "fndpaf",
+        name: "Milky Way",
         image: require("../assets/images/SearchScreen/galaxies/galaxy-2.png"),
         x: 0,
         y: 0,
@@ -80,7 +80,7 @@ const MapComponent = (props) => {
     systems: [
       {
         id: 2,
-        name: "fndpaf",
+        name: "Kripzen 12",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_1.png"),
         x: -250,
         y: -150,
@@ -88,7 +88,7 @@ const MapComponent = (props) => {
       },
       {
         id: 3,
-        name: "fndpaf",
+        name: "Wekryn 36",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_4.png"),
         x: 200,
         y: -250,
@@ -96,7 +96,7 @@ const MapComponent = (props) => {
       },
       {
         id: 4,
-        name: "fndpaf",
+        name: "Planosy Ni",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_2.png"),
         x: -150,
         y: 200,
@@ -104,7 +104,7 @@ const MapComponent = (props) => {
       },
       {
         id: 5,
-        name: "fndpaf",
+        name: "Albaro B4",
         image: require("../assets/images/SearchScreen/planetory_systems/planetorySys_3.png"),
         x: 0,
         y: 0,
