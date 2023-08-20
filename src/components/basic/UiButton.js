@@ -12,6 +12,7 @@ export const UiButton = ({
   styles = {},
   disabled = false,
   size = 8,
+  disabled = false,
 }) => {
   return (
     <View style={{ alignItems: "center", ...styles }}>

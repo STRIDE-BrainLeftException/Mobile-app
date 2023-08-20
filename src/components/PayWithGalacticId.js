@@ -10,6 +10,7 @@ import { WIDTH } from "../utils/constants";
 import { AnimatePresence, View as MViev, Text as MText } from "moti";
 import { useNavigation } from "@react-navigation/native";
 import { UiButton } from "./basic/UiButton";
+import BlurViewCard from "./basic/BlurViewCard";
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -70,7 +71,7 @@ export const PayWithGalacticId = () => {
           setStatus("COMPLETED");
           setTimeout(() => {
             setOpen(false);
-            navigation.navigate("Confirmation");
+            // navigation.navigate("Confirmation");
           }, 2000);
         }, 3000);
       }, 3000);
@@ -87,10 +88,9 @@ export const PayWithGalacticId = () => {
       />
 
       <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <Modal.Content>
           {/* <Modal.Body> */}
-          <View style={styles.outerCard}>
-            <BlurView intensity={70}>
+          {/* <View style={styles.outerCard}> */}
+            <BlurViewCard tint="dark" containerStyle={styles.outerCard}>
               {/* <View style={styles.card}> */}
 
               <View
@@ -146,10 +146,9 @@ export const PayWithGalacticId = () => {
                   )}
                 </AnimatePresence>
               </View>
-            </BlurView>
-          </View>
+            </BlurViewCard>
+          {/* </View> */}
           {/* </Modal.Body> */}
-        </Modal.Content>
       </Modal>
     </>
   );

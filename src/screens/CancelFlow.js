@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Checkbox } from "native-base";
+import { Button, Checkbox, CloseIcon } from "native-base";
 import { FormControl } from "native-base";
 import { Input } from "native-base";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 // import MapComponent from '../components/MapComponent';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Modal as RNModal } from "react-native";
 
 // const PlaceholderImage = require('./../../assets/splash.png');
 import PlaceholderImage from "../assets/images/bookingProcessBackground.png";
@@ -27,6 +20,8 @@ import tempDP from "./../assets/images/login/loginScreenUser.png";
 import { useNavigation } from "@react-navigation/native";
 import { HEIGHT } from "../constants/styles";
 import { UiButton } from "../components/basic/UiButton";
+import { UiIconButton } from "../components/basic/UiIconButton";
+import BlurViewCard from "../components/basic/BlurViewCard";
 
 const styles = StyleSheet.create({
   TextBox: {
@@ -40,18 +35,35 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
 });
-const CancelFlow = ({ open = true, setOpen }) => {
-  const onPressCancel = () => {};
+const CancelFlow = ({ jumpTo }) => {
+  const [open, setOpen] = useState(false);
+  const onPressCancel = () => {
+    setOpen(false);
+    jumpTo("home");
+  };
   const onPressResume = () => {
     setOpen(false);
   };
   return (
-    <Modal isOpen={open}>
-      <Modal.Content>
+    <>
+      <UiIconButton icon={<CloseIcon />} onPress={() => setOpen(true)} />
+      <Modal
+        isOpen={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        animationPreset="slide"
+        transparent={true}
+      >
+        {/* <Modal.Content> */}
         {/* <Modal.Body> */}
-        <BlurView style={styles.TextBox}>
+
+        <BlurViewCard blurViewStyles={styles.TextBox} tint={"dark"}>
           <View height={10} />
-          <Text style={styles.Items}> Are you sure you want to cancel?</Text>
+          <Text style={[styles.Items, { fontWeight: "bold" }]}>
+            Are you sure you want to cancel the booking?
+          </Text>
+          <Text style={styles.Items}>Any changes will be discarded</Text>
           <HStack
             space={12}
             alignItems={"center"}
@@ -63,26 +75,27 @@ const CancelFlow = ({ open = true, setOpen }) => {
               borderRadius={8}
               width={"30%"}
               variant={"subtle"}
-              textAlign={"center"}
-              colorScheme="secondary"
-              onPress={onPressCancel}
+              onPress={onPressResume}
             >
-              Cancel
+              No
             </Button>
             <Button
               rounded
               borderRadius={8}
               width={"30%"}
               variant={"subtle"}
-              onPress={onPressResume}
+              textAlign={"center"}
+              colorScheme="secondary"
+              onPress={onPressCancel}
             >
-              Resume
+              Yes
             </Button>
           </HStack>
-        </BlurView>
+        </BlurViewCard>
         {/* </Modal.Body> */}
-      </Modal.Content>
-    </Modal>
+        {/* </Modal.Content> */}
+      </Modal>
+    </>
   );
 };
 

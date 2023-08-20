@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     backgroundColor: "transparent",
-    borderColor: "rgba(255,255,255,0.2)",
+    borderColor: "rgba(255,255,255,0.1)",
     borderWidth: 1,
     width: "90%",
     alignSelf: "center",

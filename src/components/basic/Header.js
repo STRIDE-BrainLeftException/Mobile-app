@@ -6,7 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView, TouchableOpacity } from "react-native";
 import EfficientBlurViewCard from "./EfficientBlurViewCard";
 
-export const Header = ({ title = "Change title", onBackPress = null }) => {
+export const Header = ({
+  title = "Change title",
+  onBackPress = null,
+  rightIconButton,
+}) => {
   const navigation = useNavigation();
   const onPress = () => {
     if (onBackPress) {
@@ -53,16 +57,20 @@ export const Header = ({ title = "Change title", onBackPress = null }) => {
           </Text>
         </HStack>
 
-        <HStack flex={0.2}></HStack>
+        <HStack flex={0.2}>{rightIconButton}</HStack>
       </HStack>
     </BlurViewCard>
     // </SafeAreaView>
   );
 };
 
-export const NavigationHeader = ({ props, mapping }) => {
+export const NavigationHeader = ({
+  props,
+  mapping,
+  rightIconButton = null,
+}) => {
   const name = props.route.name;
-  return <Header title={mapping[name]} />;
+  return <Header title={mapping[name]} rightIconButton={rightIconButton} />;
 };
 
 // const CustomHeader = ({ route, ...props }) => {

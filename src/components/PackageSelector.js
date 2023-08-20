@@ -7,6 +7,7 @@ import { HStack, Modal, VStack } from "native-base";
 import { BlurView } from "expo-blur";
 import { Image } from "react-native";
 import { WIDTH } from "../utils/constants";
+import BlurViewCard from "./basic/BlurViewCard";
 const PackageSelector = () => {
   const packages = [
     {
@@ -84,6 +85,8 @@ const PackageSelector = () => {
 
   console.log("PACKAGESELECT data", { data });
 
+  const intensity = 30;
+
   return (
     <View style={styles.pakageSelectorStyle}>
       {/* <Text>Testing the pakage selector card</Text> */}
@@ -107,68 +110,87 @@ const PackageSelector = () => {
               onClose={() => setOpen(false)}
             >
               <View style={{ width: 400, alignItems: "center" }}>
-                <Modal.Content>
-                  <Modal.Header>
-                    <HStack style={{ alignItems: "center" }} space={5}>
-                      <Image
-                        style={{ width: 90, height: 90, borderRadius: 20 }}
-                        source={p.image}
-                      />
-                      <Text style={{ color: "#fff", fontSize: 20 }}>
-                        {p.pkg}
-                      </Text>
-                    </HStack>
+                <BlurViewCard
+                  intensity={10}
+                  tint="light"
+                  containerStyle={{
+                    width: 400,
+                    alignItems: "center",
+                    backgroundColor: "rgba(0,0,0,0.8)",
+                  }}
+                >
+                  <Modal.Content style={{ backgroundColor: "transparent" }}>
+                    <Modal.Header style={{ backgroundColor: "transparent" }}>
+                      <HStack style={{ alignItems: "center" }} space={5}>
+                        <Image
+                          style={{ width: 90, height: 90, borderRadius: 20 }}
+                          source={p.image}
+                        />
+                        <Text style={{ color: "#fff", fontSize: 20 }}>
+                          {p.pkg}
+                        </Text>
+                      </HStack>
 
-                    <Modal.CloseButton />
-                  </Modal.Header>
-                  {/* <Modal.Body> */}
-                  <View style={{ padding: 10 }}>
-                    <Text
+                      <Modal.CloseButton />
+                    </Modal.Header>
+                    {/* <Modal.Body> */}
+                    <View style={{ padding: 10 }}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          fontWeight: "500",
+                          color: "#fff",
+                        }}
+                      >
+                        Benefits:
+                      </Text>
+                      <View style={{}}>
+                        {p.benefits.map((benefit) => {
+                          return (
+                            <Text
+                              style={{
+                                color: "#fff",
+                                fontSize: 12,
+                                padding: 3,
+                              }}
+                            >
+                              - {benefit.b}
+                            </Text>
+                          );
+                        })}
+                        <View height={3} />
+                      </View>
+                    </View>
+
+                    {/* </Modal.Body> */}
+                    <Modal.Footer
                       style={{
-                        fontSize: 18,
-                        fontWeight: "500",
-                        color: "#fff",
+                        justifyContent: "center",
+                        backgroundColor: "transparent",
                       }}
                     >
-                      Benefits:
-                    </Text>
-                    <View style={{}}>
-                      {p.benefits.map((benefit) => {
-                        return (
+                      <HStack style={{ alignItems: "center" }} space={7}>
+                        <Text style={{ color: "#fff", fontSize: 18 }}>
+                          Rate per Person{" "}
+                        </Text>
+                        <VStack style={{ alignItems: "center" }}>
                           <Text
-                            style={{ color: "#fff", fontSize: 12, padding: 3 }}
+                            style={{
+                              color: "#1DBBFF",
+                              fontSize: 18,
+                              fontWeight: "500",
+                            }}
                           >
-                            - {benefit.b}
+                            {p.price}Ñ
                           </Text>
-                        );
-                      })}
-                      <View height={3} />
-                    </View>
-                  </View>
-
-                  {/* </Modal.Body> */}
-                  <Modal.Footer style={{ justifyContent: "center" }}>
-                    <HStack style={{ alignItems: "center" }} space={7}>
-                      <Text style={{ color: "#fff", fontSize: 18 }}>
-                        Rate per Person{" "}
-                      </Text>
-                      <VStack style={{ alignItems: "center" }}>
-                        <Text
-                          style={{
-                            color: "#1DBBFF",
-                            fontSize: 18,
-                            fontWeight: "500",
-                          }}
-                        >
-                          {p.price}Ñ
-                        </Text>
-                        <Text style={{ color: "#fff", fontSize: 10 }}>
-                          per Light-Year
-                        </Text>
-                      </VStack>
-                    </HStack>
-                  </Modal.Footer>
-                </Modal.Content>
+                          <Text style={{ color: "#fff", fontSize: 10 }}>
+                            per Light-Year
+                          </Text>
+                        </VStack>
+                      </HStack>
+                    </Modal.Footer>
+                  </Modal.Content>
+                </BlurViewCard>
               </View>
             </Modal>
             <PackageBlurViewCard
