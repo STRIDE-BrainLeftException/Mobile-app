@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { GET_PRICES_FETCH, GET_PRICES_SUCCESS } from "../actions";
 import { BASE_URL } from "../../utils/constants";
+import { authFetch } from "../../utils/fetch";
 
 //required params
 // {
@@ -13,7 +14,7 @@ import { BASE_URL } from "../../utils/constants";
 
 function pricesFetch(params) {
   console.log("prices fetch called");
-  return fetch(`http://${BASE_URL}/api/price`, params).then((response) => {
+  return authFetch(`/api/price`, "POST", params).then((response) => {
     const data = response.json();
     return data;
   });
