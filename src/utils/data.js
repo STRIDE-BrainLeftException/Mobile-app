@@ -15,7 +15,7 @@ export const getUniqueId = async () => {
 export const PLANETS = [
   {
     id: 1,
-    name: "fndpaf",
+    name: "Volrizen 30A",
     image: require("../assets/images/SearchScreen/planets/planet_1.png"),
     x: 200,
     y: 250,
@@ -23,7 +23,7 @@ export const PLANETS = [
   },
   {
     id: 2,
-    name: "fndpaf",
+    name: "Kelton Q",
     image: require("../assets/images/SearchScreen/planets/planet_3.png"),
     x: -250,
     y: -150,
@@ -31,7 +31,7 @@ export const PLANETS = [
   },
   {
     id: 3,
-    name: "fndpaf",
+    name: "Aldari",
     image: require("../assets/images/SearchScreen/planets/planet_4.png"),
     x: 200,
     y: -250,
@@ -39,7 +39,7 @@ export const PLANETS = [
   },
   {
     id: 4,
-    name: "fndpaf",
+    name: "Wuxon",
     image: require("../assets/images/SearchScreen/planets/planet_5.png"),
     x: -150,
     y: 200,
@@ -47,7 +47,7 @@ export const PLANETS = [
   },
   {
     id: 5,
-    name: "fndpaf",
+    name: "Nueo",
     image: require("../assets/images/SearchScreen/planets/planet_6.png"),
     x: 0,
     y: 0,
