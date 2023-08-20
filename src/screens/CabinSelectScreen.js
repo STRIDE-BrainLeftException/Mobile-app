@@ -125,7 +125,7 @@ const CabinBookingComponents = ({ bookingdata }) => {
     >
       <View style={styles.container}>
         <View style={styles.blurViewContainer} tint={"dark"} />
-        <View style={{ height: HEIGHT * 0.4, justifyContent: "flex-end" }}>
+        <View style={{ height: HEIGHT * 0.3, justifyContent: "flex-end" }}>
           <Image
             alt={" "}
             source={bookingdata[0].cabinImagePath}
@@ -139,7 +139,7 @@ const CabinBookingComponents = ({ bookingdata }) => {
           }}
           tint={"dark"}
         > */}
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingHorizontal: 80 }}>
           <View style={[styles.textBox]}>
             <Text style={{ color: "rgba(61, 197, 255, 1)" }}>
               {bookingdata[0].motionType}
@@ -245,9 +245,9 @@ const CabinSelectScreen = () => {
 
 const styles = StyleSheet.create({
   blurViewContainer: {
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: "rgba(0,0,0,0.5)",
     position: "absolute",
-    top: HEIGHT * 0.35,
+    top: HEIGHT * 0.25,
     // bottom: 0,
     left: 0,
     right: 0,
@@ -273,6 +273,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     position: "relative",
+    width: "100%",
   },
   bigContainer: {
     flex: 1,

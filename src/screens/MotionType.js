@@ -229,7 +229,7 @@ const BlurViewCardConents = ({
             <>
               <HiddenText hidden_description={hidden_description} />
               <SelectAndContinueBtn onPress={handleButtonPress} />
-              <Separator seperatorStyle={styles.customSeperatorStyle} />
+              {/* <Separator seperatorStyle={styles.customSeperatorStyle} /> */}
             </>
           )}
         </TouchableOpacity>
@@ -346,6 +346,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     padding: 10,
+    zIndex: 2,
   },
   buttonText: {
     color: "rgba(255, 255, 255, 1)",

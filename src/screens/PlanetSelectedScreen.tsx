@@ -639,6 +639,7 @@ const PlanetSelectedScreen = ({ route }) => {
   const planet = PLANETS.find((p) => p.id == route?.params?.planet?.id);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [selectedStation, setSelectedStation] = useState();
+  const [show, setShow] = useState(false);
 
   // variables
   const snapPoints = useMemo(() => ["60%", "90%"], []);
@@ -646,6 +647,12 @@ const PlanetSelectedScreen = ({ route }) => {
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
     // console.log("handleSheetChanges", index);
+  }, []);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 500);
   }, []);
 
   return (
@@ -663,59 +670,61 @@ const PlanetSelectedScreen = ({ route }) => {
           setSelectedStation={setSelectedStation}
         />
       </View>
-      <BottomSheet
-        handleIndicatorStyle={{ backgroundColor: "white", width: 60 }}
-        ref={bottomSheetRef}
-        index={0}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-        style={{ backgroundColor: "transparent" }}
-        // containerStyle={{backgroundColor: 'red'}}
-        backgroundStyle={{ backgroundColor: "transparent" }}
-        backgroundComponent={({ style }) => (
-          <View style={[styles.contentContainer, style]}>
-            <BlurView
-              intensity={50}
-              tint="dark"
-              style={[
-                { flex: 1, width: "100%", borderRadius: BORDER_RADIUS },
-                style,
-              ]}
-            />
-          </View>
-        )}
-      >
-        {/* <BottomSheetScrollView> */}
-        {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9.1].map((i) => {
+      {show && (
+        <BottomSheet
+          handleIndicatorStyle={{ backgroundColor: "white", width: 60 }}
+          ref={bottomSheetRef}
+          index={0}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+          style={{ backgroundColor: "transparent" }}
+          // containerStyle={{backgroundColor: 'red'}}
+          backgroundStyle={{ backgroundColor: "transparent" }}
+          backgroundComponent={({ style }) => (
+            <View style={[styles.contentContainer, style]}>
+              <BlurView
+                intensity={50}
+                tint="dark"
+                style={[
+                  { flex: 1, width: "100%", borderRadius: BORDER_RADIUS },
+                  style,
+                ]}
+              />
+            </View>
+          )}
+        >
+          {/* <BottomSheetScrollView> */}
+          {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9.1].map((i) => {
             return (
               <View key={i} style={{ height: 200, width: "90%" }}>
                 <Text>{i}</Text>
               </View>
             );
           })} */}
-        {/* <BlurView style={{ flex: 1, width: "100%" }}> */}
-        {/* <Text>Awesome 🎉</Text> */}
-        {/* </BottomSheetScrollView> */}
-        {/* </BlurView> */}
-        {selectedStation ? (
-          <PlanetSelectedTitleContainer
-            selectedStation={selectedStation}
-            setSelectedStation={setSelectedStation}
-            stations={stationDetailsArrayData}
-            stationName={selectedStation?.stationName}
-            subStationName={selectedStation?.subStationName}
-            content={selectedStation?.content}
-            textComponents={selectedStation?.textComponents}
-          />
-        ) : (
-          <TitleContainer
-            stationName={planetArrayData[0].stationName}
-            subStationName={planetArrayData[0].subStationName}
-            content={planetArrayData[0].content}
-          />
-        )}
-        <Planet_Details_Section selectedStation={selectedStation} />
-      </BottomSheet>
+          {/* <BlurView style={{ flex: 1, width: "100%" }}> */}
+          {/* <Text>Awesome 🎉</Text> */}
+          {/* </BottomSheetScrollView> */}
+          {/* </BlurView> */}
+          {selectedStation ? (
+            <PlanetSelectedTitleContainer
+              selectedStation={selectedStation}
+              setSelectedStation={setSelectedStation}
+              stations={stationDetailsArrayData}
+              stationName={selectedStation?.stationName}
+              subStationName={selectedStation?.subStationName}
+              content={selectedStation?.content}
+              textComponents={selectedStation?.textComponents}
+            />
+          ) : (
+            <TitleContainer
+              stationName={planetArrayData[0].stationName}
+              subStationName={planetArrayData[0].subStationName}
+              content={planetArrayData[0].content}
+            />
+          )}
+          <Planet_Details_Section selectedStation={selectedStation} />
+        </BottomSheet>
+      )}
     </ImageBackground>
   );
 };

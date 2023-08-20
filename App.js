@@ -23,6 +23,7 @@ import { ImageBackground } from "react-native";
 import bg from "./src/assets/images/Booking_BG.png";
 import CancelFlow from "./src/screens/CancelFlow";
 import SelectPackage from "./src/screens/SelectPackage";
+import Checkout from "./src/screens/Checkout";
 
 const Stack = createStackNavigator();
 
@@ -44,7 +45,7 @@ function RootStack() {
         // initialRouteName="onBoarding"
         // initialRouteName="LuxuryTest"
         initialRouteName="Home"
-        // initialRouteName="LoggedIn"
+        // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,
           cardStyle: { backgroundColor: "transparent" },
@@ -80,13 +81,17 @@ function RootStack() {
           component={SelectPackage}
           options={{ animationEnabled: false }}
         />
+        <Stack.Screen
+          name="checkoutTest"
+          component={Checkout}
+          options={{ animationEnabled: false }}
+        />
       </Stack.Navigator>
     </ImageBackground>
-    // <ImageBackground style={{ flex: 1 }} source={bg}>
-    //   <View alignItems={"center"}>
-    //     <CancelFlow />
-    //   </View>
-    // </ImageBackground>
+
+    // <View alignItems={"center"}>
+    //   <PersonSelectScreen numberOfCabins={5} />
+    // </View>
   );
 }
 

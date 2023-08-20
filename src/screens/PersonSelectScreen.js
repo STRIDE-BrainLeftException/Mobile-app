@@ -45,11 +45,11 @@ const speciesList = [
 //Number of cabins is given as input from cabin select page
 //User can select only upto number of cabins
 const PersonSelectScreen = ({
-  numberOfCabins,
   transportationMode = "Hyper Stride",
   shipName = "Star Dust C90",
 }) => {
   //number of tickets available
+  const numberOfCabins = 3;
   const [available, setAvailable] = useState(numberOfCabins);
   const [values, setValues] = useState({
     "Grown-Human": 0,
@@ -58,6 +58,8 @@ const PersonSelectScreen = ({
     "Brannigan-Adult": 0,
     "Brannigan-Young": 0,
   });
+
+  const navigation = useNavigation();
 
   const changeVal = (species, newVal) => {
     const newDict = values;
@@ -72,9 +74,10 @@ const PersonSelectScreen = ({
     setValues(newDict);
   };
 
-  const pressContinue = () => {};
+  const pressContinue = () => {
+    navigation.navigate("PackageSelect");
+  };
 
-  const navigation = useNavigation();
   return (
     <View flex={1} alignItems={"center"} justifyContent={"center"}>
       <ImageBackground
@@ -86,7 +89,7 @@ const PersonSelectScreen = ({
         <View
           style={{
             backgroundColor: "transparent",
-            height: HEIGHT * 0.4,
+            height: HEIGHT * 0.3,
             justifyContent: "flex-end",
             alignItems: "center",
           }}
@@ -164,14 +167,17 @@ const PersonSelectScreen = ({
           <View style={{ height: 20 }} />
           {speciesList.map((data) => {
             return (
-              <PassengerTypeCard
-                img={data.img}
-                ageGroup={data.ageGroup}
-                species={data.species}
-                homePlanet={data.homePlanet}
-                maxVal={available + values[data.species]}
-                valueChange={changeVal}
-              />
+              <View alignItems={"center"}>
+                <PassengerTypeCard
+                  img={data.img}
+                  ageGroup={data.ageGroup}
+                  species={data.species}
+                  homePlanet={data.homePlanet}
+                  maxVal={available + values[data.species]}
+                  valueChange={changeVal}
+                />
+                <View height={5} />
+              </View>
             );
           })}
           <View
@@ -190,9 +196,9 @@ const PersonSelectScreen = ({
                 alignItems: "center",
               }}
               onPress={() => {
-                if (available > 0) {
-                  pressContinue();
-                }
+                // if (available > 0) {
+                pressContinue();
+                // }
               }}
             >
               <BlurView
@@ -228,7 +234,7 @@ const styles = StyleSheet.create({
   blurViewContainer: {
     backgroundColor: "rgba(0,0,0,0.2)",
     position: "absolute",
-    top: HEIGHT * 0.35,
+    top: HEIGHT * 0.25,
     // bottom: 0,
     left: 0,
     right: 0,

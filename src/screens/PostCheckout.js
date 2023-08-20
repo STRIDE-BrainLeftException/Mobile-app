@@ -19,7 +19,7 @@ const PostCheckoutScreen = () => {
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ["80%", "100%"], []);
+  const snapPoints = useMemo(() => ["100%"], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index) => {

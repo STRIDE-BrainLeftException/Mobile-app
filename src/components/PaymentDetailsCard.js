@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../utils/colors";
+import { PayWithGalacticId } from "./PayWithGalacticId";
 const PaymentDetailsCard = (data) => {
   return (
     <View
       style={{
         paddingHorizontal: 40,
-      }}>
+      }}
+    >
       <View style={styles.paymentSections}>
         <Text style={styles.paymentStyle}>Payment</Text>
         <Text style={styles.refStyle}>Ref : #45ßKA</Text>
@@ -23,9 +25,10 @@ const PaymentDetailsCard = (data) => {
         <Text style={styles.summeryStyle}>Summary</Text>
         <Text style={styles.summeryStyle}>798.3Ñ</Text>
       </View>
-      <TouchableOpacity style={styles.buttonContainer}>
+      {/* <TouchableOpacity style={styles.buttonContainer} onPress>
         <Text style={styles.buttonText}>Pay with Galactic ID</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <PayWithGalacticId />
     </View>
   );
 };
