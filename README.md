@@ -16,3 +16,9 @@ Submission for RootCode Tri-athlon 2023
 ### Run ###
 
 1. `yarn start` or `npm start`
+
+## BackEnd
+
+The backend for the app is in the following link: [Back End](https://github.com/sandilsranasinghe/stride-backend)
+
+
