@@ -37,7 +37,7 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ["60%"], []);
+  const snapPoints = useMemo(() => ["60%", "90%"], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index) => {

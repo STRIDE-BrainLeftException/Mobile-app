@@ -139,7 +139,7 @@ const CabinBookingComponents = ({ bookingdata }) => {
           }}
           tint={"dark"}
         > */}
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingHorizontal: 80 }}>
           <View style={[styles.textBox]}>
             <Text style={{ color: "rgba(61, 197, 255, 1)" }}>
               {bookingdata[0].motionType}
@@ -273,6 +273,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     position: "relative",
+    width: "100%",
   },
   bigContainer: {
     flex: 1,
