@@ -63,7 +63,7 @@ export default function HomeTabs() {
       case "map2":
         return <ShipSelectionScreen jumpTo={jumpTo} />;
       case "map":
-        return <BookingNavigator jumpTo={jumpTo} />;
+        return <BookingNavigator _jumpTo={jumpTo} />;
     }
   };
 

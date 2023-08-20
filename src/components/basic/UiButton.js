@@ -11,6 +11,7 @@ export const UiButton = ({
   onTap,
   styles = {},
   size = 8,
+  disabled = false,
 }) => {
   return (
     <View style={{ alignItems: "center", ...styles }}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Checkbox } from "native-base";
+import { Button, Checkbox, CloseIcon } from "native-base";
 import { FormControl } from "native-base";
 import { Input } from "native-base";
 import { StatusBar } from "expo-status-bar";
@@ -27,6 +27,7 @@ import tempDP from "./../assets/images/login/loginScreenUser.png";
 import { useNavigation } from "@react-navigation/native";
 import { HEIGHT } from "../constants/styles";
 import { UiButton } from "../components/basic/UiButton";
+import { UiIconButton } from "../components/basic/UiIconButton";
 
 const styles = StyleSheet.create({
   TextBox: {
@@ -40,49 +41,64 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
 });
-const CancelFlow = ({ open = true, setOpen }) => {
-  const onPressCancel = () => {};
+const CancelFlow = ({ jumpTo }) => {
+  const [open, setOpen] = useState(false);
+  const onPressCancel = () => {
+    setOpen(false);
+    jumpTo("home");
+  };
   const onPressResume = () => {
     setOpen(false);
   };
   return (
-    <Modal isOpen={open}>
-      <Modal.Content>
-        {/* <Modal.Body> */}
-        <BlurView style={styles.TextBox}>
-          <View height={10} />
-          <Text style={styles.Items}> Are you sure you want to cancel?</Text>
-          <HStack
-            space={12}
-            alignItems={"center"}
-            justifyContent={"center"}
-            paddingBottom={4}
-          >
-            <Button
-              rounded
-              borderRadius={8}
-              width={"30%"}
-              variant={"subtle"}
-              textAlign={"center"}
-              colorScheme="secondary"
-              onPress={onPressCancel}
+    <>
+      <UiIconButton icon={<CloseIcon />} onPress={() => setOpen(true)} />
+      <Modal
+        isOpen={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
+        <Modal.Content>
+          {/* <Modal.Body> */}
+          <BlurView style={styles.TextBox}>
+            <View height={10} />
+            <Text style={[styles.Items, { fontWeight: "bold" }]}>
+              Are you sure you want to cancel the booking?
+            </Text>
+            <Text style={styles.Items}>Any changes will be discarded</Text>
+            <HStack
+              space={12}
+              alignItems={"center"}
+              justifyContent={"center"}
+              paddingBottom={4}
             >
-              Cancel
-            </Button>
-            <Button
-              rounded
-              borderRadius={8}
-              width={"30%"}
-              variant={"subtle"}
-              onPress={onPressResume}
-            >
-              Resume
-            </Button>
-          </HStack>
-        </BlurView>
-        {/* </Modal.Body> */}
-      </Modal.Content>
-    </Modal>
+              <Button
+                rounded
+                borderRadius={8}
+                width={"30%"}
+                variant={"subtle"}
+                onPress={onPressResume}
+              >
+                No
+              </Button>
+              <Button
+                rounded
+                borderRadius={8}
+                width={"30%"}
+                variant={"subtle"}
+                textAlign={"center"}
+                colorScheme="secondary"
+                onPress={onPressCancel}
+              >
+                Yes
+              </Button>
+            </HStack>
+          </BlurView>
+          {/* </Modal.Body> */}
+        </Modal.Content>
+      </Modal>
+    </>
   );
 };
 
