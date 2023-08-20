@@ -194,32 +194,7 @@ const PersonSelectScreen = ({
               justifyContent: "center",
             }}
           >
-            <TouchableOpacity
-              style={{
-                justifyContent: "center",
-
-                borderRadius: 26,
-                overflow: "hidden",
-                alignItems: "center",
-              }}
-              onPress={() => {
-                // if (available > 0) {
-                pressContinue();
-                // }
-              }}
-            >
-              <BlurView
-                style={{
-                  padding: 12,
-                  width: WIDTH * 0.6,
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
-                  Continue
-                </Text>
-              </BlurView>
-            </TouchableOpacity>
+            <UiButton onTap={pressContinue} />
           </View>
 
           <View style={{ height: 50 }} />
