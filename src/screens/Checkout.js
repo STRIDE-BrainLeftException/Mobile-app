@@ -17,7 +17,7 @@ const Checkout = () => {
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ["90%"], []);
+  const snapPoints = useMemo(() => ["100%"], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index) => {
@@ -103,6 +103,11 @@ const Checkout = () => {
               price="399Ñ"
             />
             <PaymentDetailsCard />
+            <View
+              style={{
+                paddingVertical: 40,
+              }}
+            />
           </BottomSheetScrollView>
         </BottomSheet>
       </ImageBackground>
