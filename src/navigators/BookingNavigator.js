@@ -22,6 +22,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PostCheckoutScreen from "../screens/PostCheckout";
 import CancelFlow from "../screens/CancelFlow";
 import { useNavigation } from "@react-navigation/native";
+import Account from "../screens/Account";
 
 const Stack = createStackNavigator();
 
@@ -95,8 +96,7 @@ function BookingNavigator({ _jumpTo }) {
   return (
     <View
       style={{ flex: 1, paddingTop: 20 }}
-      source={require("../assets/images/Booking_BG.png")}
-    >
+      source={require("../assets/images/Booking_BG.png")}>
       {/* <SafeAreaView style={{ flex: 1 }}> */}
       <Stack.Navigator
         initialRouteName="Map"
@@ -105,16 +105,14 @@ function BookingNavigator({ _jumpTo }) {
           cardStyle: { backgroundColor: "transparent" },
           header: CustomHeader,
           cardStyleInterpolator: forSlide,
-        }}
-      >
+        }}>
         <Stack.Screen
           name="Map"
           // component={MapNavigator}
           options={{
             headerShown: false,
             ...TransitionPresets.ScaleFromCenterAndroid,
-          }}
-        >
+          }}>
           {(props) => <MapNavigator {...props} jumpTo={jumpTo} />}
         </Stack.Screen>
         <Stack.Screen

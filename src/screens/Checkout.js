@@ -93,13 +93,13 @@ const Checkout = () => {
             <ShipCheckouts
               name="NotAShip"
               seatID="12434"
-              description={`\u2022 Upper deck \n\u2022 Keypium package \n \u2022 Food grade : BBB`}
+              description={`\u2022 Upper deck \n\u2022 Keypium package \n\u2022 Food grade : BBB`}
               price="100Ñ"
             />
             <ShipCheckouts
               name="Ship 123"
               seatID="123"
-              description={`\u2022 Upper deck \n\u2022 Kaypium package \n \u2022 Food grade : AAA`}
+              description={`\u2022 Upper deck \n\u2022 Kaypium package \n\u2022 Food grade : AAA`}
               price="399Ñ"
             />
             <PaymentDetailsCard />
