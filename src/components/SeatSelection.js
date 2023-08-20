@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { UiButton } from "./basic/UiButton";
 
-const SeatBookingBtn = (selectedSeats) => {
+const SeatBookingBtn = ({ selectedSeats, selectedDeck }) => {
   const route = useRoute();
   const data = route?.params?.data;
 
@@ -16,14 +16,14 @@ const SeatBookingBtn = (selectedSeats) => {
       label={"Continue"}
       onTap={() => {
         navigation.navigate("PersonSelect", {
-          data: { ...data, selectedSeats },
+          data: { ...data, selectedDeck, selectedSeats },
         });
       }}
     />
   );
 };
 
-const BookingSeats = ({ deckSeats }) => {
+const BookingSeats = ({ deckSeats, selectedDeck }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   const toggleSeat = (rowIndex, seatIndex) => {
@@ -63,7 +63,10 @@ const BookingSeats = ({ deckSeats }) => {
           </View>
         ))}
       </View>
-      <SeatBookingBtn />
+      <SeatBookingBtn
+        selectedSeats={selectedSeats}
+        selectedDeck={selectedDeck}
+      />
     </View>
   );
 };

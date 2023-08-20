@@ -1,6 +1,6 @@
 import { View, Text } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   ImageBackground,
   StyleSheet,
@@ -20,7 +20,7 @@ const BookingPageData = [
     cabinImagePath: require("../assets/images/Booking_Process/Book_Seats_Screen/seats-img.png"),
     motionType: "HyperStride",
     shipName: "Star Dust C90",
-    shipDescription: "Luxury Crusader with HyperStride",
+    shipDescription: "Luxury Crusader with ",
     deck: [
       {
         deck_name: "Upper Deck",
@@ -72,6 +72,11 @@ const CabinBookingComponents = ({ bookingdata }) => {
   const [showDeckButtons, setShowDeckButtons] = useState(true);
   const [selectedDeck, setSelectedDeck] = useState(null);
 
+  const route = useRoute();
+
+  const data = route?.params?.data;
+  console.log("CABINSELECT data", { data });
+
   const renderDeck = ({ item }) => {
     return (
       <DeckBtn
@@ -112,10 +117,23 @@ const CabinBookingComponents = ({ bookingdata }) => {
           }}
           tint={"dark"}
         > */}
-        <ScrollView contentContainerStyle={{ paddingHorizontal: 80 }}>
-          <View style={[styles.textBox]}>
-            <Text style={{ color: "rgba(61, 197, 255, 1)" }}>
-              {bookingdata[0].motionType}
+        <ScrollView contentContainerStyle={{ paddingHorizontal: 70 }}>
+          <View
+            style={[
+              styles.textBox,
+              data.shipData.type === "HyperStride"
+                ? { borderColor: "#3dc5ff" }
+                : { borderColor: "#3eff3c" },
+            ]}
+          >
+            <Text
+              style={
+                data.shipData.type === "HyperStride"
+                  ? { color: "#3dc5ff" }
+                  : { color: "#3eff3c" }
+              }
+            >
+              {data.shipData.type}
             </Text>
           </View>
 
@@ -129,7 +147,7 @@ const CabinBookingComponents = ({ bookingdata }) => {
               alignSelf: "center",
             }}
           >
-            {bookingdata[0].shipName}
+            {data.shipData.title}
           </Text>
 
           <Text
@@ -140,7 +158,7 @@ const CabinBookingComponents = ({ bookingdata }) => {
               alignSelf: "center",
             }}
           >
-            {bookingdata[0].shipDescription}
+            {bookingdata[0].shipDescription + data.shipData.type}
           </Text>
 
           <View style={{ height: 40 }} />
@@ -173,10 +191,10 @@ const CabinBookingComponents = ({ bookingdata }) => {
 
           {selectedDeck && !showDeckButtons ? (
             <React.Fragment>
-              <BookingSeats deckSeats={selectedDeck.deck_seats} />
-              <TouchableOpacity onPress={handleBackToDeckButtons}>
-                <Text style={styles.backButton}>Back</Text>
-              </TouchableOpacity>
+              <BookingSeats
+                deckSeats={selectedDeck.deck_seats}
+                selectedDeck={selectedDeck}
+              />
             </React.Fragment>
           ) : null}
 
@@ -259,7 +277,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   textBox: {
-    borderColor: "rgba(61, 197, 255, 1)",
     paddingHorizontal: 10,
     alignSelf: "center",
     borderRadius: 10,

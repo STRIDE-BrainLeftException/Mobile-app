@@ -1,4 +1,10 @@
-import React, { useRef, useMemo, useCallback } from "react";
+import React, {
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {
   View,
   StyleSheet,
@@ -12,8 +18,11 @@ import CheckoutDetailsCard from "../components/CheckoutDetailsCard";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { BlurView } from "expo-blur";
 import { BORDER_RADIUS } from "../utils/constants";
+import { useRoute } from "@react-navigation/native";
 
 const Checkout = () => {
+  const [shipData, setShipData] = useState();
+
   const bottomSheetRef = useRef(null);
 
   // variables
@@ -23,6 +32,14 @@ const Checkout = () => {
   const handleSheetChanges = useCallback((index) => {
     console.log("handleSheetChanges", index);
   }, []);
+
+  const route = useRoute();
+  const data = route?.params?.data;
+  useEffect(() => {
+    setShipData(data);
+    console.log("CHECKOUT data", { data });
+  }, [data]);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -55,7 +72,11 @@ const Checkout = () => {
           )}
         >
           <BottomSheetScrollView>
-            <CheckoutDetailsCard />
+            <CheckoutDetailsCard
+              planetName={shipData?.planetData.stationName}
+              galaxyName={shipData?.planetData.subStationName}
+              description={shipData?.planetData.content}
+            />
             <View
               style={{
                 flexDirection: "row",
@@ -86,21 +107,15 @@ const Checkout = () => {
                     color: "#3DC5FF",
                   }}
                 >
-                  HyperStride
+                  {shipData?.shipData?.type}
                 </Text>
               </View>
             </View>
             <ShipCheckouts
-              name="NotAShip"
-              seatID="12434"
-              description={`\u2022 Upper deck \n\u2022 Keypium package \n \u2022 Food grade : BBB`}
+              name={shipData?.shipData?.title}
+              quantity={shipData?.selectedSeats?.length}
+              description={`\u2022 ${shipData?.stationData?.stationName} \n\u2022 ${shipData?.selectedDeck?.deck_name} \n\u2022 ${shipData?.package?.pkg} \n\u2022 Food grade : BBB `}
               price="100Ñ"
-            />
-            <ShipCheckouts
-              name="Ship 123"
-              seatID="123"
-              description={`\u2022 Upper deck \n\u2022 Kaypium package \n \u2022 Food grade : AAA`}
-              price="399Ñ"
             />
             <PaymentDetailsCard />
             <View
