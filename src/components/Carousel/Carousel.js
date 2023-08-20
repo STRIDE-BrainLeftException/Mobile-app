@@ -5,22 +5,54 @@ import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from "./CarouselItem";
 
 const data = [
   {
-    title: "Aenean leo",
-    body: "Ut tincidunt tincidunt ",
-    imgUrl: "https://picsum.photos/id/11/200/300",
-    stats : [{title: 123, body: 'fndsf'},{title: "1M+", body: 'fdkldsf'},{title: 232, body: 'fbdsafbd'}]
+    title: "Futuorama",
+    body: "Inter-Galactic Musical Fest ",
+    img: require("./../../assets/images/HomeScreen/Events_Carousel/Featured_Card_2.png"),
+    stats: [
+      { title: 123, body: "Earth Days More" },
+      { title: "23M+", body: "Interested" },
+      { title: 9, body: "Direct Ships From Here" },
+    ],
   },
   {
-    title: "In turpis",
-    body: "Aenean ut eros et",
-    imgUrl: "https://picsum.photos/id/10/200/300",
-    stats : [{title: 123, body: 'fndsf'},{title: "1M+", body: 'fdkldsf'},{title: 232, body: 'fbdsafbd'}]
+    title: "Planazario",
+    body: "Galactic Flora Unveiled",
+    img: require("./../../assets/images/HomeScreen/Events_Carousel/Featured_Card_3.png"),
+    stats: [
+      { title: 12, body: "Earth Days More" },
+      { title: "3.8M+", body: "Interested" },
+      { title: 1, body: "Direct Ships From Here" },
+    ],
   },
   {
-    title: "Lorem Ipsum",
-    body: "Phasellus ullamcorper",
-    imgUrl: "https://picsum.photos/id/12/200/300",
-    stats : [{title: 123, body: 'fndsf'},{title: "1M+", body: 'fdkldsf'},{title: 232, body: 'fbdsafbd'}]
+    title: "Azual Festival",
+    body: "Leap Festival at Sky South Temple",
+    img: require("./../../assets/images/HomeScreen/Events_Carousel/Featured_Card_4.png"),
+    stats: [
+      { title: 412, body: "Earth Days More" },
+      { title: "49K+", body: "Interested" },
+      { title: 2, body: "Direct Ships From Here" },
+    ],
+  },
+  {
+    title: "ExhiNora",
+    body: "Verdigongberg Seasonal Events",
+    img: require("./../../assets/images/HomeScreen/Events_Carousel/Featured_Card_5.png"),
+    stats: [
+      { title: 156, body: "Earth Days More" },
+      { title: "8.8M+", body: "Interested" },
+      { title: 5, body: "Direct Ships From Here" },
+    ],
+  },
+  {
+    title: "Algizer",
+    body: "Kryton 23 Cultural Festival",
+    img: require("./../../assets/images/HomeScreen/Events_Carousel/Featured_Card_1.png"),
+    stats: [
+      { title: 212, body: "Earth Days More" },
+      { title: "4.5K+", body: "Interested" },
+      { title: 1, body: "Direct Ships From Here" },
+    ],
   },
 ];
 
