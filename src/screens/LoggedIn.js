@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 12,
     tintColor: "dark",
+    backgroundColor: "rgba(0,0,0,0.8)",
   },
   listItems: {
     padding: 8,
@@ -155,7 +156,7 @@ const LoggedIn = () => {
               style={{ backgroundColor: "transparent" }}
             >
               {/* <Modal.Body> */}
-              <BlurView style={styles.listTextBox}>
+              <BlurView style={styles.listTextBox} intensity={5}>
                 {languages.map((language) => (
                   <Text
                     key={language.data}
@@ -178,7 +179,7 @@ const LoggedIn = () => {
               style={{ backgroundColor: "transparent" }}
             >
               {/* <Modal.Body> */}
-              <BlurView style={styles.listTextBox}>
+              <BlurView style={styles.listTextBox} intensity={5}>
                 {currencies.map((curr) => (
                   <Text
                     key={curr.data}
