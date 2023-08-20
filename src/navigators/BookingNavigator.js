@@ -20,6 +20,8 @@ import Checkout from "../screens/Checkout";
 import { NavigationHeader } from "../components/basic/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PostCheckoutScreen from "../screens/PostCheckout";
+import CancelFlow from "../screens/CancelFlow";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
@@ -61,7 +63,14 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
   };
 };
 
-function BookingNavigator({ jumpTo }) {
+function BookingNavigator({ _jumpTo }) {
+  const navigation = useNavigation();
+
+  const jumpTo = (route) => {
+    navigation.navigate("Galaxies");
+    _jumpTo(route);
+  };
+
   const CustomHeader = (props) => {
     const mapping = {
       StationSelect: "Select station",
@@ -74,7 +83,13 @@ function BookingNavigator({ jumpTo }) {
       Checkout: "Checkout",
       Confirmation: "Ride confirmed",
     };
-    return <NavigationHeader props={props} mapping={mapping} />;
+    return (
+      <NavigationHeader
+        props={props}
+        mapping={mapping}
+        rightIconButton={<CancelFlow jumpTo={jumpTo} />}
+      />
+    );
   };
 
   return (
@@ -110,13 +125,19 @@ function BookingNavigator({ jumpTo }) {
           }}
         />
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
-        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} options={{headerTransparent: true}}/>
+        <Stack.Screen
+          name="MotionSelect"
+          component={MotionTypeScreen}
+          options={{ headerTransparent: true }}
+        />
         <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
         <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
         <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
         <Stack.Screen name="PackageSelect" component={SelectPackage} />
         <Stack.Screen name="Checkout" component={Checkout} />
-        <Stack.Screen name="Confirmation" component={PostCheckoutScreen} />
+        <Stack.Screen name="Confirmation">
+          {(props) => <PostCheckoutScreen {...props} jumpTo={jumpTo} />}
+        </Stack.Screen>
       </Stack.Navigator>
       {/* </SafeAreaView> */}
     </View>

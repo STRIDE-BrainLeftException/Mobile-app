@@ -9,6 +9,7 @@ import { Animated, Button, Text } from "react-native";
 import { View } from "native-base";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Header } from "../components/basic/Header";
+import CancelFlow from "../screens/CancelFlow";
 
 const Stack = createStackNavigator();
 
@@ -69,7 +70,7 @@ const forSlide = ({
             progress.interpolate({
               inputRange: [0, 1, 2],
               outputRange: [
-                0 ,// Focused, but offscreen in the beginning
+                0, // Focused, but offscreen in the beginning
                 1, // Fully focused
                 2, // Fully unfocused
               ],
@@ -109,6 +110,7 @@ function MapNavigator({ jumpTo }) {
               }
             : null
         }
+        rightIconButton={<CancelFlow jumpTo={jumpTo} />}
       />
     );
   };

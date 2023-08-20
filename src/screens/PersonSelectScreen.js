@@ -1,6 +1,6 @@
 import { View, Text } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import PassengerTypeCard from "../components/basic/PassengerTypeCard";
 import { StyleSheet } from "react-native";
@@ -74,8 +74,15 @@ const PersonSelectScreen = ({
     setValues(newDict);
   };
 
+  const route = useRoute();
+  const data = route?.params?.data;
+
+  console.log("PERSONSELECT data", { data });
+
   const pressContinue = () => {
-    navigation.navigate("PackageSelect");
+    navigation.navigate("PackageSelect", {
+      data: { ...data, selectedPersons: values },
+    });
   };
 
   return (
@@ -89,7 +96,7 @@ const PersonSelectScreen = ({
         <View
           style={{
             backgroundColor: "transparent",
-            height: HEIGHT * 0.30,
+            height: HEIGHT * 0.3,
             justifyContent: "flex-end",
             alignItems: "center",
           }}

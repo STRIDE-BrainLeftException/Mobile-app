@@ -13,8 +13,9 @@ import Ticket from "../components/TicketComponent";
 import ShipCheckouts from "../components/ShipCheckouts";
 import PaymentDetailsCard from "../components/PaymentDetailsCard";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import { UiButton } from "../components/basic/UiButton";
 
-const PostCheckoutScreen = () => {
+const PostCheckoutScreen = ({ jumpTo, ...props }) => {
   // ref
   const bottomSheetRef = useRef(null);
 
@@ -125,6 +126,13 @@ const PostCheckoutScreen = () => {
             price="399Ñ"
           />
           <PaymentDetailsCard disablePay={true} />
+          <UiButton
+            styles={{
+              padding: 20,
+            }}
+            text="Back to Home"
+            onTap={() => jumpTo("home")}
+          />
           <View style={{ paddingBottom: 70 }} />
         </BottomSheetScrollView>
       </BottomSheet>

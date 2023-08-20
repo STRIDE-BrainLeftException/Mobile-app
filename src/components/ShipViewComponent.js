@@ -17,7 +17,7 @@ import {
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { BlurView } from "expo-blur";
 import { UiButton } from "./basic/UiButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   BLUEVIEW_BORDER_COLOR,
   BLURVIEW_BORDER_WIDTH,
@@ -32,7 +32,7 @@ import { SHIPS } from "../utils/data";
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const navigation = useNavigation();
 
-  const allShips = SHIPS
+  const allShips = SHIPS;
 
   const shipTypeStyle =
     shipData.type === "HyperStride" ? styles.shipType[0] : styles.shipType[1];
@@ -47,6 +47,11 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const handleSheetChanges = useCallback((index) => {
     console.log("handleSheetChanges", index);
   }, []);
+
+  const route = useRoute();
+
+  const data = route?.params?.data;
+  console.log("SHIPSELECT data", { data });
 
   _renderItem = ({ item, index }) => {
     return (
@@ -154,7 +159,9 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
           <UiButton
             label={"Continue"}
             onTap={() => {
-              navigation.navigate("CabinSelect");
+              navigation.navigate("CabinSelect", {
+                data: { ...data, shipData },
+              });
             }}
           />
         </BottomSheetScrollView>

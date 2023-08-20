@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { UiButton } from "../components/basic/UiButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import COLORS from "../utils/colors";
 import { BlurView } from "expo-blur";
 import BottomSheet from "@gorhom/bottom-sheet";
@@ -84,6 +84,11 @@ const DateSelectScreen = () => {
 
   const formattedDate =
     Object.keys(selected).length > 0 ? formatDate(selected) : "Select a Date";
+
+  const route = useRoute();
+
+  const data = route?.params?.data;
+  console.log("DATESELECT data", { data });
 
   return (
     <View style={styles.container}>
@@ -182,14 +187,12 @@ const DateSelectScreen = () => {
                       type: "timing",
                       duration: 1000,
                     }}
+                    style={{
+                      marginBottom: 30,
+                    }}
                   >
                     <Text style={styles.departureText}>Depature date</Text>
-                    <AnimatePresence
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
+                    <AnimatePresence>
                       {showSelectedDate && (
                         <MotiText
                           from={{
@@ -246,7 +249,9 @@ const DateSelectScreen = () => {
             <UiButton
               label={"Continue"}
               onTap={() => {
-                navigation.navigate("MotionSelect");
+                navigation.navigate("MotionSelect", {
+                  data: { ...data, date: selected },
+                });
               }}
               disabled={Object.keys(selected).length === 0}
               style={[
