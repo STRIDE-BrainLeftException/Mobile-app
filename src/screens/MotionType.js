@@ -18,7 +18,6 @@ import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 import { UiButton } from "../components/basic/UiButton";
 import { HEIGHT } from "../utils/constants";
 
-
 const cardDataArray = [
   {
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/hyperStride-img.png"),
@@ -265,8 +264,7 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
       <FlatList
         data={cardDataArray}
-        
-        contentContainerStyle={{paddingTop: 100}}
+        contentContainerStyle={{ paddingTop: 100 }}
         renderItem={({ item, index }) => (
           <CardItem
             item={item}

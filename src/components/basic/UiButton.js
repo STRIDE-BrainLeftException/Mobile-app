@@ -6,7 +6,12 @@ import { WIDTH } from "../../utils/constants";
 import { Text } from "react-native";
 
 //Styles appliable to view
-export const UiButton = ({ label = "Continue", onTap, styles = {} }) => {
+export const UiButton = ({
+  label = "Continue",
+  onTap,
+  disabled = false,
+  styles = {},
+}) => {
   return (
     <View style={{ alignItems: "center", ...styles }}>
       <TouchableOpacity
@@ -18,6 +23,7 @@ export const UiButton = ({ label = "Continue", onTap, styles = {} }) => {
         onPress={() => {
           onTap();
         }}
+        disabled={disabled}
       >
         <BlurView
           style={{

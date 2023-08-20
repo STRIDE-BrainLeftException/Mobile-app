@@ -124,8 +124,8 @@ const PostCheckoutScreen = () => {
             description={`\u2022 Upper deck \n\u2022 Kaypium package \n \u2022 Food grade : AAA`}
             price="399Ñ"
           />
-          <PaymentDetailsCard />
-          <View style={{ paddingBottom: 120 }} />
+          <PaymentDetailsCard disablePay={true} />
+          <View style={{ paddingBottom: 70 }} />
         </BottomSheetScrollView>
       </BottomSheet>
     </View>
