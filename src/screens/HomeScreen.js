@@ -22,7 +22,7 @@ import { Header } from "../components/basic/Header";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 import { TouchableOpacity } from "react-native";
 
-const HomeScreen = () => {
+const HomeScreen = ({ jumpTo }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -104,7 +104,9 @@ const HomeScreen = () => {
                       <HStack style={styles.cardH}>
                         <TouchableOpacity
                           style={{ backgroundColor: "transparent" }}
-                          onPress={() => {}}
+                          onPress={() => {
+                            jumpTo("map");
+                          }}
                         >
                           <EfficientBlurViewCard>
                             <Image

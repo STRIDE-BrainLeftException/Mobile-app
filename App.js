@@ -26,6 +26,9 @@ import SelectPackage from "./src/screens/SelectPackage";
 import Checkout from "./src/screens/Checkout";
 import { UiButton } from "./src/components/basic/UiButton";
 import MotionTypeScreen from "./src/screens/MotionType";
+import { createStoreHook, Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
+import { applyMiddleware, createStore } from "redux";
 
 const Stack = createStackNavigator();
 
@@ -46,7 +49,7 @@ function RootStack() {
       <Stack.Navigator
         // initialRouteName="onBoarding"
         // initialRouteName="LuxuryTest"
-        initialRouteName="Home"
+        initialRouteName="LoggedIn"
         // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,
@@ -103,10 +106,18 @@ function RootStack() {
 }
 
 export default function App() {
+  const sagaMiddleware = createSagaMiddleware();
+
+  const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
+
+  sagaMiddleware.run(rootSaga);
+
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer theme={navTheme}>
-        <RootStack />
+        <Provider store={store}>
+          <RootStack />
+        </Provider>
       </NavigationContainer>
       <StatusBar style="light" />
     </NativeBaseProvider>
