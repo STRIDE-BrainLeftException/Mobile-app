@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"; // Make sure to import from 'react-native'
 import PackageBlurViewCard from "./basic/PackageBlurViewCard";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { HStack, Modal, VStack } from "native-base";
 import { BlurView } from "expo-blur";
 import { Image } from "react-native";
@@ -78,6 +78,12 @@ const PackageSelector = () => {
 
   const navigation = useNavigation();
 
+  const route = useRoute();
+
+  const data = route?.params?.data;
+
+  console.log("PACKAGESELECT data", { data });
+
   return (
     <View style={styles.pakageSelectorStyle}>
       {/* <Text>Testing the pakage selector card</Text> */}
@@ -87,7 +93,9 @@ const PackageSelector = () => {
           <TouchableOpacity
             key={p.pkg}
             onPress={() => {
-              navigation.navigate("Checkout");
+              navigation.navigate("Checkout", {
+                data: { ...data, package: p },
+              });
             }}
           >
             <Modal

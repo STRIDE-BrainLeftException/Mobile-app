@@ -29,7 +29,7 @@ import {
 import PlanetStationsView from "../components/PlanetStationsView";
 import { Button } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 import { Header } from "../components/basic/Header";
 import { PLANETS } from "../utils/data";
@@ -552,8 +552,14 @@ const Planet_Details_Section = ({ selectedStation }) => {
   let previousItemMatchesCondition = true;
 
   const navigation = useNavigation();
+
+  const route = useRoute();
+  const planet = PLANETS.find((p) => p.id == route?.params?.planet?.id);
+
   const onContinue = () => {
-    navigation.navigate("DateSelect");
+    navigation.navigate("DateSelect", {
+      data: { planetId: planet.id, stationId: selectedStation.id },
+    });
   };
 
   return (

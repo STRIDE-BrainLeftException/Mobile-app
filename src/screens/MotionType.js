@@ -13,14 +13,14 @@ import {
 import { View as MView } from "moti";
 
 import COLORS from "../utils/colors";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 import { UiButton } from "../components/basic/UiButton";
 import { HEIGHT } from "../utils/constants";
 
-
 const cardDataArray = [
   {
+    id: 1,
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/hyperStride-img.png"),
     title: "HyperStride",
     superScript: "TM",
@@ -30,6 +30,7 @@ const cardDataArray = [
       "Pioneering intergalactic exploration with unparalleled speed and technology. Seamlessly traverse the cosmos, unlocking new frontiers and unraveling celestial mysteries. Elevate your journey, embrace the future of space travel.",
   },
   {
+    id: 2,
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/cosmoV-img.png"),
     title: "CosmoV",
     superScript: "TM",
@@ -40,6 +41,7 @@ const cardDataArray = [
       "Pioneering intergalactic exploration with unparalleled speed and technology. Seamlessly traverse the cosmos, unlocking new frontiers and unraveling celestial mysteries. Elevate your journey, embrace the future of space travel.",
   },
   {
+    id: 3,
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/hibe-img.png"),
     title: "Hibe 2.0",
     superScript: "",
@@ -50,6 +52,7 @@ const cardDataArray = [
       "Pioneering intergalactic exploration with unparalleled speed and technology. Seamlessly traverse the cosmos, unlocking new frontiers and unraveling celestial mysteries. Elevate your journey, embrace the future of space travel.",
   },
   {
+    id: 4,
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/general-ships-img.png"),
     title: "General Ships",
     superScript: "",
@@ -59,6 +62,7 @@ const cardDataArray = [
       "Pioneering intergalactic exploration with unparalleled speed and technology. Seamlessly traverse the cosmos, unlocking new frontiers and unraveling celestial mysteries. Elevate your journey, embrace the future of space travel.",
   },
   {
+    id: 5,
     image_path: require("../assets/images/Booking_Process/Jump_Type_Screen/general-ships-img.png"),
     title: "CosmoV",
     superScript: "TM",
@@ -81,6 +85,7 @@ const CardItem = ({
 
   return (
     <BlurViewCardConents
+      id={item.id}
       image_path={item.image_path}
       title={item.title}
       superScript={item.superScript}
@@ -177,6 +182,7 @@ const SelectAndContinueBtn = ({ onPress }) => {
 };
 
 const BlurViewCardConents = ({
+  id,
   image_path,
   title,
   superScript,
@@ -227,7 +233,7 @@ const BlurViewCardConents = ({
           {isExpanded && (
             <>
               <HiddenText hidden_description={hidden_description} />
-              <SelectAndContinueBtn onPress={handleButtonPress} />
+              <SelectAndContinueBtn onPress={() => handleButtonPress(id)} />
               {/* <Separator seperatorStyle={styles.customSeperatorStyle} /> */}
             </>
           )}
@@ -249,9 +255,14 @@ const MotionTypeScreen = ({ jumpTo }) => {
     }
   };
 
-  const handleButtonPress = () => {
+  const route = useRoute();
+
+  const data = route?.params?.data;
+  console.log("MOTIONTYPE data", { data });
+
+  const handleButtonPress = (motionType) => {
     // Change it to the next screen
-    navigation.navigate("CarrierSelect");
+    navigation.navigate("CarrierSelect", { data: { ...data, motionType } });
   };
 
   return (
@@ -265,8 +276,7 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
       <FlatList
         data={cardDataArray}
-        
-        contentContainerStyle={{paddingTop: 100}}
+        contentContainerStyle={{ paddingTop: 100 }}
         renderItem={({ item, index }) => (
           <CardItem
             item={item}

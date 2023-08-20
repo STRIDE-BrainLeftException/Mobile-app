@@ -1,16 +1,23 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { UiButton } from "./basic/UiButton";
 
-const SeatBookingBtn = ({}) => {
+const SeatBookingBtn = (selectedSeats) => {
+  const route = useRoute();
+  const data = route?.params?.data;
+
   const navigation = useNavigation();
+
+  console.log("SEATSELECT data", { data });
 
   return (
     <UiButton
       label={"Continue"}
       onTap={() => {
-        navigation.navigate("PersonSelect");
+        navigation.navigate("PersonSelect", {
+          data: { ...data, selectedSeats },
+        });
       }}
     />
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { UiButton } from "../components/basic/UiButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import COLORS from "../utils/colors";
 
 const DateSelectScreen = () => {
@@ -61,6 +61,11 @@ const DateSelectScreen = () => {
 
   const formattedDate =
     Object.keys(selected).length > 0 ? formatDate(selected) : "Select a Date";
+
+  const route = useRoute();
+
+  const data = route?.params?.data;
+  console.log("DATESELECT data", { data });
 
   return (
     <View style={styles.container}>
@@ -139,7 +144,9 @@ const DateSelectScreen = () => {
       <UiButton
         label={"Continue"}
         onTap={() => {
-          navigation.navigate("MotionSelect");
+          navigation.navigate("MotionSelect", {
+            data: { ...data, date: selected },
+          });
         }}
         styles={{ padding: 50 }}
       />
