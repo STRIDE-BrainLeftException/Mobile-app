@@ -26,6 +26,7 @@ import SelectPackage from "./src/screens/SelectPackage";
 import Checkout from "./src/screens/Checkout";
 import { UiButton } from "./src/components/basic/UiButton";
 import MotionTypeScreen from "./src/screens/MotionType";
+import ActivityPage from "./src/screens/ActivityPage";
 
 const Stack = createStackNavigator();
 
@@ -46,7 +47,7 @@ function RootStack() {
       <Stack.Navigator
         // initialRouteName="onBoarding"
         // initialRouteName="LuxuryTest"
-        initialRouteName="LoggedIn"
+        initialRouteName="Home"
         // initialRouteName="checkoutTest"
         screenOptions={{
           headerShown: false,
@@ -92,6 +93,11 @@ function RootStack() {
           name="motionTypeTest"
           component={MotionTypeScreen}
           options={{ animationEnabled: false }}
+        />
+        <Stack.Screen
+          name="TravelLog"
+          component={ActivityPage}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </ImageBackground>

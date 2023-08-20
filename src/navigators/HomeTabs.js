@@ -10,6 +10,12 @@ import HomeIcon from "../assets/icons/app-bar-new/home_icon_default.png";
 import HomeIconActive from "../assets/icons/app-bar-new/home_icon_active.png";
 import RideIcon from "../assets/icons/app-bar-new/ride_icon_default.png";
 import RideIconActive from "../assets/icons/app-bar-new/ride_icon_active.png";
+import AccountIcon from "../assets/icons/app-bar-new/account_icon_default.png";
+import AccountIconActive from "../assets/icons/app-bar-new/account_icon_active.png";
+import ServiceIcon from "../assets/icons/app-bar-new/services_icon_default.png";
+import ServiceIconActive from "../assets/icons/app-bar-new/services_icon_active.png";
+import ActivityIcon from "../assets/icons/app-bar-new/activity_icon_default.png";
+import ActivityIconActive from "../assets/icons/app-bar-new/activity_icon_active.png";
 
 import { AnimatePresence, Image, View as MView } from "moti";
 import { BOTTOM_TAB_BAR_HEIGHT } from "../utils/constants";
@@ -18,6 +24,7 @@ import PlanetSelectedScreen from "../screens/PlanetSelectedScreen";
 import BookingNavigator from "./BookingNavigator";
 import ShipSelectionScreen from "../screens/ShipSelectionScreen";
 import PostCheckoutScreen from "../screens/PostCheckout";
+import ActivityPage from "../screens/ActivityPage";
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
@@ -45,7 +52,7 @@ export default function HomeTabs() {
     { key: "home", title: "Home" },
     { key: "map2", title: "Map" },
     { key: "map", title: "Map" },
-    { key: "second2", title: "Second" },
+    { key: "activity", title: "Second" },
     { key: "second", title: "Second" },
   ]);
 
@@ -58,8 +65,8 @@ export default function HomeTabs() {
         return <HomeScreen jumpTo={jumpTo} />;
       case "second":
         return <PlanetSelectedScreen jumpTo={jumpTo} />;
-      case "second2":
-        return <PostCheckoutScreen jumpTo={jumpTo} />;
+      case "activity":
+        return <ActivityPage jumpTo={jumpTo} />;
       case "map2":
         return <ShipSelectionScreen jumpTo={jumpTo} />;
       case "map":
@@ -71,9 +78,9 @@ export default function HomeTabs() {
     const routes = {
       home: { active: HomeIconActive, default: HomeIcon },
       map: { active: RideIconActive, default: RideIcon },
-      map2: { active: RideIconActive, default: RideIcon },
-      second: { active: HomeIconActive, default: HomeIcon },
-      second2: { active: HomeIconActive, default: HomeIcon },
+      map2: { active: ServiceIconActive, default: ServiceIcon },
+      second: { active: AccountIconActive, default: AccountIcon },
+      activity: { active: ActivityIconActive, default: ActivityIcon },
     };
     return (
       <Image
