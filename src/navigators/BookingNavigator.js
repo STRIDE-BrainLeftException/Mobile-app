@@ -28,13 +28,13 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
     current.progress.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
-      extrapolate: 'clamp',
+      extrapolate: "clamp",
     }),
     next
       ? next.progress.interpolate({
           inputRange: [0, 1],
           outputRange: [0, 1],
-          extrapolate: 'clamp',
+          extrapolate: "clamp",
         })
       : 0
   );
@@ -51,7 +51,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
                 0, // Fully focused
                 -screen.width, // Fully unfocused
               ],
-              extrapolate: 'clamp',
+              extrapolate: "clamp",
             }),
             inverted
           ),
@@ -66,12 +66,13 @@ function BookingNavigator({ jumpTo }) {
     const mapping = {
       StationSelect: "Select station",
       DateSelect: "Select Date",
-      MotionSelect: "Select motion type",
+      MotionSelect: "Select motion",
       CarrierSelect: "Select carrier",
       CabinSelect: "Select seats",
       PersonSelect: "Select ticket",
       PackageSelect: "Select package",
       Checkout: "Checkout",
+      Confirmation: "Ride confirmed",
     };
     return <NavigationHeader props={props} mapping={mapping} />;
   };
@@ -88,7 +89,7 @@ function BookingNavigator({ jumpTo }) {
           // headerMode: "screen",
           cardStyle: { backgroundColor: "transparent" },
           header: CustomHeader,
-          cardStyleInterpolator: forSlide
+          cardStyleInterpolator: forSlide,
         }}
       >
         <Stack.Screen
@@ -109,7 +110,7 @@ function BookingNavigator({ jumpTo }) {
           }}
         />
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
-        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
+        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} options={{headerTransparent: true}}/>
         <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
         <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
         <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />

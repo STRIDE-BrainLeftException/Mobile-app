@@ -95,7 +95,7 @@ function MapNavigator({ jumpTo }) {
       name == "Galaxies"
         ? "Select galaxy"
         : name == "SolarSystems"
-        ? "Select solar system"
+        ? "Select system"
         : name == "Planets"
         ? "Select planet"
         : "Error 404";

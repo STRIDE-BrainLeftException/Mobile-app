@@ -89,7 +89,7 @@ const PersonSelectScreen = ({
         <View
           style={{
             backgroundColor: "transparent",
-            height: HEIGHT * 0.4,
+            height: HEIGHT * 0.30,
             justifyContent: "flex-end",
             alignItems: "center",
           }}
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   blurViewContainer: {
     backgroundColor: "rgba(0,0,0,0.2)",
     position: "absolute",
-    top: HEIGHT * 0.35,
+    top: HEIGHT * 0.25,
     // bottom: 0,
     left: 0,
     right: 0,

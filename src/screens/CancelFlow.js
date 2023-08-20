@@ -40,9 +40,11 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
 });
-const CancelFlow = ({ open = true }) => {
+const CancelFlow = ({ open = true, setOpen }) => {
   const onPressCancel = () => {};
-  const onPressResume = () => {};
+  const onPressResume = () => {
+    setOpen(false);
+  };
   return (
     <Modal isOpen={open}>
       <Modal.Content>
