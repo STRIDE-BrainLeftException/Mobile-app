@@ -1,41 +1,18 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { UiButton } from "./basic/UiButton";
 
 const SeatBookingBtn = ({}) => {
   const navigation = useNavigation();
 
   return (
-    <View
-      style={{
-        borderColor: "rgba(151, 169, 246, 0.5)",
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
-        borderWidth: 1.12,
-        borderRadius: 34,
-        width: 198.2,
-        height: 45.53,
-        alignItems: "center",
-        alignSelf: "center",
+    <UiButton
+      label={"Continue"}
+      onTap={() => {
+        navigation.navigate("PersonSelect");
       }}
-    >
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("PersonSelect");
-        }}
-      >
-        <Text
-          style={{
-            color: "rgba(255, 255, 255, 1)",
-            fontSize: 15.32,
-            lineHeight: 19.82,
-            paddingTop: 10,
-          }}
-        >
-          {" "}
-          Continue{" "}
-        </Text>
-      </TouchableOpacity>
-    </View>
+    />
   );
 };
 

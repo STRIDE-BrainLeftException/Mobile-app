@@ -151,25 +151,12 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
             <Text>Continue</Text>
           </UiButton> */}
 
-          <TouchableOpacity
-            style={{
-              borderRadius: 26,
-              overflow: "hidden",
-              alignItems: "center",
-              marginTop: 10,
-            }}
-            onPress={() => {
+          <UiButton
+            label={"Continue"}
+            onTap={() => {
               navigation.navigate("CabinSelect");
             }}
-          >
-            <BlurView
-              style={{ padding: 12, width: 200 * 0.6, alignItems: "center" }}
-            >
-              <Text style={{ fontSize: 18, color: "#fff", padding: 4 }}>
-                Continue
-              </Text>
-            </BlurView>
-          </TouchableOpacity>
+          />
         </BottomSheetScrollView>
       </BottomSheet>
     </View>

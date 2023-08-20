@@ -135,26 +135,14 @@ const DateSelectScreen = () => {
           <Text style={styles.formattedDate}>{formattedDate}</Text>
         )}
       </View>
-      {/* <UiButton
-        onPress={() => {
-          navigation.navigate("MotionSelect");
-        }}>
-        <Text>Continue</Text>
-      </UiButton> */}
-      <TouchableOpacity
-        style={[
-          styles.buttonContainer,
-          Object.keys(selected).length > 0
-            ? styles.buttonContainer
-            : styles.disabledButton,
-        ]}
-        disabled={Object.keys(selected).length === 0}
-        onPress={() => {
+
+      <UiButton
+        label={"Continue"}
+        onTap={() => {
           navigation.navigate("MotionSelect");
         }}
-      >
-        <Text style={styles.buttonText}>Continue</Text>
-      </TouchableOpacity>
+        styles={{ padding: 50 }}
+      />
     </View>
   );
 };
