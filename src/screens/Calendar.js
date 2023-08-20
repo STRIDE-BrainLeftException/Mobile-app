@@ -187,14 +187,12 @@ const DateSelectScreen = () => {
                       type: "timing",
                       duration: 1000,
                     }}
+                    style={{
+                      marginBottom: 30,
+                    }}
                   >
                     <Text style={styles.departureText}>Depature date</Text>
-                    <AnimatePresence
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
+                    <AnimatePresence>
                       {showSelectedDate && (
                         <MotiText
                           from={{

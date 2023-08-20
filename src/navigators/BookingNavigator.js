@@ -110,13 +110,19 @@ function BookingNavigator({ jumpTo }) {
           }}
         />
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
-        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} options={{headerTransparent: true}}/>
+        <Stack.Screen
+          name="MotionSelect"
+          component={MotionTypeScreen}
+          options={{ headerTransparent: true }}
+        />
         <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
         <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
         <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />
         <Stack.Screen name="PackageSelect" component={SelectPackage} />
         <Stack.Screen name="Checkout" component={Checkout} />
-        <Stack.Screen name="Confirmation" component={PostCheckoutScreen} />
+        <Stack.Screen name="Confirmation">
+          {(props) => <PostCheckoutScreen {...props} jumpTo={jumpTo} />}
+        </Stack.Screen>
       </Stack.Navigator>
       {/* </SafeAreaView> */}
     </View>
