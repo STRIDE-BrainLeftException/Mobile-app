@@ -1,7 +1,7 @@
 import { View, Text } from "native-base";
 import { UiButton } from "../components/basic/UiButton";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PassengerTypeCard from "../components/basic/PassengerTypeCard";
 import { StyleSheet } from "react-native";
 import { ImageBackground } from "react-native";
@@ -48,9 +48,8 @@ const PersonSelectScreen = ({
   transportationMode = "Hyper Stride",
   shipName = "Star Dust C90",
 }) => {
-  //number of tickets available
-  const numberOfCabins = 3;
-  const [available, setAvailable] = useState(numberOfCabins);
+  const [available, setAvailable] = useState(0);
+  const [numberOfCabins, setNumberOfCabins] = useState(0); //data?.selectedSeats?.length
   const [values, setValues] = useState({
     "Grown-Human": 0,
     "Young-Human": 0,
@@ -76,6 +75,12 @@ const PersonSelectScreen = ({
 
   const route = useRoute();
   const data = route?.params?.data;
+
+  useEffect(() => {
+    const numberOfCabins = data?.selectedSeats?.length;
+    setNumberOfCabins(numberOfCabins);
+    setAvailable(numberOfCabins);
+  }, [data]);
 
   console.log("PERSONSELECT data", { data });
 
@@ -194,7 +199,7 @@ const PersonSelectScreen = ({
               justifyContent: "center",
             }}
           >
-            <UiButton onTap={pressContinue} />
+            <UiButton onTap={pressContinue} disabled={available !== 0} />
           </View>
 
           <View style={{ height: 50 }} />

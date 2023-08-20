@@ -557,8 +557,15 @@ const Planet_Details_Section = ({ selectedStation }) => {
   const planet = PLANETS.find((p) => p.id == route?.params?.planet?.id);
 
   const onContinue = () => {
+    const planetData = planetArrayData[0];
+    const stationData = stationDetailsArrayData[selectedStation.id - 1];
     navigation.navigate("DateSelect", {
-      data: { planetId: planet.id, stationId: selectedStation.id },
+      data: {
+        planetId: planet.id,
+        planetData,
+        stationData,
+        stationId: selectedStation.id,
+      },
     });
   };
 
@@ -627,9 +634,7 @@ const Planet_Details_Section = ({ selectedStation }) => {
         selectedStation={selectedStation}
       />
       {selectedStation ? (
-        <UiButton label={'Continue'} onTap={onContinue}/>
-          
-        
+        <UiButton label={"Continue"} onTap={onContinue} />
       ) : (
         <Text flex={1} textAlign={"center"} mt={5}>
           Select a station to continue to next screen

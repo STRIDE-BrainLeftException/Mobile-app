@@ -10,6 +10,7 @@ export const UiButton = ({
   label = "Continue",
   onTap,
   styles = {},
+  disabled = false,
   size = 8,
 }) => {
   return (
