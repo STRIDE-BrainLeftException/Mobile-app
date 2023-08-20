@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   listTextBox: {
     alignItems: "center",
     padding: 12,
+    tintColor: "dark",
   },
   listItems: {
     padding: 8,
@@ -149,7 +150,10 @@ const LoggedIn = () => {
           }}
         >
           <Modal isOpen={modalOpenLang} onClose={() => setOpenLang(false)}>
-            <Modal.Content maxWidth="400px">
+            <Modal.Content
+              maxWidth="400px"
+              style={{ backgroundColor: "transparent" }}
+            >
               {/* <Modal.Body> */}
               <BlurView style={styles.listTextBox}>
                 {languages.map((language) => (
@@ -169,7 +173,10 @@ const LoggedIn = () => {
             </Modal.Content>
           </Modal>
           <Modal isOpen={modalOpenCurr} onClose={() => setOpenCurr(false)}>
-            <Modal.Content maxWidth="400px">
+            <Modal.Content
+              maxWidth="400px"
+              style={{ backgroundColor: "transparent" }}
+            >
               {/* <Modal.Body> */}
               <BlurView style={styles.listTextBox}>
                 {currencies.map((curr) => (
