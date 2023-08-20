@@ -3,10 +3,20 @@ import { BlurView } from "expo-blur";
 import { Text, View } from "native-base";
 import { StyleSheet } from "react-native";
 
-const BlurViewCard = ({ children, containerStyle, intensity }) => {
+const BlurViewCard = ({
+  children,
+  containerStyle,
+  intensity,
+  tint = "default",
+  blurViewStyles,
+}) => {
   return (
     <View style={[styles.view, containerStyle]}>
-      <BlurView intensity={intensity} style={[styles.blurView]}>
+      <BlurView
+        intensity={intensity}
+        style={[styles.blurView, blurViewStyles]}
+        tint={tint}
+      >
         {children}
       </BlurView>
     </View>
@@ -21,11 +31,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     backgroundColor: "transparent",
-    borderColor: "rgba(255,255,255,0.5)",
+    borderColor: "rgba(255,255,255,0.2)",
     borderWidth: 1,
     width: "90%",
     alignSelf: "center",
-    textAlign: 'center'
+    textAlign: "center",
   },
 });
 

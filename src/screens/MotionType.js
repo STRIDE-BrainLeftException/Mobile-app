@@ -15,7 +15,9 @@ import { View as MView } from "moti";
 import COLORS from "../utils/colors";
 import { useNavigation } from "@react-navigation/native";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
-import { UiButton } from "../components/basic/UiButton";
+import { UiButton } from "../components/basic/UiButton;
+import { HEIGHT } from "../utils/constants";
+
 
 const cardDataArray = [
   {
@@ -263,6 +265,8 @@ const MotionTypeScreen = ({ jumpTo }) => {
 
       <FlatList
         data={cardDataArray}
+        
+        contentContainerStyle={{paddingTop: 100}}
         renderItem={({ item, index }) => (
           <CardItem
             item={item}

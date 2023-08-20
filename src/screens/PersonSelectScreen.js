@@ -89,7 +89,7 @@ const PersonSelectScreen = ({
         <View
           style={{
             backgroundColor: "transparent",
-            height: HEIGHT * 0.3,
+            height: HEIGHT * 0.30,
             justifyContent: "flex-end",
             alignItems: "center",
           }}
