@@ -66,7 +66,7 @@ function BookingNavigator({ jumpTo }) {
     const mapping = {
       StationSelect: "Select station",
       DateSelect: "Select Date",
-      MotionSelect: "Select motion type",
+      MotionSelect: "Select motion",
       CarrierSelect: "Select carrier",
       CabinSelect: "Select seats",
       PersonSelect: "Select ticket",
@@ -110,7 +110,7 @@ function BookingNavigator({ jumpTo }) {
           }}
         />
         <Stack.Screen name="DateSelect" component={DateSelectScreen} />
-        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} />
+        <Stack.Screen name="MotionSelect" component={MotionTypeScreen} options={{headerTransparent: true}}/>
         <Stack.Screen name="CarrierSelect" component={ShipSelectionScreen} />
         <Stack.Screen name="CabinSelect" component={CabinSelectScreen} />
         <Stack.Screen name="PersonSelect" component={PersonSelectScreen} />

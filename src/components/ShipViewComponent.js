@@ -26,9 +26,13 @@ import {
   BORDER_RADIUS,
 } from "../utils/constants";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import { AnimatePresence, Image as MImage } from "moti";
+import { SHIPS } from "../utils/data";
 
 const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const navigation = useNavigation();
+
+  const allShips = SHIPS
 
   const shipTypeStyle =
     shipData.type === "HyperStride" ? styles.shipType[0] : styles.shipType[1];
@@ -37,7 +41,7 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
   const bottomSheetRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ["60%", "90%"], []);
+  const snapPoints = useMemo(() => ["60%", "100%"], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index) => {
@@ -54,7 +58,22 @@ const ShipViewComponent = ({ shipData, handleShipSelection }) => {
 
   return (
     <View style={styles.root}>
-      <Image source={shipData.image} style={styles.shipImage} />
+      <AnimatePresence>
+        {allShips.map((ship) => (
+          <View key={ship.id}>
+            {ship.id == shipData.id && (
+              <MImage
+                key={ship.id}
+                source={ship.image}
+                style={styles.shipImage}
+                from={{ translateX: -400, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                exit={{ translateX: 400, opacity: 0 }}
+              />
+            )}
+          </View>
+        ))}
+      </AnimatePresence>
       <BottomSheet
         ref={bottomSheetRef}
         index={0}
