@@ -54,3 +54,40 @@ export const PLANETS = [
     size: 200,
   },
 ];
+
+export const SHIPS = [
+  {
+    id:1,
+    title: "Star Dust C90",
+    type: "HyperStride",
+    engine: "Hyper Thrusters | 34LYpK",
+    description:
+      "Lorem  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    price: "899Ñ",
+    passengers: "200",
+    arrivalTime: "3 days",
+    image: require("../assets/images/Booking_Process/Ship_Selection_Screen_1/Star-dust-ship-img.png"),
+    visualArchive: [
+      require("../assets/images/Booking_Process/Ship_Selection_Screen_1/img-1.png"),
+      require("../assets/images/Booking_Process/Ship_Selection_Screen_1/img-2.png"),
+      require("../assets/images/Booking_Process/Ship_Selection_Screen_1/img-3.png"),
+    ],
+  },
+  {
+    id: 2,
+    title: "Exploriz 69",
+    type: "Hib 2.0",
+    engine: "Hi-Nova Thrusters | 16LYpK",
+    description:
+      "Lorem  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    price: "648Ñ",
+    passengers: "600",
+    arrivalTime: "761 days",
+    image: require("../assets/images/Booking_Process/Ship_Selection_Screen_2/exploeriz-ship-img.png"),
+    visualArchive: [
+      require("../assets/images/Booking_Process/Ship_Selection_Screen_2/img-1.png"),
+      require("../assets/images/Booking_Process/Ship_Selection_Screen_2/img-2.png"),
+      require("../assets/images/Booking_Process/Ship_Selection_Screen_2/img-3.png"),
+    ],
+  },
+];
