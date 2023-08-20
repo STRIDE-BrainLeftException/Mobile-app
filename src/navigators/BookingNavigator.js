@@ -28,13 +28,13 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
     current.progress.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
-      extrapolate: 'clamp',
+      extrapolate: "clamp",
     }),
     next
       ? next.progress.interpolate({
           inputRange: [0, 1],
           outputRange: [0, 1],
-          extrapolate: 'clamp',
+          extrapolate: "clamp",
         })
       : 0
   );
@@ -51,7 +51,7 @@ const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
                 0, // Fully focused
                 -screen.width, // Fully unfocused
               ],
-              extrapolate: 'clamp',
+              extrapolate: "clamp",
             }),
             inverted
           ),
@@ -72,6 +72,7 @@ function BookingNavigator({ jumpTo }) {
       PersonSelect: "Select ticket",
       PackageSelect: "Select package",
       Checkout: "Checkout",
+      Confirmation: "Ride confirmed",
     };
     return <NavigationHeader props={props} mapping={mapping} />;
   };
@@ -88,7 +89,7 @@ function BookingNavigator({ jumpTo }) {
           // headerMode: "screen",
           cardStyle: { backgroundColor: "transparent" },
           header: CustomHeader,
-          cardStyleInterpolator: forSlide
+          cardStyleInterpolator: forSlide,
         }}
       >
         <Stack.Screen
