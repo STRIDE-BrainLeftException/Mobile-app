@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  Dimensions,
 } from "react-native";
 import Animated, {
   useAnimatedGestureHandler,
@@ -23,6 +24,7 @@ import { PLANETS } from "../utils/data";
 import EfficientBlurViewCard from "../components/basic/EfficientBlurViewCard";
 import { Text } from "native-base";
 import BlurViewCard from "../components/basic/BlurViewCard";
+import ZoomedCard from "../components/ZoomCard";
 
 const MAP_HEIGHT = 1000;
 const MAP_WIDTH = 1000;
@@ -128,91 +130,114 @@ const cardDataArray = [
   },
 ];
 
-const MemoryCard = (cardDescription) => {
+const MemoryCard = ({ cardDescription, onPress }) => {
   return (
-    <View style={styles.imageContainer}>
-      <ImageBackground
-        alt={" "}
-        source={cardDescription.img_path}
-        style={styles.image}
-      >
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{cardDescription.name}</Text>
-          <Text style={styles.subTitle}>{cardDescription.sub_title}</Text>
-          <View style={styles.subTextContainer}>
-            <Text style={styles.date}>{cardDescription.date}</Text>
-            <View style={{ width: 10 }} />
-            <Text style={styles.planetTime}>{cardDescription.planet_time}</Text>
+    <TouchableOpacity onPress={() => onPress(cardDescription)}>
+      <View style={styles.imageContainer}>
+        <ImageBackground
+          alt={" "}
+          source={cardDescription.img_path}
+          style={styles.image}
+        >
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{cardDescription.name}</Text>
+            <Text style={styles.subTitle}>{cardDescription.sub_title}</Text>
+            <View style={styles.subTextContainer}>
+              <Text style={styles.date}>{cardDescription.date}</Text>
+              <View style={{ width: 10 }} />
+              <Text style={styles.planetTime}>
+                {cardDescription.planet_time}
+              </Text>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </TouchableOpacity>
   );
 };
 
-const CustomMemoryGrid = ({ cardDataArray }) => {
-    const translateX = useSharedValue(0);
-    const translateY = useSharedValue(0);
-  
-    const panGestureHandler = useAnimatedGestureHandler({
-      onStart: (_, ctx) => {
-        ctx.startX = translateX.value;
-        ctx.startY = translateY.value;
-      },
-      onActive: (event, ctx) => {
-        // Allow diagonal and vertical movement by considering both translationX and translationY
-        translateX.value = ctx.startX + event.translationX;
-        translateY.value = ctx.startY + event.translationY;
-      },
-      onEnd: () => {
-        // Ensure the screen doesn't go beyond the bounds
-        translateX.value = withSpring(translateX.value, {
-          damping: 2,
-          stiffness: 80,
-        });
-        translateY.value = withSpring(translateY.value, {
-          damping: 2,
-          stiffness: 80,
-        });
-      },
-    });
-  
-    const animatedStyle = useAnimatedStyle(() => {
-      return {
-        transform: [{ translateX: translateX.value }, { translateY: translateY.value }],
-      };
-    });
-  
-    // Split the cardDataArray into rows of 3 and 4
-    const chunkedData = [];
-    for (let i = 0; i < cardDataArray.length; i += 7) {
-      const row = cardDataArray.slice(i, i + 3);
-      chunkedData.push(row);
-      if (i + 3 < cardDataArray.length) {
-        const row2 = cardDataArray.slice(i + 3, i + 7);
-        chunkedData.push(row2);
-      }
+const CustomMemoryGrid = ({ cardDataArray, onCardPress }) => {
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+
+  const panGestureHandler = useAnimatedGestureHandler({
+    onStart: (_, ctx) => {
+      ctx.startX = translateX.value;
+      ctx.startY = translateY.value;
+    },
+    onActive: (event, ctx) => {
+      // Allow diagonal and vertical movement by considering both translationX and translationY
+      translateX.value = ctx.startX + event.translationX;
+      translateY.value = ctx.startY + event.translationY;
+    },
+    onEnd: () => {
+      // Ensure the screen doesn't go beyond the bounds
+      translateX.value = withSpring(translateX.value, {
+        damping: 2,
+        stiffness: 80,
+      });
+      translateY.value = withSpring(translateY.value, {
+        damping: 2,
+        stiffness: 80,
+      });
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: translateX.value },
+        { translateY: translateY.value },
+      ],
+    };
+  });
+
+  // Split the cardDataArray into rows of 3 and 4
+  const chunkedData = [];
+  for (let i = 0; i < cardDataArray.length; i += 7) {
+    const row = cardDataArray.slice(i, i + 3);
+    chunkedData.push(row);
+    if (i + 3 < cardDataArray.length) {
+      const row2 = cardDataArray.slice(i + 3, i + 7);
+      chunkedData.push(row2);
     }
-  
-    return (
-      <GestureHandlerRootView>
-        <PanGestureHandler onGestureEvent={panGestureHandler}>
-          <Animated.View style={[styles.container, animatedStyle]}>
-            {chunkedData.map((row, rowIndex) => (
-              <View key={rowIndex} style={styles.row}>
-                {row.map((card, cardIndex) => (
-                  <MemoryCard key={cardIndex} {...card} />
-                ))}
-              </View>
-            ))}
-          </Animated.View>
-        </PanGestureHandler>
-      </GestureHandlerRootView>
-    );
-  };
-  
+  }
+
+  return (
+    <GestureHandlerRootView>
+      <PanGestureHandler onGestureEvent={panGestureHandler}>
+        <Animated.View style={[styles.container, animatedStyle]}>
+          {chunkedData.map((row, rowIndex) => (
+            <View key={rowIndex} style={styles.row}>
+              {row.map((card, cardIndex) => (
+                <MemoryCard
+                  key={cardIndex}
+                  cardDescription={card}
+                  onPress={onCardPress}
+                />
+              ))}
+            </View>
+          ))}
+        </Animated.View>
+      </PanGestureHandler>
+    </GestureHandlerRootView>
+  );
+};
 
 const MemoryScreen = () => {
+  const [zoomedCard, setZoomedCard] = useState(null);
+
+  const onCardPress = (cardData) => {
+    // Set the zoomed card when a card is pressed
+    console.log("Zoomed card:", cardData); // Add this line
+    setZoomedCard(cardData);
+  };
+
+  const onBackgroundPress = () => {
+    // Reset the zoomed card when the background is pressed
+    setZoomedCard(null);
+  };
+
   return (
     <ImageBackground
       source={require("../assets/images/Booking_BG.png")}
@@ -223,7 +248,17 @@ const MemoryScreen = () => {
       <View style={styles.container_}>
         {/* <Text style={{ color: "black" }}>Memory Screen</Text>
         <MemoryCard {...cardDataArray[0]} /> */}
-        <CustomMemoryGrid cardDataArray={cardDataArray} />
+        {/* <CustomMemoryGrid cardDataArray={cardDataArray} /> */}
+        <CustomMemoryGrid
+          cardDataArray={cardDataArray}
+          onCardPress={onCardPress}
+        />
+        {zoomedCard && (
+          <ZoomedCard
+            cardData={zoomedCard}
+            onBackgroundPress={onBackgroundPress}
+          />
+        )}
       </View>
     </ImageBackground>
   );
@@ -291,6 +326,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 16, // Adjust the margin as needed
+  },
+  zoomedContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  zoomedCard: {
+    width: 300, // Adjust the size as needed
+    height: 400, // Adjust the size as needed
+    borderRadius: 18,
+    elevation: 5, // Add elevation for shadow (Android)
   },
 });
 
