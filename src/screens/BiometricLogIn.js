@@ -84,9 +84,12 @@ const BiometricLogIn = () => {
         if (result.success == true) {
           setScanned(true);
           console.log({ result, id });
-          login(id).then(() => {
-            onConfirm();
-          }, 3000);
+          setTimeout(()=> {
+            onConfirm()
+          }, 3000)
+          // login(id).then(() => {
+          //   onConfirm();
+          // }, 3000);
         }
       });
     });

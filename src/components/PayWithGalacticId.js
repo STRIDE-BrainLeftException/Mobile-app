@@ -71,7 +71,7 @@ export const PayWithGalacticId = () => {
           setStatus("COMPLETED");
           setTimeout(() => {
             setOpen(false);
-            // navigation.navigate("Confirmation");
+            navigation.navigate("Confirmation");
           }, 2000);
         }, 3000);
       }, 3000);
