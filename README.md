@@ -2,7 +2,7 @@
 
 ### Team : BrainLeftException
 
-Submission for RootCode Tri-athlon 2023
+Submission for [TECH-TRIATHALON 2023](https://tech-triathlon.rootcode.io/) which won 2nd Place.
 
 Prototype Link: [Figma](https://www.figma.com/proto/KAajR532K5CpnW03Y4rW8a/Stride?page-id=1%3A295&type=design&node-id=195-4984&viewport=-1037%2C-2234%2C0.33&t=YWBho1CA9KT7v22P-1&scaling=scale-down&starting-point-node-id=195%3A4984&show-proto-sidebar=1&mode=design)
 
